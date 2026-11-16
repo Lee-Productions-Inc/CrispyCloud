@@ -15,12 +15,12 @@ RUN npm run build
 FROM php:8.3-apache-bookworm
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    git unzip \
+    git unzip ca-certificates \
     libonig-dev libzip-dev libicu-dev \
     libjpeg62-turbo-dev libpng-dev libfreetype6-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j"$(nproc)" \
-       pdo_mysql mbstring bcmath intl zip gd \
+    pdo_mysql mbstring bcmath intl zip gd \
     && a2enmod rewrite headers \
     && rm -rf /var/lib/apt/lists/*
 
