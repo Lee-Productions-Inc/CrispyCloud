@@ -49,5 +49,6 @@
     </aside>
 </form>
 <script src="{{ asset('js/admin-product-refine.js') }}" defer></script>
+<script src="{{ asset('js/admin-product-crop.js') }}" defer></script>
 @endif
 @endsection
