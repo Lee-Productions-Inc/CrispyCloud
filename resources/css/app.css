@@ -1,0 +1,17 @@
+/* CrispyCloud Step 42 — Tailwind CSS v4, compiled by Vite. */
+@import "tailwindcss";
+@source "../views";
+@source "../js";
+@theme {
+  --color-chicks-red: #c8102e;
+  --color-chicks-darkred: #a50f27;
+  --color-chicks-cream: #fff5ec;
+  --color-chicks-ink: #263044;
+  --font-chicks-display: "Fredoka", "Baloo 2", sans-serif;
+  --font-chicks-body: "Quicksand", "Poppins", sans-serif;
+}
+/* Legacy-specific visual effects and responsive states remain component CSS
+   in these Tailwind-built entries to preserve the approved CHICK'S POPS design.
+   Layout and spacing declarations have been migrated to Tailwind @apply. */
+
+/* React/Inertia Tailwind entry. Laravel Customer/Admin use their own themed entries. */

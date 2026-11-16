@@ -1,0 +1,207 @@
+/* Step 34 — single-card customer and administrator-compatible sign-in.
+   Loaded after the existing auth stylesheet; leaves form IDs/JS/actions untouched. */
+body.cca-body {
+  background: radial-gradient(circle at 50% 0, #fff3f1 0, #fbf8f5 40%, #f6f4f1 100%);
+}
+
+.auth-container.cca-shell {
+  padding: 34px 18px;
+  min-height: 100svh;
+}
+
+.cca-shell .cca-frame,
+.cca-shell .cca-frame-register {
+  display: block;
+  width: min(100%, 470px);
+  min-height: 0;
+  overflow: visible;
+  background: #fff;
+  border: 1px solid #efe6e4;
+  border-radius: 22px;
+  box-shadow: 0 24px 75px rgba(83, 39, 34, .08), 0 2px 14px rgba(83, 39, 34, .035);
+}
+
+.cca-shell .cca-frame-register {
+  width: min(100%, 540px);
+}
+
+.cca-shell .cca-brand-panel {
+  display: none !important;
+}
+
+.cca-shell .cca-form-panel {
+  padding: 42px clamp(23px, 5vw, 48px) 35px;
+  display: block;
+}
+
+.cca-shell .cca-form-width {
+  width: 100%;
+  max-width: 100%;
+}
+
+.cca-top-brand {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 9px;
+  margin: 0 auto 28px;
+  text-decoration: none;
+}
+
+.cca-top-logo {
+  display: grid;
+  place-items: center;
+  width: 66px;
+  height: 66px;
+  background: #fff4f3;
+  border: 1px solid #f6dcdf;
+  border-radius: 19px;
+  color: #b71934;
+  font-weight: 900;
+  font-size: 22px;
+  overflow: hidden;
+}
+
+.cca-top-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 5px;
+}
+
+.cca-top-brand strong {
+  color: #282c33;
+  font-size: 16px;
+  letter-spacing: .065em;
+  font-weight: 850;
+}
+
+.cca-top-brand small {
+  color: #a65361;
+  font-weight: 750;
+  font-size: 10px;
+  letter-spacing: .18em;
+}
+
+.cca-shell .cca-form-heading {
+  text-align: center;
+  margin-bottom: 27px;
+}
+
+.cca-shell .cca-form-heading h1 {
+  font-size: clamp(25px, 4vw, 30px);
+  letter-spacing: -.045em;
+  margin-bottom: 7px;
+}
+
+.cca-shell .cca-form-heading>p:not(.cca-kicker) {
+  font-size: 12px;
+}
+
+.cca-shell .cca-kicker {
+  margin-bottom: 8px;
+}
+
+.cca-shell .cca-form {
+  gap: 16px;
+}
+
+.cca-shell .cca-field-row {
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.cca-shell .cca-field>label {
+  font-size: 12px;
+}
+
+.cca-shell .cca-field>input,
+.cca-shell .cca-password-field>input {
+  min-height: 48px;
+  border-radius: 10px;
+}
+
+.cca-shell .cca-primary-btn {
+  min-height: 50px;
+  margin-top: 5px;
+  font-size: 13px;
+}
+
+.cca-shell .cca-guest-btn {
+  min-height: 47px;
+}
+
+.cca-shell .cca-bottom {
+  margin-top: 25px;
+  padding-top: 19px;
+}
+
+.cca-shell .cca-legal-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 17px;
+  font-size: 11px;
+}
+
+.cca-shell .cca-legal-links a {
+  color: #69717a;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.cca-shell .cca-legal-links a:hover {
+  color: #b71934;
+}
+
+.cca-shell .cca-check {
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.cca-shell .cca-check a {
+  color: #b71934;
+  font-weight: 750;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.cca-shell .cca-check a:focus-visible {
+  outline: 3px solid #e39cab;
+  outline-offset: 2px;
+}
+
+.cca-shell .cca-field-hint {
+  color: #68737f;
+  margin: -3px 0 0;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+@media (max-width: 720px) {
+  .auth-container.cca-shell {
+    padding: 18px 12px;
+    display: flex;
+    align-items: center;
+  }
+
+  .cca-shell .cca-frame,
+  .cca-shell .cca-frame-register {
+    min-height: 0;
+    border: 1px solid #efe6e4;
+    border-radius: 18px;
+    box-shadow: 0 12px 40px rgba(83, 39, 34, .06);
+  }
+
+  .cca-shell .cca-form-panel {
+    padding: 30px 20px 30px;
+  }
+}
+
+
+/* CRISPYCLOUD_STEP40_PASSWORD_REVEAL — keep one Show/Hide control in Edge. */
+.cca-password-field input::-ms-reveal,
+.cca-password-field input::-ms-clear {
+  display: none !important;
+}

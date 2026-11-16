@@ -1,0 +1,564 @@
+/* Shared customer auth redesign. No decorative/non-working social controls. */
+body.cca-body {
+    min-height: 100vh;
+    background: #f9f6f2;
+    color: #26303b;
+    font-family: 'Poppins', sans-serif
+}
+
+.auth-container.cca-shell {
+    padding: 24px;
+    max-width: none;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.cca-shell * {
+    box-sizing: border-box
+}
+
+.cca-frame {
+    width: min(1070px, 100%);
+    min-height: 620px;
+    display: grid;
+    grid-template-columns: minmax(280px, .88fr) minmax(0, 1.12fr);
+    background: #fff;
+    border-radius: 21px;
+    overflow: hidden;
+    box-shadow: 0 18px 68px rgba(45, 32, 28, .12);
+    border: 1px solid #eee7df
+}
+
+.cca-frame-register {
+    min-height: 680px
+}
+
+.cca-brand-panel {
+    background: linear-gradient(147deg, #bd102d 0%, #9e1129 70%, #7f0f20 100%);
+    color: white;
+    padding: 43px 42px 37px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden
+}
+
+.cca-brand-panel::before,
+.cca-brand-panel::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none
+}
+
+.cca-brand-panel::before {
+    width: 330px;
+    height: 330px;
+    border: 1px solid rgba(255, 255, 255, .17);
+    right: -165px;
+    top: 21%
+}
+
+.cca-brand-panel::after {
+    width: 290px;
+    height: 290px;
+    background: rgba(255, 255, 255, .035);
+    left: -150px;
+    bottom: -110px
+}
+
+.cca-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    z-index: 1;
+    width: fit-content;
+    color: #fff;
+    text-decoration: none
+}
+
+.cca-brand img {
+    object-fit: contain;
+    width: 55px;
+    height: 55px;
+    background: rgba(255, 255, 255, .95);
+    border-radius: 13px;
+    padding: 5px
+}
+
+.cca-monogram {
+    width: 52px;
+    height: 52px;
+    display: grid;
+    place-items: center;
+    background: #fff;
+    color: #bd102d;
+    font-size: 20px;
+    font-weight: 900;
+    border-radius: 13px
+}
+
+.cca-brand strong,
+.cca-brand small {
+    display: block
+}
+
+.cca-brand strong {
+    font-size: 19px;
+    letter-spacing: -.03em;
+    line-height: 1.2;
+    font-weight: 850
+}
+
+.cca-brand small {
+    font-size: 10px;
+    letter-spacing: .14em;
+    font-weight: 700;
+    color: #ffe1df;
+    margin-top: 4px
+}
+
+.cca-brand-message {
+    position: relative;
+    z-index: 1;
+    padding: 40px 0 70px
+}
+
+.cca-eyebrow {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .16em;
+    color: #ffdbb4;
+    margin: 0 0 21px
+}
+
+.cca-brand-message h2 {
+    font-size: clamp(31px, 3.6vw, 45px);
+    font-weight: 850;
+    letter-spacing: -.06em;
+    line-height: 1.18;
+    margin: 0 0 19px;
+    color: #fff
+}
+
+.cca-brand-message h2 em {
+    color: #ffdf87;
+    font-style: normal
+}
+
+.cca-brand-message>p:not(.cca-eyebrow) {
+    font-size: 13px;
+    line-height: 1.85;
+    color: #ffdee0;
+    max-width: 330px;
+    margin: 0
+}
+
+.cca-brand-footer {
+    position: relative;
+    z-index: 1;
+    color: #f9c8cd;
+    font-size: 11px
+}
+
+.cca-form-panel {
+    padding: 38px clamp(29px, 4.2vw, 65px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0
+}
+
+.cca-form-width {
+    width: min(100%, 460px)
+}
+
+.cca-form-heading {
+    margin-bottom: 29px
+}
+
+.cca-kicker {
+    font-size: 10px;
+    letter-spacing: .14em;
+    color: #bd1933;
+    font-weight: 850;
+    margin: 0 0 11px
+}
+
+.cca-form-heading h1 {
+    font-size: clamp(25px, 3vw, 33px);
+    font-weight: 850;
+    letter-spacing: -.05em;
+    line-height: 1.18;
+    margin: 0 0 11px;
+    color: #252e38
+}
+
+.cca-form-heading>p:not(.cca-kicker) {
+    font-size: 13px;
+    color: #6e7782;
+    line-height: 1.7;
+    margin: 0
+}
+
+.cca-form {
+    display: grid;
+    gap: 19px
+}
+
+.cca-field {
+    display: grid;
+    gap: 8px;
+    min-width: 0
+}
+
+.cca-field>label {
+    font-size: 12px;
+    color: #394552;
+    font-weight: 750
+}
+
+.cca-optional {
+    font-weight: 500;
+    color: #89909a
+}
+
+.cca-field>input,
+.cca-password-field>input {
+    width: 100%;
+    border: 1px solid #dbe0e3;
+    border-radius: 10px;
+    background: #fff;
+    min-height: 49px;
+    padding: 12px 15px;
+    font: 500 13px/1.5 'Poppins', sans-serif;
+    color: #26303b;
+    outline: 0;
+    transition: border-color .15s ease, box-shadow .15s ease;
+    box-shadow: none
+}
+
+.cca-field>input::placeholder,
+.cca-password-field>input::placeholder {
+    color: #969da5;
+    opacity: 1
+}
+
+.cca-field>input:focus,
+.cca-password-field>input:focus {
+    border-color: #bd1933;
+    box-shadow: 0 0 0 3px rgba(200, 16, 46, .12)
+}
+
+.cca-password-field {
+    position: relative
+}
+
+.cca-password-field>input {
+    padding-right: 100px
+}
+
+.cca-visibility {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    min-height: 38px;
+    display: inline-flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 10px;
+    color: #6a7480;
+    background: #f8f9fa;
+    border: 0;
+    border-radius: 7px;
+    cursor: pointer;
+    font: 750 11px/1 'Poppins', sans-serif
+}
+
+.cca-visibility:hover {
+    background: #fff0f2;
+    color: #a2122d
+}
+
+.cca-visibility svg {
+    width: 17px;
+    height: 17px
+}
+
+.cca-eye-hide {
+    display: none
+}
+
+.cca-visibility[aria-pressed="true"] .cca-eye-show {
+    display: none
+}
+
+.cca-visibility[aria-pressed="true"] .cca-eye-hide {
+    display: block
+}
+
+.cca-primary-btn {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 11px;
+    min-height: 49px;
+    border: none;
+    border-radius: 10px;
+    background: #c8102e;
+    color: #fff;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    margin-top: 5px;
+    transition: background .15s ease, transform .15s ease
+}
+
+.cca-primary-btn:hover {
+    background: #a00c28
+}
+
+.cca-primary-btn:active {
+    transform: translateY(1px)
+}
+
+/* Secondary action: an explicit, understated way to browse without an account. */
+.cca-guest-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    min-height: 49px;
+    margin-top: 12px;
+    border: 1px solid #d4d9df;
+    border-radius: 10px;
+    background: #fff;
+    color: #3c4552;
+    text-align: center;
+    text-decoration: none;
+    font: 750 13px/1.4 'Poppins', sans-serif;
+    transition: border-color .15s ease, background-color .15s ease, color .15s ease
+}
+
+.cca-guest-btn:hover {
+    background: #fbf3f4;
+    border-color: #b71834;
+    color: #9f1630
+}
+
+.cca-guest-btn svg {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0
+}
+
+.cca-guest-btn:focus-visible {
+    outline: 3px solid #e39cab;
+    outline-offset: 3px
+}
+
+.cca-bottom {
+    border-top: 1px solid #eee9e5;
+    margin-top: 30px;
+    padding-top: 24px;
+    text-align: center;
+    font-size: 12px;
+    color: #7b828c
+}
+
+.cca-bottom a {
+    color: #b71834;
+    font-weight: 800;
+    text-decoration: none
+}
+
+.cca-bottom a:hover {
+    text-decoration: underline
+}
+
+.cca-alert {
+    border: 1px solid #edbcbc;
+    background: #fff1f2;
+    border-radius: 10px;
+    color: #9e2639;
+    font-size: 12px;
+    line-height: 1.7;
+    padding: 12px 15px;
+    margin: 0 0 21px
+}
+
+.cca-alert strong {
+    display: inline
+}
+
+.cca-alert ul {
+    padding-left: 19px;
+    margin: 7px 0 0
+}
+
+.cca-field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 13px
+}
+
+.cca-register-heading {
+    margin-bottom: 22px
+}
+
+.cca-frame-register .cca-form {
+    gap: 14px
+}
+
+.cca-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 3px 0 1px;
+    color: #596573;
+    font-size: 11px;
+    font-weight: 550;
+    line-height: 1.7;
+    cursor: pointer
+}
+
+.cca-check input {
+    width: 17px;
+    height: 17px;
+    margin-top: 2px;
+    flex-shrink: 0;
+    accent-color: #c8102e
+}
+
+.cca-shell a:focus-visible,
+.cca-shell button:focus-visible,
+.cca-shell input:focus-visible {
+    outline: 3px solid #e39cab;
+    outline-offset: 3px
+}
+
+.cca-skip {
+    position: absolute;
+    left: 12px;
+    top: -80px;
+    background: #fff;
+    color: #b71834;
+    z-index: 10;
+    padding: 10px;
+    border-radius: 7px
+}
+
+.cca-skip:focus {
+    top: 10px
+}
+
+@media(max-width:950px) {
+    .cca-frame {
+        grid-template-columns: 320px minmax(0, 1fr)
+    }
+
+    .cca-brand-panel {
+        padding: 32px 26px
+    }
+
+    .cca-brand-message h2 {
+        font-size: 33px
+    }
+
+    .cca-form-panel {
+        padding: 33px 30px
+    }
+}
+
+@media(max-width:720px) {
+    .auth-container.cca-shell {
+        padding: 0;
+        align-items: stretch
+    }
+
+    .cca-frame,
+    .cca-frame-register {
+        grid-template-columns: 1fr;
+        min-height: 100vh;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none
+    }
+
+    .cca-brand-panel {
+        padding: 20px 22px;
+        min-height: auto
+    }
+
+    .cca-brand-panel::before,
+    .cca-brand-panel::after,
+    .cca-brand-message,
+    .cca-brand-footer {
+        display: none
+    }
+
+    .cca-brand img {
+        width: 41px;
+        height: 41px
+    }
+
+    .cca-monogram {
+        width: 40px;
+        height: 40px
+    }
+
+    .cca-brand strong {
+        font-size: 15px
+    }
+
+    .cca-brand small {
+        font-size: 8px
+    }
+
+    .cca-form-panel {
+        padding: 31px 22px 55px;
+        align-items: start
+    }
+
+    .cca-form-width {
+        max-width: 500px
+    }
+}
+
+@media(max-width:490px) {
+    .cca-field-row {
+        grid-template-columns: 1fr
+    }
+
+    .cca-form {
+        gap: 16px
+    }
+
+    .cca-frame-register .cca-form {
+        gap: 16px
+    }
+
+    .cca-form-heading h1 {
+        font-size: 27px
+    }
+
+    .cca-form-panel {
+        padding: 26px 18px 48px
+    }
+}
+
+@media(prefers-reduced-motion:reduce) {
+    .cca-shell * {
+        transition: none !important
+    }
+}

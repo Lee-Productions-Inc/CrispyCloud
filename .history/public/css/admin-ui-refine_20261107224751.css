@@ -1,0 +1,21 @@
+/* Step 23: compact, grouped Admin navigation. No changes to authentication or routes. */
+.a-sidebar{min-height:0;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#ffffff66 transparent}
+.a-refined-nav{display:block}
+.a-nav-group{margin-bottom:13px}
+.a-nav-group .a-nav-label{margin:0 12px 4px;font-size:10px;letter-spacing:.13em;color:#ffe0e6}
+.a-refined-nav .a-nav-link{min-height:41px;padding:9px 12px;border-radius:9px;font-size:13px;gap:11px;margin-bottom:2px;transition:background-color .15s ease}
+.a-refined-nav .a-nav-symbol{font-size:17px;width:23px}
+.a-refined-nav .a-nav-link.active{background:#ffdb58;color:#7c1c27;box-shadow:none}
+.a-refined-nav .a-nav-link:hover:not(.active){background:#ffffff29}
+.a-side-bottom{padding:0 6px}
+.a-preview-link{display:flex;justify-content:space-between;gap:8px;align-items:center;color:#ffeaed;font-size:12px;text-decoration:none;border:1px solid #ffffff40;border-radius:9px;padding:11px 12px;margin-bottom:11px}
+.a-preview-link:hover{background:#ffffff21}
+.a-brand{margin-bottom:26px}
+.a-topbar-brand strong{color:#bb0e2f;letter-spacing:.08em}
+.a-topbar-brand span{font-weight:650;color:#626c79}
+.a-main{max-width:1420px}
+.a-panel{box-shadow:0 5px 20px rgba(24,28,37,.035)}
+.a-nav-link:focus-visible,.a-preview-link:focus-visible{outline:3px solid #ffe190;outline-offset:2px}
+@media(max-width:800px){.a-mobile-menu nav a{min-height:44px;display:flex;align-items:center}.a-topbar{padding-inline:18px}}
+/* The product editor disables the food-only section when a Drink category is selected. */
+.ap-product-editor [hidden]{display:none!important}

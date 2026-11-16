@@ -1,0 +1,1249 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap");
+/* CrispyCloud Step 42 — Tailwind CSS v4, compiled by Vite. */
+@import "tailwindcss";
+@source "../views";
+@source "../js";
+@theme {
+  --color-chicks-red: #c8102e;
+  --color-chicks-darkred: #a50f27;
+  --color-chicks-cream: #fff5ec;
+  --color-chicks-ink: #263044;
+  --font-chicks-display: "Fredoka", "Baloo 2", sans-serif;
+  --font-chicks-body: "Quicksand", "Poppins", sans-serif;
+}
+/* Legacy-specific visual effects and responsive states remain component CSS
+   in these Tailwind-built entries to preserve the approved CHICK'S POPS design.
+   Layout and spacing declarations have been migrated to Tailwind @apply. */
+
+/* === Original: resources/css/app.css === */
+
+
+
+:root{
+--primary-red: #e31837;
+--primary-red-dark: #9d1b1b;
+--dark-text: #263044;
+--muted-text: #98a0ae;
+--cream: #fff5ec;
+--border: #f0dcc8;
+--white: #ffffff;
+}
+
+*{
+@apply box-border;
+@apply m-0;
+@apply p-0;
+}
+
+body{
+font-family: "Poppins", sans-serif;
+color: var(--dark-text);
+background: var(--white);
+}
+
+button,
+input{
+font-family: inherit;
+}
+
+.auth-page{
+@apply min-h-screen;
+background: #ffffff;
+}
+
+.auth-container{
+@apply w-full;
+@apply min-h-screen;
+@apply flex;
+@apply justify-center;
+@apply items-start;
+padding: 48px 20px 60px;
+}
+
+.auth-card{
+@apply w-full;
+@apply max-w-[560px];
+}
+
+.auth-brand{
+@apply text-center;
+@apply mb-[48px];
+}
+
+.auth-logo{
+@apply w-[150px];
+@apply h-[150px];
+@apply object-contain;
+@apply block;
+margin: 0 auto 12px;
+}
+
+.auth-brand-name{
+font-family: "Baloo 2", sans-serif;
+@apply text-[38px];
+@apply font-extrabold;
+line-height: 1;
+color: var(--primary-red);
+@apply tracking-[-0.5px];
+}
+
+.auth-tagline{
+@apply mt-[8px];
+color: var(--primary-red);
+@apply text-[13px];
+@apply font-medium;
+@apply tracking-[2px];
+}
+
+.auth-heading{
+@apply text-center;
+@apply mb-[30px];
+}
+
+.auth-heading h1{
+font-family: "Baloo 2", sans-serif;
+@apply text-[27px];
+@apply font-extrabold;
+color: var(--dark-text);
+line-height: 1.2;
+}
+
+.auth-heading .auth-subtitle{
+@apply mt-[7px];
+color: var(--primary-red);
+@apply text-[12px];
+@apply tracking-[1.5px];
+@apply font-medium;
+text-transform: uppercase;
+}
+
+.auth-form{
+@apply w-full;
+}
+
+.form-group{
+@apply mb-[16px];
+}
+
+.form-label{
+@apply block;
+margin: 0 0 8px 2px;
+@apply text-[14px];
+@apply font-medium;
+color: var(--dark-text);
+}
+
+.form-row{
+@apply grid;
+grid-template-columns: 1fr 1fr;
+@apply gap-[24px];
+}
+
+.input-wrapper{
+@apply relative;
+}
+
+.form-input{
+@apply w-full;
+@apply h-[60px];
+padding: 0 18px;
+border: 2px solid var(--border);
+@apply rounded-[15px];
+background: var(--cream);
+color: var(--dark-text);
+@apply text-[15px];
+outline: none;
+transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-input::placeholder{
+@apply text-[#a4a9b4];
+}
+
+.form-input:focus{
+@apply border-[#e9b99c];
+box-shadow: 0 0 0 3px rgba(227, 24, 55, 0.06);
+}
+
+.input-with-icon{
+@apply pl-[48px];
+}
+
+.input-icon{
+@apply absolute;
+@apply left-[17px];
+@apply top-[50%];
+transform: translateY(-50%);
+@apply text-[#a2a9b5];
+@apply text-[17px];
+@apply pointer-events-none;
+}
+
+.password-toggle{
+@apply absolute;
+@apply right-[17px];
+@apply top-[50%];
+transform: translateY(-50%);
+@apply border-0;
+background: transparent;
+@apply text-[#98a0ae];
+@apply cursor-pointer;
+@apply text-[17px];
+}
+
+.form-options{
+@apply flex;
+@apply justify-between;
+@apply items-center;
+margin: 8px 4px 25px;
+@apply text-[13px];
+}
+
+.checkbox-label{
+@apply flex;
+@apply items-center;
+@apply gap-[8px];
+@apply cursor-pointer;
+}
+
+.checkbox-label input{
+@apply w-[20px];
+@apply h-[20px];
+accent-color: var(--primary-red);
+}
+
+.auth-link{
+color: var(--primary-red);
+@apply underline;
+text-underline-offset: 2px;
+@apply font-medium;
+}
+
+.auth-button{
+@apply w-full;
+@apply h-[64px];
+@apply border-0;
+@apply rounded-[15px];
+background: var(--primary-red);
+color: white;
+font-family: "Baloo 2", sans-serif;
+@apply text-[20px];
+@apply font-extrabold;
+@apply cursor-pointer;
+box-shadow: 0 6px 0 var(--primary-red-dark);
+transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.auth-button:hover{
+transform: translateY(-1px);
+}
+
+.auth-button:active{
+transform: translateY(4px);
+box-shadow: 0 2px 0 var(--primary-red-dark);
+}
+
+.social-section{
+@apply mt-[46px];
+}
+
+.divider{
+@apply flex;
+@apply items-center;
+@apply gap-[15px];
+@apply text-[#9aa2b0];
+@apply text-[11px];
+@apply tracking-[1px];
+text-transform: uppercase;
+}
+
+.divider::before,
+.divider::after{
+content: "";
+@apply h-[2px];
+@apply flex-1;
+background: var(--border);
+}
+
+.social-buttons{
+@apply grid;
+grid-template-columns: 1fr 1fr;
+@apply gap-[16px];
+@apply mt-[18px];
+}
+
+.social-button{
+@apply h-[49px];
+border: 2px solid var(--border);
+@apply rounded-[13px];
+background: white;
+color: var(--dark-text);
+@apply text-[13px];
+@apply font-semibold;
+@apply cursor-pointer;
+}
+
+.auth-footer{
+@apply text-center;
+@apply mt-[45px];
+@apply text-[14px];
+color: var(--dark-text);
+}
+
+.form-error{
+@apply mt-[6px];
+@apply ml-[2px];
+color: var(--primary-red);
+@apply text-[12px];
+}
+
+@media (max-width: 650px){
+.auth-container{
+padding: 30px 20px 45px;
+}
+
+.auth-card{
+@apply max-w-full;
+}
+
+.form-row{
+grid-template-columns: 1fr;
+@apply gap-[0];
+}
+
+.auth-brand{
+@apply mb-[35px];
+}
+
+.auth-logo{
+@apply w-[125px];
+@apply h-[125px];
+}
+
+.auth-brand-name{
+@apply text-[32px];
+}
+
+.social-buttons{
+grid-template-columns: 1fr;
+}
+}
+
+.customize-page{
+@apply min-h-screen;
+background: #fff8f1;
+padding: 48px 20px;
+font-family: "Poppins", sans-serif;
+}
+
+.customize-card{
+@apply max-w-[650px];
+margin: 0 auto;
+padding: 32px;
+background: white;
+@apply rounded-[24px];
+box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+}
+
+.customize-header{
+@apply text-center;
+@apply mb-[30px];
+}
+
+.customize-header h1{
+@apply text-[#e31837];
+@apply text-[28px];
+}
+
+.customize-header p{
+@apply text-[#777];
+@apply mt-[8px];
+}
+
+.customize-card section{
+margin: 22px 0;
+}
+
+.customize-card h2,
+.customize-card h3{
+@apply text-[#263044];
+@apply mb-[14px];
+}
+
+.customize-card hr{
+@apply border-0;
+border-top: 1px solid #f0dcc8;
+}
+
+.customize-option{
+@apply flex;
+@apply justify-between;
+@apply items-center;
+@apply gap-[12px];
+background: #fff5ec;
+padding: 16px;
+@apply rounded-[12px];
+@apply mb-[10px];
+@apply cursor-pointer;
+}
+
+.customize-option span{
+@apply flex;
+@apply items-center;
+@apply gap-[12px];
+}
+
+.customize-option input{
+accent-color: #e31837;
+@apply w-[18px];
+@apply h-[18px];
+}
+
+.customize-option strong{
+@apply text-[#e31837];
+@apply whitespace-nowrap;
+}
+
+.customize-card textarea{
+@apply w-full;
+border: 1px solid #f0dcc8;
+@apply rounded-[12px];
+padding: 14px;
+font: inherit;
+resize: vertical;
+}
+
+.customize-quantity{
+@apply flex;
+@apply items-center;
+@apply justify-between;
+@apply gap-[12px];
+}
+
+.quantity-controls{
+@apply flex;
+@apply items-center;
+@apply gap-[12px];
+}
+
+.quantity-controls button{
+background: #e31837;
+color: white;
+@apply border-0;
+@apply rounded-[8px];
+@apply w-[36px];
+@apply h-[36px];
+@apply cursor-pointer;
+}
+
+.quantity-controls input{
+@apply w-[55px];
+@apply text-center;
+padding: 8px;
+border: 1px solid #f0dcc8;
+@apply rounded-[8px];
+}
+
+.customize-total{
+@apply flex;
+@apply justify-between;
+@apply items-center;
+background: #fff5ec;
+padding: 20px;
+@apply rounded-[14px];
+@apply text-[20px];
+}
+
+.customize-total strong{
+@apply text-[#e31837];
+}
+
+.customize-note{
+@apply mt-[16px];
+@apply text-center;
+@apply text-[13px];
+@apply text-[#777];
+}
+
+@media (max-width: 600px){
+.customize-page{
+padding: 16px;
+}
+
+.customize-card{
+padding: 20px;
+}
+
+.customize-header h1{
+@apply text-[23px];
+}
+}
+
+
+/* === Original: resources/css/customer/auth-redesign.css === */
+body.cca-body{
+@apply min-h-screen;
+background: #f9f6f2;
+@apply text-[#26303b];
+font-family: "Poppins", sans-serif;
+}
+
+.auth-container.cca-shell{
+padding: 24px;
+max-width: none;
+@apply min-h-screen;
+@apply w-full;
+@apply flex;
+@apply items-center;
+@apply justify-center;
+}
+
+.cca-shell *{
+@apply box-border;
+}
+
+.cca-frame{
+width: min(1070px, 100%);
+@apply min-h-[620px];
+@apply grid;
+grid-template-columns: minmax(280px, .88fr) minmax(0, 1.12fr);
+background: #fff;
+@apply rounded-[21px];
+@apply overflow-hidden;
+box-shadow: 0 18px 68px rgba(45, 32, 28, .12);
+border: 1px solid #eee7df;
+}
+
+.cca-frame-register{
+@apply min-h-[680px];
+}
+
+.cca-brand-panel{
+background: linear-gradient(147deg, #bd102d 0%, #9e1129 70%, #7f0f20 100%);
+color: white;
+padding: 43px 42px 37px;
+@apply flex;
+@apply flex-col;
+@apply justify-between;
+@apply relative;
+@apply overflow-hidden;
+}
+
+.cca-brand-panel::before,
+.cca-brand-panel::after{
+content: "";
+@apply absolute;
+@apply rounded-full;
+@apply pointer-events-none;
+}
+
+.cca-brand-panel::before{
+@apply w-[330px];
+@apply h-[330px];
+border: 1px solid rgba(255, 255, 255, .17);
+@apply right-[-165px];
+@apply top-[21%];
+}
+
+.cca-brand-panel::after{
+@apply w-[290px];
+@apply h-[290px];
+background: rgba(255, 255, 255, .035);
+@apply left-[-150px];
+@apply bottom-[-110px];
+}
+
+.cca-brand{
+@apply inline-flex;
+@apply items-center;
+@apply gap-[12px];
+@apply relative;
+z-index: 1;
+width: fit-content;
+@apply text-[#fff];
+@apply no-underline;
+}
+
+.cca-brand img{
+@apply object-contain;
+@apply w-[55px];
+@apply h-[55px];
+background: rgba(255, 255, 255, .95);
+@apply rounded-[13px];
+padding: 5px;
+}
+
+.cca-monogram{
+@apply w-[52px];
+@apply h-[52px];
+@apply grid;
+@apply place-items-center;
+background: #fff;
+@apply text-[#bd102d];
+@apply text-[20px];
+@apply font-black;
+@apply rounded-[13px];
+}
+
+.cca-brand strong,
+.cca-brand small{
+@apply block;
+}
+
+.cca-brand strong{
+@apply text-[19px];
+letter-spacing: -.03em;
+line-height: 1.2;
+font-weight: 850;
+}
+
+.cca-brand small{
+@apply text-[10px];
+letter-spacing: .14em;
+@apply font-bold;
+@apply text-[#ffe1df];
+@apply mt-[4px];
+}
+
+.cca-brand-message{
+@apply relative;
+z-index: 1;
+padding: 40px 0 70px;
+}
+
+.cca-eyebrow{
+@apply text-[10px];
+@apply font-extrabold;
+letter-spacing: .16em;
+@apply text-[#ffdbb4];
+margin: 0 0 21px;
+}
+
+.cca-brand-message h2{
+font-size: clamp(31px, 3.6vw, 45px);
+font-weight: 850;
+letter-spacing: -.06em;
+line-height: 1.18;
+margin: 0 0 19px;
+@apply text-[#fff];
+}
+
+.cca-brand-message h2 em{
+@apply text-[#ffdf87];
+font-style: normal;
+}
+
+.cca-brand-message>p:not(.cca-eyebrow){
+@apply text-[13px];
+line-height: 1.85;
+@apply text-[#ffdee0];
+@apply max-w-[330px];
+@apply m-0;
+}
+
+.cca-brand-footer{
+@apply relative;
+z-index: 1;
+@apply text-[#f9c8cd];
+@apply text-[11px];
+}
+
+.cca-form-panel{
+padding: 38px clamp(29px, 4.2vw, 65px);
+@apply flex;
+@apply items-center;
+@apply justify-center;
+@apply min-w-0;
+}
+
+.cca-form-width{
+width: min(100%, 460px);
+}
+
+.cca-form-heading{
+@apply mb-[29px];
+}
+
+.cca-kicker{
+@apply text-[10px];
+letter-spacing: .14em;
+@apply text-[#bd1933];
+font-weight: 850;
+margin: 0 0 11px;
+}
+
+.cca-form-heading h1{
+font-size: clamp(25px, 3vw, 33px);
+font-weight: 850;
+letter-spacing: -.05em;
+line-height: 1.18;
+margin: 0 0 11px;
+@apply text-[#252e38];
+}
+
+.cca-form-heading>p:not(.cca-kicker){
+@apply text-[13px];
+@apply text-[#6e7782];
+line-height: 1.7;
+@apply m-0;
+}
+
+.cca-form{
+@apply grid;
+@apply gap-[19px];
+}
+
+.cca-field{
+@apply grid;
+@apply gap-[8px];
+@apply min-w-0;
+}
+
+.cca-field>label{
+@apply text-[12px];
+@apply text-[#394552];
+font-weight: 750;
+}
+
+.cca-optional{
+@apply font-medium;
+@apply text-[#89909a];
+}
+
+.cca-field>input,
+.cca-password-field>input{
+@apply w-full;
+border: 1px solid #dbe0e3;
+@apply rounded-[10px];
+background: #fff;
+@apply min-h-[49px];
+padding: 12px 15px;
+font: 500 13px/1.5 "Poppins", sans-serif;
+@apply text-[#26303b];
+outline: 0;
+transition: border-color .15s ease, box-shadow .15s ease;
+box-shadow: none;
+}
+
+.cca-field>input::placeholder,
+.cca-password-field>input::placeholder{
+@apply text-[#969da5];
+@apply opacity-100;
+}
+
+.cca-field>input:focus,
+.cca-password-field>input:focus{
+@apply border-[#bd1933];
+box-shadow: 0 0 0 3px rgba(200, 16, 46, .12);
+}
+
+.cca-password-field{
+@apply relative;
+}
+
+.cca-password-field>input{
+@apply pr-[100px];
+}
+
+.cca-visibility{
+@apply absolute;
+@apply right-[6px];
+@apply top-[50%];
+transform: translateY(-50%);
+@apply min-h-[38px];
+@apply inline-flex;
+@apply gap-[5px];
+@apply items-center;
+@apply justify-center;
+padding: 7px 10px;
+@apply text-[#6a7480];
+background: #f8f9fa;
+@apply border-0;
+@apply rounded-[7px];
+@apply cursor-pointer;
+font: 750 11px/1 "Poppins", sans-serif;
+}
+
+.cca-visibility:hover{
+background: #fff0f2;
+@apply text-[#a2122d];
+}
+
+.cca-visibility svg{
+@apply w-[17px];
+@apply h-[17px];
+}
+
+.cca-eye-hide{
+@apply hidden;
+}
+
+.cca-visibility[aria-pressed="true"] .cca-eye-show{
+@apply hidden;
+}
+
+.cca-visibility[aria-pressed="true"] .cca-eye-hide{
+@apply block;
+}
+
+.cca-primary-btn{
+@apply flex;
+@apply w-full;
+@apply items-center;
+@apply justify-center;
+@apply gap-[11px];
+@apply min-h-[49px];
+@apply border-0;
+@apply rounded-[10px];
+background: #c8102e;
+@apply text-[#fff];
+font-family: inherit;
+@apply text-[13px];
+@apply font-extrabold;
+@apply cursor-pointer;
+@apply mt-[5px];
+transition: background .15s ease, transform .15s ease;
+}
+
+.cca-primary-btn:hover{
+background: #a00c28;
+}
+
+.cca-primary-btn:active{
+transform: translateY(1px);
+}
+
+.cca-guest-btn{
+@apply flex;
+@apply items-center;
+@apply justify-center;
+@apply gap-[10px];
+@apply w-full;
+@apply min-h-[49px];
+@apply mt-[12px];
+border: 1px solid #d4d9df;
+@apply rounded-[10px];
+background: #fff;
+@apply text-[#3c4552];
+@apply text-center;
+@apply no-underline;
+font: 750 13px/1.4 "Poppins", sans-serif;
+transition: border-color .15s ease, background-color .15s ease, color .15s ease;
+}
+
+.cca-guest-btn:hover{
+background: #fbf3f4;
+@apply border-[#b71834];
+@apply text-[#9f1630];
+}
+
+.cca-guest-btn svg{
+@apply w-[17px];
+@apply h-[17px];
+@apply shrink-0;
+}
+
+.cca-guest-btn:focus-visible{
+outline: 3px solid #e39cab;
+outline-offset: 3px;
+}
+
+.cca-bottom{
+border-top: 1px solid #eee9e5;
+@apply mt-[30px];
+@apply pt-[24px];
+@apply text-center;
+@apply text-[12px];
+@apply text-[#7b828c];
+}
+
+.cca-bottom a{
+@apply text-[#b71834];
+@apply font-extrabold;
+@apply no-underline;
+}
+
+.cca-bottom a:hover{
+@apply underline;
+}
+
+.cca-alert{
+border: 1px solid #edbcbc;
+background: #fff1f2;
+@apply rounded-[10px];
+@apply text-[#9e2639];
+@apply text-[12px];
+line-height: 1.7;
+padding: 12px 15px;
+margin: 0 0 21px;
+}
+
+.cca-alert strong{
+@apply inline;
+}
+
+.cca-alert ul{
+@apply pl-[19px];
+margin: 7px 0 0;
+}
+
+.cca-field-row{
+@apply grid;
+grid-template-columns: 1fr 1fr;
+@apply gap-[13px];
+}
+
+.cca-register-heading{
+@apply mb-[22px];
+}
+
+.cca-frame-register .cca-form{
+@apply gap-[14px];
+}
+
+.cca-check{
+@apply flex;
+@apply items-start;
+@apply gap-[10px];
+margin: 3px 0 1px;
+@apply text-[#596573];
+@apply text-[11px];
+font-weight: 550;
+line-height: 1.7;
+@apply cursor-pointer;
+}
+
+.cca-check input{
+@apply w-[17px];
+@apply h-[17px];
+@apply mt-[2px];
+@apply shrink-0;
+accent-color: #c8102e;
+}
+
+.cca-shell a:focus-visible,
+.cca-shell button:focus-visible,
+.cca-shell input:focus-visible{
+outline: 3px solid #e39cab;
+outline-offset: 3px;
+}
+
+.cca-skip{
+@apply absolute;
+@apply left-[12px];
+@apply top-[-80px];
+background: #fff;
+@apply text-[#b71834];
+z-index: 10;
+padding: 10px;
+@apply rounded-[7px];
+}
+
+.cca-skip:focus{
+@apply top-[10px];
+}
+
+@media (max-width:950px){
+.cca-frame{
+grid-template-columns: 320px minmax(0, 1fr);
+}
+
+.cca-brand-panel{
+padding: 32px 26px;
+}
+
+.cca-brand-message h2{
+@apply text-[33px];
+}
+
+.cca-form-panel{
+padding: 33px 30px;
+}
+}
+
+@media (max-width:720px){
+.auth-container.cca-shell{
+@apply p-0;
+@apply items-stretch;
+}
+
+.cca-frame,
+    .cca-frame-register{
+grid-template-columns: 1fr;
+@apply min-h-screen;
+@apply border-0;
+@apply rounded-[0];
+box-shadow: none;
+}
+
+.cca-brand-panel{
+padding: 20px 22px;
+min-height: auto;
+}
+
+.cca-brand-panel::before,
+    .cca-brand-panel::after,
+    .cca-brand-message,
+    .cca-brand-footer{
+@apply hidden;
+}
+
+.cca-brand img{
+@apply w-[41px];
+@apply h-[41px];
+}
+
+.cca-monogram{
+@apply w-[40px];
+@apply h-[40px];
+}
+
+.cca-brand strong{
+@apply text-[15px];
+}
+
+.cca-brand small{
+@apply text-[8px];
+}
+
+.cca-form-panel{
+padding: 31px 22px 55px;
+align-items: start;
+}
+
+.cca-form-width{
+@apply max-w-[500px];
+}
+}
+
+@media (max-width:490px){
+.cca-field-row{
+grid-template-columns: 1fr;
+}
+
+.cca-form{
+@apply gap-[16px];
+}
+
+.cca-frame-register .cca-form{
+@apply gap-[16px];
+}
+
+.cca-form-heading h1{
+@apply text-[27px];
+}
+
+.cca-form-panel{
+padding: 26px 18px 48px;
+}
+}
+
+@media (prefers-reduced-motion:reduce){
+.cca-shell *{
+transition: none !important;
+}
+}
+
+
+/* === Original: public/css/crispycloud-auth-clean.css === */
+body.cca-body{
+background: radial-gradient(circle at 50% 0, #fff3f1 0, #fbf8f5 40%, #f6f4f1 100%);
+}
+
+.auth-container.cca-shell{
+padding: 34px 18px;
+min-height: 100svh;
+}
+
+.cca-shell .cca-frame, .cca-shell .cca-frame-register{
+@apply block;
+width: min(100%, 470px);
+@apply min-h-0;
+@apply overflow-visible;
+background: #fff;
+border: 1px solid #efe6e4;
+@apply rounded-[22px];
+box-shadow: 0 24px 75px rgba(83, 39, 34, .08), 0 2px 14px rgba(83, 39, 34, .035);
+}
+
+.cca-shell .cca-frame-register{
+width: min(100%, 540px);
+}
+
+.cca-shell .cca-brand-panel{
+display: none !important;
+}
+
+.cca-shell .cca-form-panel{
+padding: 42px clamp(23px, 5vw, 48px) 35px;
+@apply block;
+}
+
+.cca-shell .cca-form-width{
+@apply w-full;
+@apply max-w-full;
+}
+
+.cca-top-brand{
+@apply grid;
+justify-items: center;
+@apply text-center;
+@apply gap-[9px];
+margin: 0 auto 28px;
+@apply no-underline;
+}
+
+.cca-top-logo{
+@apply grid;
+@apply place-items-center;
+@apply w-[66px];
+@apply h-[66px];
+background: #fff4f3;
+border: 1px solid #f6dcdf;
+@apply rounded-[19px];
+@apply text-[#b71934];
+@apply font-black;
+@apply text-[22px];
+@apply overflow-hidden;
+}
+
+.cca-top-logo img{
+@apply w-full;
+@apply h-full;
+@apply object-contain;
+padding: 5px;
+}
+
+.cca-top-brand strong{
+@apply text-[#282c33];
+@apply text-[16px];
+letter-spacing: .065em;
+font-weight: 850;
+}
+
+.cca-top-brand small{
+@apply text-[#a65361];
+font-weight: 750;
+@apply text-[10px];
+letter-spacing: .18em;
+}
+
+.cca-shell .cca-form-heading{
+@apply text-center;
+@apply mb-[27px];
+}
+
+.cca-shell .cca-form-heading h1{
+font-size: clamp(25px, 4vw, 30px);
+letter-spacing: -.045em;
+@apply mb-[7px];
+}
+
+.cca-shell .cca-form-heading>p:not(.cca-kicker){
+@apply text-[12px];
+}
+
+.cca-shell .cca-kicker{
+@apply mb-[8px];
+}
+
+.cca-shell .cca-form{
+@apply gap-[16px];
+}
+
+.cca-shell .cca-field-row{
+grid-template-columns: 1fr;
+@apply gap-[16px];
+}
+
+.cca-shell .cca-field>label{
+@apply text-[12px];
+}
+
+.cca-shell .cca-field>input, .cca-shell .cca-password-field>input{
+@apply min-h-[48px];
+@apply rounded-[10px];
+}
+
+.cca-shell .cca-primary-btn{
+@apply min-h-[50px];
+@apply mt-[5px];
+@apply text-[13px];
+}
+
+.cca-shell .cca-guest-btn{
+@apply min-h-[47px];
+}
+
+.cca-shell .cca-bottom{
+@apply mt-[25px];
+@apply pt-[19px];
+}
+
+.cca-shell .cca-legal-links{
+@apply flex;
+@apply flex-wrap;
+@apply justify-center;
+@apply gap-[10px];
+@apply mt-[17px];
+@apply text-[11px];
+}
+
+.cca-shell .cca-legal-links a{
+@apply text-[#69717a];
+@apply underline;
+text-underline-offset: 3px;
+}
+
+.cca-shell .cca-legal-links a:hover{
+@apply text-[#b71934];
+}
+
+.cca-shell .cca-check{
+@apply text-[12px];
+line-height: 1.7;
+}
+
+.cca-shell .cca-check a{
+@apply text-[#b71934];
+font-weight: 750;
+@apply underline;
+text-underline-offset: 2px;
+}
+
+.cca-shell .cca-check a:focus-visible{
+outline: 3px solid #e39cab;
+outline-offset: 2px;
+}
+
+.cca-shell .cca-field-hint{
+@apply text-[#68737f];
+margin: -3px 0 0;
+@apply text-[11px];
+line-height: 1.5;
+}
+
+@media (max-width: 720px){
+.auth-container.cca-shell{
+padding: 18px 12px;
+@apply flex;
+@apply items-center;
+}
+
+.cca-shell .cca-frame, .cca-shell .cca-frame-register{
+@apply min-h-0;
+border: 1px solid #efe6e4;
+@apply rounded-[18px];
+box-shadow: 0 12px 40px rgba(83,39,34,.06);
+}
+
+.cca-shell .cca-form-panel{
+padding: 30px 20px 30px;
+}
+}
+
+.cca-password-field input::-ms-reveal,
+.cca-password-field input::-ms-clear{
+display: none !important;
+}
+

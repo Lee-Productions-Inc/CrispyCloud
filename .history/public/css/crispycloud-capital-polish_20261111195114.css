@@ -1,0 +1,51 @@
+/* Step 35 — Small additions to existing CHICK'S POPS admin styling. */
+.cc-capital-filter{padding:16px 20px;margin:0 0 18px}
+.cc-capital-month-form{display:flex;align-items:end;gap:12px;flex-wrap:wrap}
+.cc-capital-month-form label,.cc-capital-form label{display:block;font-size:12px;font-weight:750;color:#344152}
+.cc-capital-month-form input,.cc-capital-form input,.cc-capital-correction input{background:#fff;border:1px solid #dadfe5;border-radius:9px;padding:10px 12px;color:#202a37;font:inherit;min-height:42px}
+.cc-capital-month-form input{min-width:170px}
+.cc-capital-button{min-height:42px;border:0;border-radius:9px;padding:11px 17px;background:#c8102e;color:#fff;font-weight:750;font:inherit;cursor:pointer}
+.cc-capital-button:hover{background:#a30b25}
+.cc-capital-button-light{background:#fff5f5;color:#9f1430;border:1px solid #ecc9d0}
+.cc-capital-button-light:hover{background:#ffe7eb}
+.cc-capital-summary{margin-bottom:18px}
+.cc-capital-grid{display:grid;grid-template-columns:minmax(260px,.85fr) minmax(0,1.5fr);gap:18px;align-items:start;margin-bottom:18px}
+.cc-capital-panel{padding:22px;min-width:0}
+.cc-capital-panel h2{margin:0 0 18px;font-size:18px}
+.cc-capital-form{display:grid;gap:10px}
+.cc-capital-form input{width:100%;max-width:100%}
+.cc-capital-form button{margin-top:7px}
+.cc-capital-muted,.cc-capital-chart-head p,.cc-capital-chart-note{color:#697686;font-weight:500}
+.cc-capital-history td{vertical-align:top}
+.cc-capital-history strong{white-space:nowrap}
+.cc-capital-voided{display:inline-block;padding:3px 9px;background:#f1f2f4;color:#576273;border-radius:16px;font-size:11px;font-weight:700}
+.cc-capital-void-reason{display:block;color:#697686;max-width:220px;overflow-wrap:anywhere;margin-top:5px}
+.cc-capital-correction summary{color:#a91a35;cursor:pointer;font-size:12px;font-weight:700;white-space:nowrap}
+.cc-capital-correction form{display:grid;gap:7px;margin-top:9px;min-width:170px}
+.cc-capital-correction label{font-size:11px}
+.cc-capital-correction input{width:100%;font-size:12px}
+.cc-capital-correction button{font-size:12px;padding:8px 10px;min-height:36px}
+.cc-capital-chart-head{display:flex;align-items:start;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.cc-capital-chart-head p{margin:0;font-size:12px}
+.cc-capital-key{display:flex;gap:15px;flex-wrap:wrap;color:#536174;font-size:12px}
+.cc-capital-key>span{display:inline-flex;align-items:center;gap:7px}
+.cc-capital-dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+.cc-capital-dot-capital{background:#f0a570}
+.cc-capital-dot-sales{background:#c8102e}
+.cc-capital-chart{height:235px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:13px;padding:20px 2px 0;margin-top:8px;border-bottom:1px solid #e9e9ed}
+.cc-capital-chart-month{min-width:0;display:flex;flex-direction:column;align-items:stretch}
+.cc-capital-chart-pair{height:180px;display:flex;align-items:end;justify-content:center;gap:6px;padding:0 5px;border-bottom:1px solid #e6e8ea}
+.cc-capital-chart-bar{min-width:9px;max-width:33px;flex:1;border-radius:5px 5px 0 0}
+.cc-capital-chart-bar-capital{background:#f0a570}
+.cc-capital-chart-bar-sales{background:#c8102e}
+.cc-capital-chart-month small{text-align:center;margin-top:7px;font-weight:700;color:#667386;white-space:nowrap;font-size:10px}
+.cc-capital-chart-details{margin-top:12px}
+.cc-capital-chart-details summary{cursor:pointer;color:#ab1230;font-weight:700;font-size:12px}
+.cc-capital-chart-note{margin:13px 0 0;font-size:12px}
+.cc-finance-info{position:relative;display:inline-flex;z-index:3}
+.cc-finance-info summary{list-style:none;cursor:pointer;border:1px solid #d8dde3;border-radius:50%;width:20px;height:20px;display:inline-grid;place-items:center;font-size:12px;font-weight:700;color:#697686;background:#fff}
+.cc-finance-info summary::-webkit-details-marker{display:none}
+.cc-finance-info>div{position:absolute;right:0;top:26px;width:min(265px,72vw);z-index:10;background:#fff;color:#39475a;padding:12px 14px;border:1px solid #e5e7ec;box-shadow:0 10px 24px rgba(0,0,0,.1);border-radius:10px;font-size:12px;line-height:1.5;font-weight:400}
+.cc-capital-button:focus-visible,.cc-capital-month-form input:focus-visible,.cc-capital-form input:focus-visible,.cc-capital-correction input:focus-visible,.cc-finance-info summary:focus-visible{outline:3px solid #f5b83c;outline-offset:2px}
+@media(max-width:980px){.cc-capital-grid{grid-template-columns:1fr}}
+@media(max-width:560px){.cc-capital-panel{padding:16px}.cc-capital-chart{gap:5px}.cc-capital-chart-pair{gap:3px;padding:0 2px}.cc-capital-chart-month small{font-size:9px}.cc-capital-month-form{align-items:stretch}.cc-capital-month-form input{width:100%}.cc-capital-month-form button{width:100%}}

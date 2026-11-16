@@ -1,0 +1,37 @@
+/* Step 36 — Accessible micro-polish only. Existing CHICK'S POPS design is unchanged. */
+.cc-menu-page .ccm-card:focus-within {
+    border-color: #da9faa;
+    box-shadow: 0 10px 26px rgba(90, 32, 44, .09)
+}
+
+.cc-menu-page .ccm-card:focus-within .ccm-card-cta {
+    background: #a90e28;
+    color: #fff
+}
+
+.cc-menu-page :is(.ccm-card-cta, .ccm-category, .ccm-flavor, .ccm-section-option, .ccm-hero-button, .ccm-search-form button):focus-visible,
+.cc-customer-page :is(.ccn-nav-link, .ccn-cart-action, .ccn-sign-in, .ccn-mobile-nav a):focus-visible {
+    outline: 3px solid #d49a21;
+    outline-offset: 3px
+}
+
+.cc-menu-page .ccm-search-form input[type=search] {
+    min-width: 0
+}
+
+.cc-menu-page .ccm-card-description {
+    overflow-wrap: anywhere
+}
+
+.cc-menu-page .ccm-card-cta {
+    min-height: 40px
+}
+
+@media (prefers-reduced-motion:reduce) {
+
+    .cc-menu-page .ccm-card,
+    .cc-menu-page .ccm-card-photo img {
+        transition: none !important;
+        transform: none !important
+    }
+}

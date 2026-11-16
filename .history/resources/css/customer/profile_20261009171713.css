@@ -1,0 +1,494 @@
+/* Chick's Pops — Step 14 Customer Profile */
+.cc-profile-page {
+    margin: 0;
+    background: #fff;
+    color: #1f2937;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600
+}
+
+.cc-profile-page * {
+    box-sizing: border-box
+}
+
+.cc-profile-page button,
+.cc-profile-page input {
+    font: inherit
+}
+
+.cc-profile-header {
+    min-height: 112px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 16px max(24px, 4vw);
+    border-bottom: 1px solid #f4e8dd;
+    background: white
+}
+
+.cc-profile-brand {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    text-decoration: none;
+    color: #e31837;
+    font: 700 25px/0.96 'Fredoka', sans-serif;
+    letter-spacing: -.5px
+}
+
+.cc-profile-brand img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain
+}
+
+.cc-profile-header-nav {
+    display: flex;
+    align-items: center;
+    gap: 34px;
+    flex-wrap: wrap
+}
+
+.cc-profile-header-nav a {
+    text-decoration: none;
+    color: #4b5563;
+    font-size: 14px
+}
+
+.cc-profile-header-nav a:hover,
+.cc-profile-header-nav .is-active {
+    color: #e31837
+}
+
+.cc-profile-header-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    max-width: 220px
+}
+
+.cc-profile-header-user span:last-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+
+.cc-profile-avatar {
+    display: inline-flex;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background: #fee1dd;
+    color: #c8102e;
+    font: 700 21px 'Fredoka', sans-serif;
+    width: 42px;
+    height: 42px
+}
+
+.cc-profile-layout {
+    width: min(1360px, 100%);
+    margin: 0 auto;
+    padding: 48px max(20px, 4vw) 72px;
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    align-items: start;
+    gap: 50px
+}
+
+.cc-profile-sidebar {
+    position: sticky;
+    top: 20px
+}
+
+.cc-profile-sidebar h2 {
+    font: 700 30px 'Fredoka', sans-serif;
+    margin: 0 0 26px
+}
+
+.cc-profile-sidebar nav {
+    display: grid;
+    gap: 7px
+}
+
+.cc-profile-sidebar nav a,
+.cc-profile-logout {
+    display: block;
+    text-align: left;
+    width: 100%;
+    padding: 15px 18px;
+    text-decoration: none;
+    border-radius: 12px;
+    color: #374151;
+    background: none;
+    border: 0;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer
+}
+
+.cc-profile-sidebar nav a:hover,
+.cc-profile-sidebar nav .is-active {
+    background: #e31837;
+    color: #fff
+}
+
+.cc-profile-sidebar form {
+    padding-top: 22px;
+    margin-top: 25px;
+    border-top: 1px solid #f2e4d6
+}
+
+.cc-profile-logout {
+    color: #c8102e
+}
+
+.cc-profile-content {
+    min-width: 0
+}
+
+.cc-profile-section {
+    scroll-margin-top: 16px;
+    margin-bottom: 44px
+}
+
+.cc-profile-section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+    flex-wrap: wrap
+}
+
+.cc-profile-section h1,
+.cc-profile-section h2 {
+    font: 700 30px 'Fredoka', sans-serif;
+    letter-spacing: .2px;
+    margin: 0
+}
+
+.cc-profile-link {
+    color: #e31837;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px
+}
+
+.cc-profile-link:hover {
+    text-decoration: underline
+}
+
+.cc-profile-summary {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    background: #fff;
+    border-radius: 20px;
+    border: 1px solid #f0e6de;
+    box-shadow: 0 8px 28px rgba(24, 24, 30, .055);
+    padding: 30px 34px
+}
+
+.cc-profile-avatar.large {
+    width: 116px;
+    height: 116px;
+    font-size: 55px;
+    border: 4px solid #fff3ec;
+    box-shadow: 0 4px 14px #0001
+}
+
+.cc-profile-summary dl {
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 36px;
+    flex: 1
+}
+
+.cc-profile-summary dt {
+    font-size: 12px;
+    color: #9ca3af;
+    margin-bottom: 6px
+}
+
+.cc-profile-summary dd {
+    font-size: 17px;
+    font-weight: 700;
+    margin: 0;
+    overflow-wrap: anywhere
+}
+
+.cc-profile-editor,
+.cc-address-editor {
+    margin-top: 16px;
+    border: 1px solid #f0dcc8;
+    border-radius: 14px;
+    padding: 15px 18px;
+    background: #fffaf5
+}
+
+.cc-profile-editor summary,
+.cc-address-editor summary {
+    color: #c8102e;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 700
+}
+
+.cc-profile-form {
+    display: grid;
+    gap: 14px;
+    margin-top: 20px
+}
+
+.cc-profile-form label:not(.cc-profile-checkbox) {
+    display: grid;
+    gap: 6px;
+    font-size: 13px;
+    color: #374151;
+    font-weight: 700
+}
+
+.cc-profile-form input:not([type='checkbox']) {
+    border: 2px solid #edd9c8;
+    background: #fff;
+    padding: 13px 14px;
+    border-radius: 10px;
+    width: 100%;
+    min-width: 0;
+    outline-offset: 2px
+}
+
+.cc-profile-checkbox {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 13px
+}
+
+.cc-profile-checkbox input {
+    accent-color: #e31837
+}
+
+.cc-profile-button {
+    background: #e31837;
+    border: 0;
+    border-radius: 10px;
+    color: #fff;
+    font: 700 16px 'Fredoka', sans-serif;
+    padding: 13px 22px;
+    cursor: pointer;
+    justify-self: start;
+    box-shadow: 0 4px 0 #a50e2b
+}
+
+.cc-profile-button:hover {
+    background: #c8102e
+}
+
+.cc-profile-helper {
+    margin: -2px 0 17px;
+    color: #6b7280;
+    font-size: 13px
+}
+
+.cc-address-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px
+}
+
+.cc-address-card {
+    padding: 22px;
+    border: 1px solid #edd9c8;
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 6px 20px #1f29370c;
+    min-width: 0
+}
+
+.cc-address-title {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+    font: 700 18px 'Fredoka', sans-serif
+}
+
+.cc-address-badge {
+    font: 700 10px 'Quicksand', sans-serif;
+    letter-spacing: 1px;
+    color: #087444;
+    background: #e9faef;
+    padding: 5px 8px;
+    border-radius: 50px
+}
+
+.cc-address-card address {
+    font-size: 13px;
+    font-style: normal;
+    line-height: 1.8;
+    color: #6b7280;
+    overflow-wrap: anywhere
+}
+
+.cc-address-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 16px
+}
+
+.cc-address-actions form {
+    margin: 0
+}
+
+.cc-profile-text-button {
+    color: #e31837;
+    cursor: pointer;
+    padding: 0;
+    border: none;
+    background: none;
+    font-size: 12px;
+    text-decoration: underline
+}
+
+.cc-profile-text-button.danger {
+    color: #9f1239
+}
+
+.cc-profile-no-address,
+.cc-profile-notice {
+    padding: 24px;
+    border: 1px solid #edd9c8;
+    background: #fff9f2;
+    border-radius: 16px;
+    color: #4b5563;
+    font-size: 14px;
+    line-height: 1.7
+}
+
+.cc-profile-notice p {
+    margin: 7px 0 0;
+    color: #6b7280
+}
+
+.cc-profile-alert {
+    padding: 16px 20px;
+    border-radius: 12px;
+    margin-bottom: 18px;
+    font-size: 14px
+}
+
+.cc-profile-alert.success {
+    background: #f0fdf4;
+    color: #166534;
+    border: 1px solid #bbf7d0
+}
+
+.cc-profile-alert.error {
+    background: #fff1f2;
+    color: #9f1239;
+    border: 1px solid #fecdd3
+}
+
+.cc-profile-alert ul {
+    margin: 8px 0 0;
+    padding-left: 21px
+}
+
+@media(max-width:950px) {
+    .cc-profile-layout {
+        grid-template-columns: 1fr;
+        gap: 24px
+    }
+
+    .cc-profile-sidebar {
+        position: static
+    }
+
+    .cc-profile-sidebar nav {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 5px
+    }
+
+    .cc-profile-sidebar nav a {
+        font-size: 12px;
+        padding: 12px
+    }
+
+    .cc-profile-sidebar form {
+        margin: 6px 0 0;
+        padding: 6px 0 0
+    }
+
+    .cc-profile-header-user {
+        display: none
+    }
+}
+
+@media(max-width:650px) {
+    .cc-profile-header {
+        gap: 10px;
+        align-items: flex-start;
+        flex-wrap: wrap
+    }
+
+    .cc-profile-header-nav {
+        gap: 16px;
+        width: 100%;
+        order: 3
+    }
+
+    .cc-profile-header-nav a {
+        font-size: 12px
+    }
+
+    .cc-profile-brand img {
+        width: 56px;
+        height: 56px
+    }
+
+    .cc-profile-brand {
+        font-size: 20px
+    }
+
+    .cc-profile-layout {
+        padding: 28px 16px 45px
+    }
+
+    .cc-profile-sidebar h2 {
+        font-size: 25px
+    }
+
+    .cc-profile-sidebar nav {
+        grid-template-columns: repeat(2, minmax(0, 1fr))
+    }
+
+    .cc-profile-summary {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+        gap: 20px
+    }
+
+    .cc-profile-summary dl {
+        width: 100%;
+        grid-template-columns: 1fr;
+        gap: 12px
+    }
+
+    .cc-address-grid {
+        grid-template-columns: 1fr
+    }
+
+    .cc-profile-section h1,
+    .cc-profile-section h2 {
+        font-size: 26px
+    }
+}

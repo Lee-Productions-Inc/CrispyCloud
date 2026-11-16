@@ -1,0 +1,513 @@
+/* Step 20: Sales & Reports. Scoped classes: ar-*; builds on shared admin.css. */
+.ar-page-head {
+    gap: 16px;
+}
+
+.ar-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 43px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    border: 1px solid #e0e1e5;
+    font-size: 12px;
+    font-weight: 800;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.ar-button-primary {
+    border-color: #c8102e;
+    color: #fff;
+    background: #c8102e;
+}
+
+.ar-button-primary:hover {
+    background: #9f1028;
+}
+
+.ar-filter-card {
+    padding: 18px 20px;
+    margin: 0 0 18px;
+}
+
+.ar-filter-main {
+    display: flex;
+    gap: 16px;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.ar-small-label {
+    margin: 0 0 7px;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: .1em;
+    color: #647183;
+}
+
+.ar-segments {
+    display: flex;
+    gap: 7px;
+    flex-wrap: wrap;
+}
+
+.ar-segment {
+    padding: 9px 12px;
+    border: 1px solid #e0e3e8;
+    border-radius: 9px;
+    color: #4f5b6a;
+    text-decoration: none;
+    background: #fff;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.ar-segment:hover {
+    border-color: #b40d29;
+    color: #b40d29;
+}
+
+.ar-segment.is-active {
+    background: #c8102e;
+    border-color: #c8102e;
+    color: white;
+}
+
+.ar-date-display {
+    display: grid;
+    gap: 1px;
+    text-align: right;
+    font-size: 12px;
+}
+
+.ar-date-display span {
+    color: #77808c;
+}
+
+.ar-date-display strong {
+    font-size: 13px;
+}
+
+.ar-custom-dates {
+    margin-top: 15px;
+    padding-top: 12px;
+    border-top: 1px solid #edf0f2;
+}
+
+.ar-custom-dates summary {
+    cursor: pointer;
+    color: #b9102e;
+    font-weight: 800;
+    font-size: 12px;
+}
+
+.ar-custom-dates small {
+    color: #7b8794;
+    display: block;
+    margin-top: 8px;
+}
+
+.ar-date-form {
+    margin-top: 14px;
+    display: flex;
+    align-items: end;
+    gap: 11px;
+    flex-wrap: wrap;
+}
+
+.ar-date-form label {
+    display: grid;
+    gap: 6px;
+    color: #465362;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.ar-date-form input {
+    min-height: 42px;
+    min-width: 145px;
+    border: 1px solid #dce1e7;
+    padding: 9px 11px;
+    border-radius: 9px;
+    background: white;
+    color: #27313e;
+    font: inherit;
+}
+
+.ar-error {
+    margin-top: 13px;
+    padding: 12px;
+    background: #fff0f0;
+    color: #99223a;
+    border-radius: 9px;
+}
+
+.ar-error p {
+    margin: 4px 0 0;
+}
+
+.ar-stats {
+    display: grid;
+    gap: 14px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-bottom: 18px;
+}
+
+.ar-stat {
+    background: #fff;
+    border: 1px solid #e9e8ea;
+    border-radius: 15px;
+    padding: 21px;
+    min-width: 0;
+    box-shadow: 0 5px 20px #27314308;
+}
+
+.ar-stat-primary {
+    border-top: 3px solid #c8102e;
+}
+
+.ar-stat-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    color: #606c78;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.ar-stat-label span {
+    color: #c8102e;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.ar-stat>strong {
+    display: block;
+    margin-top: 13px;
+    font-size: clamp(21px, 2.3vw, 31px);
+    line-height: 1.18;
+    letter-spacing: -.035em;
+    overflow-wrap: anywhere;
+}
+
+.ar-stat p {
+    color: #7a8795;
+    font-size: 11px;
+    margin: 9px 0 0;
+}
+
+.ar-grid {
+    display: grid;
+    gap: 16px;
+    align-items: stretch;
+}
+
+.ar-main-grid {
+    grid-template-columns: minmax(0, 1.35fr) minmax(280px, .9fr);
+    margin-bottom: 16px;
+}
+
+.ar-secondary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-bottom: 16px;
+}
+
+.ar-panel {
+    min-width: 0;
+}
+
+.ar-section-heading {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 16px;
+}
+
+.ar-section-heading h2 {
+    margin: 0;
+    font-size: 17px;
+    letter-spacing: -.03em;
+}
+
+.ar-section-heading p {
+    margin: 3px 0 0;
+    font-size: 11px;
+    color: #7b8896;
+}
+
+.ar-pill {
+    white-space: nowrap;
+    border-radius: 100px;
+    padding: 6px 10px;
+    background: #eefaf0;
+    font-size: 10px;
+    color: #207341;
+    font-weight: 800;
+}
+
+.ar-chart {
+    height: 215px;
+    display: flex;
+    align-items: stretch;
+    gap: 7px;
+    overflow-x: auto;
+    padding: 6px 0 0;
+}
+
+.ar-chart-col {
+    flex: 1 0 22px;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.ar-bar-track {
+    height: 173px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0 4px;
+    border-bottom: 1px solid #d7dce3;
+    background: repeating-linear-gradient(to top, transparent 0, transparent 43px, #f0f1f4 44px);
+}
+
+.ar-bar {
+    display: block;
+    width: 100%;
+    max-width: 40px;
+    min-width: 9px;
+    border-radius: 7px 7px 0 0;
+    background: linear-gradient(180deg, #ef5b6a, #c8102e);
+}
+
+.ar-bar-label {
+    text-align: center;
+    color: #89929f;
+    font-size: 9px;
+    margin-top: 11px;
+    white-space: nowrap;
+}
+
+.ar-chart-data {
+    margin-top: 12px;
+    border-top: 1px solid #f0f1f2;
+    padding-top: 10px;
+}
+
+.ar-chart-data summary {
+    color: #b8102b;
+    font-weight: 800;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.ar-chart-data .a-table {
+    margin-top: 12px;
+}
+
+.ar-panel-note {
+    margin: 13px 0 0;
+    color: #7e8995;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.ar-product {
+    padding: 11px 0;
+    display: flex;
+    align-items: start;
+    gap: 11px;
+    border-top: 1px solid #f0f0f2;
+}
+
+.ar-rank {
+    display: grid;
+    place-items: center;
+    flex: 0 0 25px;
+    height: 25px;
+    background: #fff0ed;
+    color: #b8102b;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 900;
+}
+
+.ar-product-main {
+    flex: 1;
+    min-width: 0;
+}
+
+.ar-product-line {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 12px;
+}
+
+.ar-product-line strong {
+    overflow-wrap: anywhere;
+}
+
+.ar-product-line span {
+    white-space: nowrap;
+    color: #6d7a87;
+}
+
+.ar-product-meter {
+    height: 6px;
+    background: #f2edf0;
+    border-radius: 999px;
+    overflow: hidden;
+    margin: 7px 0 4px;
+}
+
+.ar-product-meter span {
+    height: 100%;
+    display: block;
+    background: #c8102e;
+    border-radius: 999px;
+}
+
+.ar-product-main small {
+    font-size: 10px;
+    color: #8a94a0;
+}
+
+.ar-summary-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 13px 2px;
+    border-top: 1px solid #efeff1;
+    font-size: 12px;
+}
+
+.ar-summary-row strong {
+    font-size: 13px;
+}
+
+.ar-summary-row small {
+    color: #89939f;
+}
+
+.ar-hint {
+    margin-top: 10px;
+    padding: 12px;
+    background: #fbf7f1;
+    border: 1px solid #f1e8dc;
+    border-radius: 9px;
+    font-size: 11px;
+}
+
+.ar-hint strong {
+    color: #bc1830;
+}
+
+.ar-hint span {
+    display: block;
+    color: #7e8794;
+    margin-top: 4px;
+}
+
+.ar-text-link {
+    font-size: 12px;
+    font-weight: 800;
+    color: #b90e2b;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.ar-text-link:hover {
+    text-decoration: underline;
+}
+
+.ar-table {
+    min-width: 650px;
+}
+
+.ar-recent {
+    margin-bottom: 15px;
+}
+
+.ar-footnote {
+    font-size: 12px;
+    color: #76838f;
+    line-height: 1.65;
+    margin: 0;
+    padding: 0 3px 10px;
+}
+
+@media(max-width:1250px) {
+    .ar-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .ar-main-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media(max-width:850px) {
+    .ar-secondary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ar-filter-main {
+        align-items: start;
+    }
+
+    .ar-date-display {
+        text-align: left;
+    }
+}
+
+@media(max-width:560px) {
+    .ar-stats {
+        gap: 10px;
+    }
+
+    .ar-stat {
+        padding: 14px;
+    }
+
+    .ar-stat>strong {
+        font-size: 22px;
+    }
+
+    .ar-page-head {
+        flex-direction: column;
+    }
+
+    .ar-page-head .ar-button {
+        width: 100%;
+    }
+
+    .ar-filter-card {
+        padding: 14px;
+    }
+
+    .ar-stat-label {
+        font-size: 11px;
+    }
+
+    .ar-bar-label {
+        font-size: 8px;
+        transform: rotate(-25deg);
+        transform-origin: 50% 50%;
+    }
+}
+
+@media(prefers-reduced-motion:reduce) {
+
+    .ar-button,
+    .ar-segment {
+        transition: none;
+    }
+}

@@ -1,0 +1,45 @@
+/* CrispyCloud Step 22 POS. Scoped styles; uses existing admin shell. */
+.pos-head{gap:16px;align-items:center}
+.pos-head-buttons{display:flex;flex-wrap:wrap;gap:9px}
+.pos-columns{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(320px,.95fr);gap:20px;align-items:start;margin:22px 0}
+.pos-panel{padding:25px!important;min-width:0}
+.pos-titleline{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:19px}
+.pos-titleline h2{font-size:1.17rem;letter-spacing:-.025em;margin:0;color:#26303d}
+.pos-titleline a{color:#bf0b2d;font-weight:700;text-decoration:none}
+.pos-step{font-size:12px;font-weight:800;padding:5px 10px;background:#fff4ed;border:1px solid #ffe4d2;color:#8c4d2d;border-radius:99px}
+.pos-field{display:grid;gap:7px;margin-bottom:17px}.pos-field label,.pos-options legend,.pos-method legend{font-weight:750;font-size:13px;color:#344153}
+.pos-field select,.pos-field input,.pos-field textarea{width:100%;min-width:0;box-sizing:border-box;padding:12px 13px;border:1px solid #d4dce4;border-radius:12px;background:#fff;color:#273140;font:inherit;line-height:1.35}
+.pos-field textarea{resize:vertical}.pos-field :is(input,select,textarea):focus-visible,.pos-btn:focus-visible,.pos-remove:focus-visible{outline:3px solid #ffbd74;outline-offset:2px}
+.pos-product-summary{background:#fff7ed;border:1px solid #fbe4cf;border-radius:12px;color:#78462c;font-size:13px;padding:12px;margin-bottom:17px}
+.pos-field-compact input{max-width:160px}.pos-options,.pos-method{border:1px solid #e5e9ed;border-radius:13px;margin:0 0 17px;padding:14px 16px;min-width:0}.pos-options legend,.pos-method legend{padding:0 6px}
+.pos-check,.pos-radio,.pos-confirm{display:flex;align-items:flex-start;gap:10px;padding:7px 0;font-size:14px;line-height:1.5;cursor:pointer;color:#334155}
+.pos-check input,.pos-radio input,.pos-confirm input{flex:none;margin-top:3px;accent-color:#c8102e;width:17px;height:17px}
+.pos-options .pos-check+.pos-check{border-top:1px solid #f0f2f4}.pos-help{font-size:13px;color:#687487;line-height:1.5;margin:9px 0}
+.pos-btn{border-radius:11px;border:1px solid transparent;padding:11px 17px;display:inline-flex;align-items:center;justify-content:center;gap:6px;font:inherit;font-weight:760;font-size:13px;text-decoration:none;cursor:pointer;text-align:center;transition:background .15s ease,color .15s ease}
+.pos-btn-primary{background:#c8102e;color:#fff!important;box-shadow:0 4px 12px rgba(200,16,46,.14)}.pos-btn-primary:hover{background:#a70c26}.pos-btn-muted{background:#fff;color:#2b3747;border-color:#d7dee6}.pos-btn-muted:hover{background:#f8fafc}.pos-btn:disabled{opacity:.6;cursor:wait}
+.pos-add{width:100%;min-height:46px}.pos-checkout{position:sticky;top:24px}.pos-cart-lines{display:grid;gap:10px;min-height:90px}
+.pos-empty{margin:10px 0;padding:20px;border:1px dashed #d7dee6;text-align:center;border-radius:12px;font-size:14px;color:#82909d}
+.pos-cart-row{border:1px solid #e6eaf0;border-radius:12px;padding:12px;display:flex;gap:14px;justify-content:space-between;align-items:start;background:#fff}
+.pos-cart-item-content{display:grid;gap:3px;min-width:0}.pos-cart-item-content strong{font-size:14px;color:#283446}.pos-cart-item-content small{color:#667485;font-size:12px;line-height:1.3;overflow-wrap:anywhere}
+.pos-cart-item-actions{display:flex;align-items:end;flex-direction:column;gap:8px;flex:none}.pos-cart-item-actions strong{font-size:13px;color:#c8102e}
+.pos-remove{background:transparent;border:0;color:#ad1931;text-decoration:underline;cursor:pointer;padding:2px;font:inherit;font-size:12px}
+.pos-total{border-top:1px solid #e8ecf1;border-bottom:1px solid #e8ecf1;display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:18px;padding:17px 0;color:#435065;font-weight:700}
+.pos-total strong{font-size:24px;color:#c8102e;letter-spacing:-.04em}
+.pos-change{font-size:13px;margin:2px 0;font-weight:600;color:#364453}.pos-change strong{color:#127a46}.pos-change strong.pos-insufficient{color:#bf0d2d}
+.pos-confirm{background:#f8fafc;border-radius:10px;padding:12px;line-height:1.45;margin:16px 0;border:1px solid #e2e8f0;font-weight:600}
+.pos-record{width:100%;min-height:47px}.pos-after-note{margin-top:19px;padding-top:14px;border-top:1px solid #e9edf1}
+.pos-client-error,.pos-error{border:1px solid #f1b3c0;background:#fff1f4;color:#9b1937;padding:12px 15px;border-radius:12px;margin:12px 0;line-height:1.5}.pos-error ul{margin:6px 0 0;padding-left:20px}
+.pos-recent{padding:22px!important;margin-top:20px}.pos-status{display:inline-flex;align-items:center;border-radius:99px;font-size:12px;font-weight:800;padding:5px 11px;color:#94630a;background:#fff1c4;border:1px solid #f9dea0;white-space:nowrap}.pos-status-done{color:#147548;background:#dff8e9;border-color:#b5e6c9}
+.pos-recent td a,.pos-recent a:not(.pos-btn),.pos-receipt-side a:not(.pos-btn){color:#be0c2c;text-decoration:none;font-weight:740}
+.pos-tabs{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:20px 0}.pos-tabs a{font-weight:720;border:1px solid #d8dee6;color:#445268;background:#fff;padding:9px 16px;border-radius:99px;text-decoration:none;font-size:13px}.pos-tabs a.active{background:#c8102e;border-color:#c8102e;color:#fff}
+.pos-pagination{margin:18px 0 0}.pos-receipt-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(250px,.7fr);gap:20px;align-items:start;margin:22px 0}.pos-receipt,.pos-receipt-side{padding:28px!important;min-width:0}
+.pos-receipt-brand{display:flex;justify-content:space-between;gap:14px;align-items:center;border-bottom:2px dashed #e5e9ef;padding-bottom:17px}.pos-receipt-brand strong{color:#c8102e;font-size:21px}.pos-receipt-brand span{letter-spacing:.08em;font-size:11px;color:#637286;font-weight:800}
+.pos-receipt-details{margin:18px 0;display:grid;gap:9px}.pos-receipt-details>div{display:flex;justify-content:space-between;gap:18px}.pos-receipt-details dt{color:#667589;font-size:13px}.pos-receipt-details dd{font-weight:740;text-align:right;margin:0;color:#304156;font-size:13px;overflow-wrap:anywhere}
+.pos-receipt-items{padding:10px 0;border-block:1px dashed #e3e8ef;display:grid;gap:12px}.pos-receipt-item{display:flex;justify-content:space-between;gap:15px}.pos-receipt-item>div{display:grid;gap:4px}.pos-receipt-item strong{font-size:13px;color:#243345}.pos-receipt-item small{font-size:12px;color:#667589;white-space:pre-line;line-height:1.35}
+.pos-receipt-total{display:flex;justify-content:space-between;padding:18px 0;align-items:center;font-weight:760}.pos-receipt-total strong{color:#c8102e;font-size:24px}.pos-receipt-footer{text-align:center;color:#6b7582;font-size:12px;border-top:1px dashed #e6eaf0;padding-top:16px;margin-top:20px}
+.pos-receipt-side h2{font-size:18px;color:#293649;margin:0 0 16px}.pos-receipt-side p{font-size:13px;color:#617084;line-height:1.6}.pos-receipt-side .pos-btn{margin:9px 0}.pos-complete-message{background:#e8f7ed;padding:12px;border-radius:10px;color:#127a46!important;font-weight:700}
+@media(max-width:900px){.pos-columns,.pos-receipt-grid{grid-template-columns:1fr}.pos-checkout{position:static}}
+@media(max-width:560px){.pos-panel,.pos-recent,.pos-receipt,.pos-receipt-side{padding:16px!important}.pos-head{align-items:flex-start}.pos-head-buttons{width:100%}.pos-head-buttons .pos-btn{flex:1}.pos-total strong{font-size:21px}.pos-receipt-brand{align-items:flex-start;flex-direction:column;gap:4px}}
+@media print{body.admin-app{background:#fff!important}.a-sidebar,.a-topbar,.a-mobile-menu,.pos-no-print,.a-side-bottom,.a-alert{display:none!important}.a-shell,.a-content-area,.a-main{display:block!important;padding:0!important;margin:0!important;max-width:100%!important}.pos-receipt-grid{display:block!important;margin:0!important}.pos-receipt{width:100%!important;box-shadow:none!important;border:0!important;padding:0!important}.pos-receipt-brand{color:#000}}
+
+.pos-pagination{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:center;border-top:1px solid #e6eaf0;padding-top:20px}.pos-pagination a{color:#bd1430;font-weight:700;text-decoration:none}.pos-pagination span[aria-disabled]{opacity:.5}.pos-pagination span{font-size:13px}

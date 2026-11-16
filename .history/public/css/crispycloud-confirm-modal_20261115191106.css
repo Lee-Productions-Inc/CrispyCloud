@@ -1,0 +1,126 @@
+/* CrispyCloud Step 38 — shared accessible modal, intentionally minimal. */
+.cc-confirm-modal {
+    box-sizing: border-box;
+    width: min(92vw, 440px);
+    max-height: min(88vh, 680px);
+    max-height: min(88dvh, 680px);
+    overflow-y: auto;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #e9e3e1;
+    border-radius: 18px;
+    background: #fff;
+    color: #28232a;
+    box-shadow: 0 24px 70px rgba(36, 18, 24, .22);
+    font-family: inherit;
+}
+
+.cc-confirm-modal::backdrop {
+    background: rgba(25, 19, 24, .56);
+}
+
+.cc-confirm-modal .cc-confirm-panel {
+    box-sizing: border-box;
+    padding: clamp(20px, 5vw, 30px);
+}
+
+.cc-confirm-modal .cc-confirm-mark {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: #fff0f2;
+    color: #b91935;
+    font-weight: 800;
+    font-size: 22px;
+    margin-bottom: 16px;
+}
+
+.cc-confirm-modal h2 {
+    margin: 0 0 9px;
+    color: #291d21;
+    font-size: clamp(1.15rem, 4vw, 1.35rem);
+    line-height: 1.35;
+    font-weight: 750;
+}
+
+.cc-confirm-modal p {
+    margin: 0;
+    color: #655c61;
+    font-size: .94rem;
+    line-height: 1.65;
+}
+
+.cc-confirm-modal .cc-confirm-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 24px;
+}
+
+.cc-confirm-modal .cc-confirm-actions button {
+    box-sizing: border-box;
+    min-height: 43px;
+    min-width: 108px;
+    padding: 10px 16px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    font: inherit;
+    font-size: .9rem;
+    line-height: 1.2;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color .15s ease, box-shadow .15s ease;
+}
+
+.cc-confirm-modal .cc-confirm-cancel {
+    background: #f6f3f4;
+    color: #41383d;
+    border-color: #e7e1e4 !important;
+}
+
+.cc-confirm-modal .cc-confirm-cancel:hover {
+    background: #eee8eb;
+}
+
+.cc-confirm-modal .cc-confirm-accept {
+    background: #c8102e;
+    color: #fff;
+}
+
+.cc-confirm-modal .cc-confirm-accept:hover {
+    background: #a60b24;
+}
+
+.cc-confirm-modal [data-tone="danger"] {
+    color: inherit;
+}
+
+.cc-confirm-modal button:focus-visible {
+    outline: 3px solid #f2a0ae;
+    outline-offset: 3px;
+}
+
+@media (max-width: 400px) {
+    .cc-confirm-modal .cc-confirm-actions {
+        flex-direction: column-reverse;
+    }
+
+    .cc-confirm-modal .cc-confirm-actions button {
+        width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cc-confirm-modal .cc-confirm-actions button {
+        transition: none;
+    }
+}
+
+@media print {
+    .cc-confirm-modal {
+        display: none !important;
+    }
+}

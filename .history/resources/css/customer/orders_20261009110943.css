@@ -1,0 +1,686 @@
+/* CrispyCloud Step 12 — scoped styles for Customer Order History and Tracking.
+   Matched to the Chick's Pops Fredoka / Quicksand / red-and-white Figma language. */
+.cc-orders-page {
+   background: #fff;
+   color: #1f2937;
+   font-family: 'Quicksand', Arial, sans-serif;
+   min-height: 100vh
+}
+
+.cc-orders-page * {
+   box-sizing: border-box
+}
+
+.cc-orders-header {
+   max-width: 1400px;
+   margin: 0 auto;
+   padding: 18px 42px;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   gap: 24px;
+   border-bottom: 1px solid #f8e8df
+}
+
+.cc-orders-brand {
+   display: flex;
+   gap: 10px;
+   align-items: center;
+   text-decoration: none;
+   color: #e31837;
+   font: 700 21px/1 'Fredoka', sans-serif;
+   white-space: nowrap
+}
+
+.cc-orders-brand img {
+   width: 66px;
+   height: 66px;
+   object-fit: contain
+}
+
+.cc-orders-header nav {
+   display: flex;
+   gap: 26px;
+   align-items: center;
+   flex-wrap: wrap
+}
+
+.cc-orders-header nav a {
+   font-size: 12px;
+   color: #4b5563;
+   text-decoration: none;
+   font-weight: 700;
+   letter-spacing: .06em
+}
+
+.cc-orders-header nav a[aria-current=page],
+.cc-orders-header nav a:hover {
+   color: #e31837
+}
+
+.cc-orders-container {
+   max-width: 1410px;
+   padding: 36px 52px 80px;
+   margin: 0 auto
+}
+
+.cc-orders-heading {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   gap: 28px;
+   margin-bottom: 48px
+}
+
+.cc-orders-heading h1,
+.cc-tracking-intro h1 {
+   font: 700 clamp(30px, 4vw, 49px)/1.1 'Fredoka', sans-serif;
+   margin: 0;
+   color: #1f2937;
+   letter-spacing: .01em
+}
+
+.cc-orders-heading-icon {
+   color: #e31837
+}
+
+.cc-orders-heading p {
+   font-size: 12px;
+   letter-spacing: .13em;
+   font-weight: 700;
+   color: #8b94a5;
+   margin: 5px 0 0
+}
+
+.cc-orders-filters {
+   display: flex;
+   gap: 12px;
+   flex-wrap: wrap
+}
+
+.cc-orders-filters a {
+   min-width: 92px;
+   text-align: center;
+   border: 1.5px solid #dde1e7;
+   border-radius: 30px;
+   padding: 9px 16px;
+   text-decoration: none;
+   font-size: 13px;
+   font-weight: 700;
+   color: #4b5563
+}
+
+.cc-orders-filters a.is-selected {
+   background: #ffd633;
+   color: #1f2937;
+   border-color: #ffd633
+}
+
+.cc-order-card {
+   --status: #f3c900;
+   --status-bg: #fff8de;
+   --status-ink: #976600;
+   display: grid;
+   grid-template-columns: 90px minmax(95px, 1.05fr) minmax(115px, 1fr) minmax(135px, 1.35fr) minmax(108px, 1.05fr) minmax(95px, .8fr) minmax(140px, 1fr);
+   align-items: center;
+   gap: 20px;
+   position: relative;
+   background: #fff;
+   box-shadow: 0 12px 20px rgba(31, 41, 55, .12);
+   border-radius: 25px;
+   padding: 29px 29px 29px 36px;
+   margin: 0 0 27px;
+   overflow: hidden;
+   min-height: 144px
+}
+
+.cc-order-card:before {
+   content: '';
+   position: absolute;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   width: 6px;
+   background: var(--status)
+}
+
+.cc-order-card--preparing {
+   --status: #ffcc00;
+   --status-bg: #fff6d7;
+   --status-ink: #a56a00
+}
+
+.cc-order-card--pending {
+   --status: #ffcc00;
+   --status-bg: #fff6d7;
+   --status-ink: #986000
+}
+
+.cc-order-card--delivery {
+   --status: #3988ff;
+   --status-bg: #e3efff;
+   --status-ink: #2169df
+}
+
+.cc-order-card--delivered {
+   --status: #24c66e;
+   --status-bg: #ddf9e9;
+   --status-ink: #157542
+}
+
+.cc-order-card--cancelled {
+   --status: #fa5964;
+   --status-bg: #ffe2e2;
+   --status-ink: #c93742
+}
+
+.cc-order-symbol {
+   border-radius: 16px;
+   background: var(--status-bg);
+   color: var(--status);
+   font-size: 37px;
+   font-family: 'Fredoka', sans-serif;
+   width: 78px;
+   height: 78px;
+   display: grid;
+   place-items: center
+}
+
+.cc-order-field {
+   display: flex;
+   flex-direction: column;
+   gap: 4px;
+   min-width: 0;
+   font-size: 13px;
+   line-height: 1.5;
+   font-weight: 600
+}
+
+.cc-order-field strong {
+   font-family: 'Fredoka', sans-serif;
+   font-size: 17px;
+   line-height: 1.25;
+   overflow-wrap: anywhere
+}
+
+.cc-order-label {
+   font-size: 10px;
+   letter-spacing: .14em;
+   font-weight: 700;
+   color: #9ca3af;
+   white-space: nowrap
+}
+
+.cc-order-products>span:last-child {
+   overflow-wrap: anywhere
+}
+
+.cc-order-status {
+   background: var(--status-bg);
+   color: var(--status-ink);
+   font-size: 12px;
+   font-weight: 700;
+   padding: 8px 12px;
+   border-radius: 25px;
+   align-self: flex-start
+}
+
+.cc-order-total {
+   align-items: center;
+   border-left: 1px solid #f2eeee;
+   padding-left: 14px;
+   text-align: center
+}
+
+.cc-order-total strong {
+   color: #e31837;
+   font-size: 20px
+}
+
+.cc-order-cta {
+   display: inline-block;
+   white-space: nowrap;
+   text-decoration: none;
+   text-align: center;
+   background: #e31837;
+   color: #fff;
+   border-radius: 11px;
+   font: 700 13px 'Fredoka', sans-serif;
+   padding: 14px 13px;
+   box-shadow: 0 4px 0 #a70b25
+}
+
+.cc-order-cta:hover {
+   filter: brightness(.96)
+}
+
+.cc-order-cta--outline {
+   color: #e31837;
+   background: white;
+   border: 2px solid #e31837;
+   box-shadow: none
+}
+
+.cc-orders-empty {
+   padding: 65px 20px;
+   text-align: center;
+   border: 2px dashed #f0dcc8;
+   border-radius: 22px
+}
+
+.cc-orders-empty h2 {
+   font: 700 24px 'Fredoka', sans-serif
+}
+
+.cc-orders-empty p {
+   color: #6b7280
+}
+
+.cc-orders-empty a {
+   display: inline-block;
+   margin-top: 15px;
+   color: #e31837;
+   font-weight: 700
+}
+
+.cc-orders-pagination {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 30px;
+   font-size: 13px;
+   margin-top: 30px
+}
+
+.cc-orders-pagination a {
+   color: #e31837;
+   font-weight: 700
+}
+
+.cc-orders-pagination span {
+   color: #767f90
+}
+
+.cc-tracking-container {
+   max-width: 1330px;
+   padding: 40px 45px 90px;
+   margin: 0 auto
+}
+
+.cc-tracking-intro {
+   display: flex;
+   justify-content: space-between;
+   gap: 25px;
+   align-items: center;
+   margin: 0 0 24px
+}
+
+.cc-tracking-intro p {
+   color: #808997;
+   font-size: 13px;
+   margin-top: 9px
+}
+
+.cc-order-back {
+   display: inline-block;
+   color: #e31837;
+   font-size: 12px;
+   font-weight: 700;
+   letter-spacing: .1em;
+   text-decoration: none;
+   margin-bottom: 16px
+}
+
+.cc-tracking-pill {
+   border-radius: 28px;
+   background: #fff2cc;
+   color: #ab6b00;
+   font: 700 13px 'Quicksand', sans-serif;
+   padding: 10px 18px;
+   white-space: nowrap
+}
+
+.cc-tracking-pill--cancelled {
+   color: #b91c1c;
+   background: #fee2e2
+}
+
+.cc-tracking-cancelled {
+   padding: 18px;
+   margin-bottom: 25px;
+   background: #fff1f2;
+   border: 1px solid #fecaca;
+   color: #991b1b;
+   border-radius: 14px;
+   font-weight: 600
+}
+
+.cc-tracking-grid {
+   display: grid;
+   grid-template-columns: minmax(0, 1.12fr) minmax(310px, .88fr);
+   gap: 32px;
+   align-items: start
+}
+
+.cc-tracking-panel {
+   padding: 30px;
+   background: #fff;
+   box-shadow: 0 13px 35px rgba(31, 41, 55, .08);
+   border: 2px solid #f9eee7;
+   border-radius: 26px;
+   min-width: 0
+}
+
+.cc-tracking-panel h2,
+.cc-tracking-panel h3 {
+   font: 700 22px 'Fredoka', sans-serif;
+   margin: 0 0 20px
+}
+
+.cc-tracking-panel h3 {
+   font-size: 18px;
+   margin-bottom: 10px
+}
+
+.cc-tracking-item {
+   display: flex;
+   justify-content: space-between;
+   gap: 22px;
+   border-top: 1px solid #f4e6dc;
+   padding: 16px 0
+}
+
+.cc-tracking-item strong {
+   font-weight: 700;
+   font-size: 15px;
+   overflow-wrap: anywhere
+}
+
+.cc-tracking-item>strong {
+   color: #e31837;
+   white-space: nowrap
+}
+
+.cc-tracking-item p {
+   color: #798293;
+   font-size: 13px;
+   margin: 7px 0 0;
+   white-space: pre-line
+}
+
+.cc-tracking-summary-line {
+   display: flex;
+   justify-content: space-between;
+   gap: 20px;
+   border-top: 1px solid #f4e6dc;
+   padding: 15px 0;
+   font-size: 14px
+}
+
+.cc-tracking-summary-total {
+   font: 700 21px 'Fredoka', sans-serif;
+   color: #e31837
+}
+
+.cc-tracking-address {
+   background: #fff8f2;
+   border: 1px solid #f0dcc8;
+   padding: 20px;
+   border-radius: 18px;
+   margin-top: 22px
+}
+
+.cc-tracking-address p,
+.cc-tracking-payment {
+   color: #6b7280;
+   font-size: 13px;
+   line-height: 1.65;
+   overflow-wrap: anywhere
+}
+
+.cc-tracking-details-link {
+   margin-top: 20px
+}
+
+.cc-tracking-help {
+   font-size: 13px;
+   color: #7a8491;
+   line-height: 1.6;
+   margin-bottom: 25px
+}
+
+.cc-progress-list {
+   padding: 0 0 0 2px;
+   margin: 20px 0 24px;
+   list-style: none
+}
+
+.cc-progress-step {
+   display: flex;
+   gap: 16px;
+   position: relative;
+   min-height: 95px;
+   color: #aeb4bf
+}
+
+.cc-progress-step:not(:last-child):before {
+   content: '';
+   height: calc(100% - 38px);
+   width: 3px;
+   position: absolute;
+   top: 40px;
+   left: 17px;
+   background: #e5e7eb
+}
+
+.cc-progress-step.is-complete:not(:last-child):before {
+   background: #26bb6b
+}
+
+.cc-progress-marker {
+   flex: 0 0 38px;
+   height: 38px;
+   display: grid;
+   place-items: center;
+   background: #f1f2f5;
+   border: 3px solid white;
+   border-radius: 50%;
+   color: #aeb4bf;
+   box-shadow: 0 2px 7px rgba(0, 0, 0, .08);
+   font-size: 18px;
+   font-weight: 700;
+   z-index: 1
+}
+
+.cc-progress-step.is-complete .cc-progress-marker {
+   background: #26bb6b;
+   color: white
+}
+
+.cc-progress-step.is-current .cc-progress-marker {
+   background: #e31837;
+   color: white
+}
+
+.cc-progress-step strong {
+   display: block;
+   padding-top: 5px;
+   color: inherit;
+   font: 700 17px 'Fredoka', sans-serif
+}
+
+.cc-progress-step p {
+   margin-top: 5px;
+   font-size: 12px;
+   line-height: 1.5
+}
+
+.cc-progress-step.is-complete strong {
+   color: #1f2937
+}
+
+.cc-progress-step.is-current strong {
+   color: #e31837
+}
+
+.cc-tracking-refresh {
+   display: block;
+   width: 100%;
+   border: 0;
+   border-radius: 14px;
+   padding: 16px;
+   color: white;
+   background: #e31837;
+   font: 700 16px 'Fredoka', sans-serif;
+   cursor: pointer;
+   box-shadow: 0 4px 0 #a70b25
+}
+
+.cc-tracking-refresh:hover {
+   filter: brightness(.96)
+}
+
+.cc-tracking-disclaimer {
+   font-size: 12px;
+   color: #8b94a5;
+   line-height: 1.6;
+   margin-top: 19px
+}
+
+@media(max-width:1220px) {
+   .cc-order-card {
+      grid-template-columns: 76px repeat(3, minmax(110px, 1fr));
+      gap: 14px
+   }
+
+   .cc-order-status-field,
+   .cc-order-total,
+   .cc-order-links {
+      grid-column: span 1
+   }
+
+   .cc-order-products {
+      grid-column: span 1
+   }
+
+   .cc-order-symbol {
+      width: 65px;
+      height: 65px
+   }
+}
+
+@media(max-width:900px) {
+   .cc-orders-heading {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 28px
+   }
+
+   .cc-tracking-grid {
+      grid-template-columns: 1fr
+   }
+
+   .cc-orders-container {
+      padding: 27px 20px 65px
+   }
+
+   .cc-order-card {
+      grid-template-columns: 70px repeat(2, minmax(0, 1fr));
+      gap: 15px
+   }
+
+   .cc-order-symbol {
+      grid-row: span 2
+   }
+
+   .cc-order-total {
+      border: 0;
+      padding: 0;
+      align-items: flex-start;
+      text-align: left
+   }
+
+   .cc-order-links {
+      grid-column: 2/-1
+   }
+
+   .cc-tracking-container {
+      padding: 30px 20px 65px
+   }
+}
+
+@media(max-width:580px) {
+   .cc-orders-header {
+      padding: 12px 17px;
+      flex-wrap: wrap
+   }
+
+   .cc-orders-header nav {
+      gap: 14px
+   }
+
+   .cc-orders-header nav a {
+      font-size: 11px
+   }
+
+   .cc-orders-brand img {
+      width: 50px;
+      height: 50px
+   }
+
+   .cc-orders-brand {
+      font-size: 16px
+   }
+
+   .cc-orders-heading h1,
+   .cc-tracking-intro h1 {
+      font-size: 33px
+   }
+
+   .cc-order-card {
+      grid-template-columns: 57px minmax(0, 1fr);
+      gap: 12px;
+      padding: 20px 16px 24px 21px
+   }
+
+   .cc-order-symbol {
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
+      grid-row: span 1
+   }
+
+   .cc-order-number {
+      grid-column: 2
+   }
+
+   .cc-order-date,
+   .cc-order-products,
+   .cc-order-status-field,
+   .cc-order-total,
+   .cc-order-links {
+      grid-column: 1/-1
+   }
+
+   .cc-order-links .cc-order-cta {
+      display: block
+   }
+
+   .cc-tracking-intro {
+      align-items: flex-start;
+      flex-direction: column
+   }
+
+   .cc-tracking-panel {
+      padding: 20px
+   }
+
+   .cc-tracking-item {
+      flex-direction: column;
+      gap: 8px
+   }
+
+   .cc-orders-filters a {
+      min-width: 0
+   }
+}

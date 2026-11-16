@@ -1,0 +1,289 @@
+/* CrispyCloud Step 42 — Tailwind CSS v4, compiled by Vite. */
+@import "tailwindcss";
+@source "../views";
+@source "../js";
+@theme {
+  --color-chicks-red: #c8102e;
+  --color-chicks-darkred: #a50f27;
+  --color-chicks-cream: #fff5ec;
+  --color-chicks-ink: #263044;
+  --font-chicks-display: "Fredoka", "Baloo 2", sans-serif;
+  --font-chicks-body: "Quicksand", "Poppins", sans-serif;
+}
+/* Legacy-specific visual effects and responsive states remain component CSS
+   in these Tailwind-built entries to preserve the approved CHICK'S POPS design.
+   Layout and spacing declarations have been migrated to Tailwind @apply. */
+
+/* === Original: public/css/crispycloud-legal.css === */
+:root{
+--ink: #27313d;
+--subtle: #65717f;
+--red: #bb1837;
+--paper: #fff;
+--line: #ebe4e1;
+}
+
+*{
+@apply box-border;
+}
+
+html{
+scroll-behavior: smooth;
+}
+
+body{
+@apply m-0;
+color: var(--ink);
+background: #f9f6f3;
+font-family: Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial,sans-serif;
+@apply text-[15px];
+line-height: 1.75;
+}
+
+a{
+color: var(--red);
+}
+
+a:hover{
+@apply text-[#90102b];
+}
+
+.skip-link{
+@apply absolute;
+@apply left-[8px];
+@apply top-[-100px];
+background: #fff;
+padding: 9px;
+z-index: 9;
+}
+
+.skip-link:focus{
+@apply top-[8px];
+}
+
+.policy-header{
+background: white;
+border-bottom: 1px solid var(--line);
+}
+
+.policy-header-inner{
+@apply max-w-[980px];
+@apply m-auto;
+padding: 15px 24px;
+@apply flex;
+@apply items-center;
+@apply justify-between;
+@apply gap-[15px];
+}
+
+.policy-brand{
+@apply flex;
+@apply gap-[10px];
+@apply items-center;
+@apply no-underline;
+}
+
+.policy-brand strong, .policy-brand small{
+@apply block;
+line-height: 1.22;
+}
+
+.policy-brand strong{
+@apply text-[15px];
+letter-spacing: .03em;
+@apply text-[#252b32];
+}
+
+.policy-brand small{
+color: var(--red);
+@apply text-[10px];
+font-weight: 750;
+letter-spacing: .15em;
+@apply mt-[4px];
+}
+
+.policy-symbol{
+@apply grid;
+@apply place-items-center;
+@apply rounded-[12px];
+@apply text-[#fff];
+@apply w-[43px];
+@apply h-[43px];
+background: #bc1737;
+@apply font-extrabold;
+letter-spacing: .02em;
+}
+
+.policy-header nav{
+@apply flex;
+@apply gap-[20px];
+}
+
+.policy-header nav a{
+@apply text-[#4b5662];
+@apply text-[13px];
+font-weight: 650;
+@apply no-underline;
+}
+
+.policy-header nav a:hover{
+color: var(--red);
+}
+
+.policy-shell{
+@apply max-w-[950px];
+padding: 30px 24px 48px;
+@apply m-auto;
+}
+
+.policy-breadcrumb{
+@apply flex;
+@apply items-center;
+@apply gap-[10px];
+@apply mb-[19px];
+color: var(--subtle);
+@apply text-[12px];
+}
+
+.policy-breadcrumb a{
+color: var(--subtle);
+}
+
+.policy-paper{
+background: var(--paper);
+border: 1px solid var(--line);
+@apply rounded-[17px];
+padding: clamp(25px,5vw,62px);
+box-shadow: 0 10px 44px rgba(72,36,31,.035);
+}
+
+.policy-intro{
+border-bottom: 1px solid var(--line);
+@apply pb-[22px];
+@apply mb-[26px];
+}
+
+.policy-overline{
+@apply text-[11px];
+letter-spacing: .15em;
+@apply font-extrabold;
+color: var(--red);
+margin: 0 0 12px;
+}
+
+h1{
+font-size: clamp(29px,5vw,43px);
+letter-spacing: -.055em;
+line-height: 1.2;
+margin: 0 0 10px;
+}
+
+.policy-meta{
+@apply m-0;
+@apply text-[12px];
+color: var(--subtle);
+}
+
+.policy-lead{
+@apply text-[16px];
+@apply text-[#3d4854];
+@apply mt-[0];
+}
+
+.policy-copy section{
+@apply mt-[30px];
+}
+
+.policy-copy h2{
+@apply text-[18px];
+letter-spacing: -.025em;
+line-height: 1.4;
+margin: 0 0 11px;
+}
+
+.policy-copy p{
+margin: 0 0 12px;
+}
+
+.policy-copy ul{
+margin: 10px 0 14px;
+@apply pl-[22px];
+}
+
+.policy-copy li{
+margin: 6px 0;
+}
+
+.policy-contacts{
+@apply grid;
+@apply gap-[0];
+margin: 14px 0 18px;
+border: 1px solid var(--line);
+@apply rounded-[12px];
+@apply overflow-hidden;
+}
+
+.policy-contacts div{
+padding: 11px 16px;
+background: #fff;
+border-bottom: 1px solid var(--line);
+}
+
+.policy-contacts div:last-child{
+@apply border-0;
+}
+
+.policy-contacts dt{
+@apply text-[11px];
+color: var(--subtle);
+@apply font-bold;
+}
+
+.policy-contacts dd{
+margin: 3px 0 0;
+@apply text-[13px];
+overflow-wrap: anywhere;
+}
+
+.policy-notice{
+padding: 12px 15px;
+background: #fff7ef;
+border-left: 3px solid #d99b35;
+@apply rounded-[5px];
+@apply text-[13px];
+}
+
+.policy-other{
+@apply flex;
+@apply flex-wrap;
+@apply gap-[18px];
+margin: 20px 0 0;
+@apply justify-center;
+@apply text-[13px];
+}
+
+.policy-footer{
+@apply text-center;
+padding: 0 20px 26px;
+color: var(--subtle);
+@apply text-[12px];
+}
+
+@media (max-width:560px){
+.policy-header-inner{
+padding: 12px 16px;
+}
+
+.policy-shell{
+padding: 20px 12px 34px;
+}
+
+.policy-paper{
+padding: 25px 21px;
+}
+
+.policy-header nav{
+@apply gap-[12px];
+}
+}
+

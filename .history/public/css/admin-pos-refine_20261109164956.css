@@ -1,0 +1,533 @@
+/* Step 23: Food + Beverage POS, calm visual hierarchy, compact checkout. */
+.pos-workflow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 11px;
+    margin: 0 0 16px;
+    color: #687587;
+    font-size: 12px;
+    font-weight: 750
+}
+
+.pos-workflow span b {
+    display: inline-grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #fff1f3;
+    color: #bf1633;
+    font-size: 11px;
+    margin-right: 5px
+}
+
+.pos-refined-columns {
+    grid-template-columns: minmax(0, 1.15fr) minmax(335px, .85fr);
+    margin-top: 12px;
+    gap: 16px
+}
+
+.pos-picker-panel,
+.pos-refined-columns .pos-checkout {
+    padding: 22px !important
+}
+
+.pos-refined-columns .pos-checkout {
+    position: sticky;
+    top: 15px
+}
+
+.pos-titleline {
+    margin-bottom: 14px
+}
+
+.pos-titleline .pos-help {
+    margin: 4px 0 0
+}
+
+.pos-kind-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    background: #f3f4f7;
+    padding: 6px;
+    border-radius: 13px;
+    margin-bottom: 15px
+}
+
+.pos-kind-tab {
+    min-height: 43px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    background: transparent;
+    color: #586578;
+    font-weight: 800;
+    font-size: 13px;
+    cursor: pointer
+}
+
+.pos-kind-tab:hover {
+    background: #fff
+}
+
+.pos-kind-tab.is-active {
+    background: #fff;
+    color: #b90c2e;
+    border-color: #e8dce0;
+    box-shadow: 0 2px 7px rgba(40, 30, 40, .055)
+}
+
+.pos-search-field {
+    margin-bottom: 7px
+}
+
+.pos-catalog-count {
+    margin: 7px 0 10px !important;
+    font-size: 11px !important;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-weight: 850
+}
+
+.pos-product-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    max-height: 342px;
+    overflow-y: auto;
+    padding: 2px 3px 4px 1px
+}
+
+.pos-product-card {
+    width: 100%;
+    min-height: 89px;
+    min-width: 0;
+    background: #fff;
+    border: 1px solid #e2e7ed;
+    border-radius: 13px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-align: left;
+    padding: 10px;
+    cursor: pointer;
+    color: #293747;
+    font: inherit;
+    transition: border-color .15s, background-color .15s
+}
+
+.pos-product-card:hover {
+    border-color: #d68795;
+    background: #fff9fa
+}
+
+.pos-product-card.is-selected {
+    border: 2px solid #c8102e;
+    padding: 9px;
+    background: #fff7f8
+}
+
+.pos-product-art {
+    height: 60px;
+    width: 63px;
+    display: grid;
+    place-items: center;
+    flex: none;
+    border-radius: 10px;
+    background: #faf3e9;
+    overflow: hidden;
+    font-size: 24px
+}
+
+.pos-product-art img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover
+}
+
+.pos-product-details {
+    display: grid;
+    gap: 3px;
+    min-width: 0
+}
+
+.pos-product-details strong {
+    font-size: 12px;
+    line-height: 1.25;
+    overflow-wrap: anywhere
+}
+
+.pos-product-details small {
+    font-size: 11px;
+    color: #8993a1
+}
+
+.pos-product-details b {
+    font-size: 12px;
+    color: #c8102e
+}
+
+.pos-catalog-empty {
+    grid-column: 1/-1;
+    padding: 25px 15px;
+    text-align: center;
+    background: #fcfcfc;
+    border: 1px dashed #d9dee5;
+    border-radius: 13px
+}
+
+.pos-catalog-empty strong {
+    font-size: 13px
+}
+
+.pos-configuration {
+    border-top: 1px solid #e9edf2;
+    margin-top: 17px;
+    padding-top: 17px
+}
+
+.pos-configuration[hidden],
+.pos-beverage-note[hidden],
+.pos-refined-columns #pos-food-options[hidden] {
+    display: none !important
+}
+
+.pos-selection-head {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 13px
+}
+
+.pos-selection-head h3 {
+    font-size: 16px;
+    font-weight: 850;
+    letter-spacing: -.02em;
+    margin: 0;
+    color: #1e2d3d
+}
+
+.pos-selection-head .pos-help {
+    margin: 2px 0 0
+}
+
+.pos-reset-selection {
+    padding: 6px 0;
+    border: 0;
+    background: transparent;
+    color: #be1230;
+    text-decoration: underline;
+    font-weight: 750;
+    font-size: 12px;
+    white-space: nowrap
+}
+
+.pos-refined-columns .pos-field {
+    margin-bottom: 13px
+}
+
+.pos-refined-columns .pos-options {
+    padding: 12px 14px;
+    margin-bottom: 12px
+}
+
+.pos-refined-columns .pos-check {
+    padding: 5px 0
+}
+
+.pos-beverage-note {
+    font-size: 12px;
+    line-height: 1.5;
+    background: #edf7ff;
+    color: #265278;
+    border: 1px solid #cce5fb;
+    border-radius: 10px;
+    padding: 12px;
+    margin: 10px 0 16px
+}
+
+.pos-kind-hint {
+    padding-top: 13px;
+    border-top: 1px solid #ecedf0;
+    margin-top: 16px !important
+}
+
+.pos-kind-hint a {
+    color: #bb0d2d;
+    font-weight: 750
+}
+
+.pos-add {
+    margin-top: 5px
+}
+
+.pos-refined-columns .pos-method {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 12px 14px
+}
+
+.pos-refined-columns .pos-method legend {
+    grid-column: 1/-1
+}
+
+.pos-refined-columns .pos-radio {
+    border: 1px solid #e4e8ee;
+    border-radius: 11px;
+    padding: 10px;
+    align-items: center
+}
+
+.pos-radio span {
+    display: grid;
+    gap: 1px
+}
+
+.pos-radio small {
+    font-size: 10px;
+    color: #778595;
+    line-height: 1.35
+}
+
+.pos-refined-columns .pos-radio:has(input:checked) {
+    border-color: #c8102e;
+    background: #fff8f9
+}
+
+.pos-cart-item-actions {
+    align-items: flex-end
+}
+
+.pos-qty-tools {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+    background: #f7f8fa;
+    border: 1px solid #e2e6ec;
+    border-radius: 9px;
+    padding: 2px
+}
+
+.pos-qty-tools button {
+    display: grid;
+    place-items: center;
+    border: 0;
+    background: #fff;
+    color: #b90d2f;
+    height: 28px;
+    width: 28px;
+    border-radius: 7px;
+    font-weight: 850;
+    font-size: 17px
+}
+
+.pos-qty-tools button:disabled {
+    opacity: .3;
+    cursor: not-allowed
+}
+
+.pos-qty-tools span {
+    display: inline-block;
+    min-width: 23px;
+    text-align: center;
+    font-weight: 800;
+    color: #314154;
+    font-size: 12px
+}
+
+.pos-refined-columns .pos-cart-row {
+    gap: 8px
+}
+
+.pos-refined-columns .pos-cart-item-content small:first-child {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-weight: 750;
+    color: #77828f
+}
+
+.pos-refined-columns .pos-total strong {
+    font-size: 25px
+}
+
+.pos-refined-columns .pos-confirm {
+    font-size: 12px
+}
+
+.pos-kind-tab:focus-visible,
+.pos-product-card:focus-visible,
+.pos-reset-selection:focus-visible,
+.pos-qty-tools button:focus-visible {
+    outline: 3px solid #ecbb64;
+    outline-offset: 2px
+}
+
+@media(max-width:1130px) {
+    .pos-refined-columns {
+        grid-template-columns: minmax(0, 1fr)
+    }
+
+    .pos-refined-columns .pos-checkout {
+        position: static
+    }
+}
+
+@media(max-width:640px) {
+    .pos-workflow {
+        gap: 6px;
+        font-size: 11px
+    }
+
+    .pos-refined-columns .pos-product-grid {
+        max-height: 350px
+    }
+
+    .pos-refined-columns .pos-product-card {
+        min-height: 78px;
+        padding: 8px
+    }
+
+    .pos-product-art {
+        height: 52px;
+        width: 49px
+    }
+
+    .pos-refined-columns .pos-panel {
+        padding: 16px !important
+    }
+
+    .pos-refined-columns .pos-method {
+        grid-template-columns: 1fr
+    }
+
+    .pos-refined-columns .pos-radio {
+        min-height: 49px
+    }
+}
+
+@media(max-width:400px) {
+    .pos-product-grid {
+        grid-template-columns: minmax(0, 1fr)
+    }
+}
+
+/* Preserve the hidden attribute over older .pos-field { display:grid } rules. */
+.pos-refined-columns [hidden] {
+    display: none !important
+}
+
+/* Step 24: categories within the already-separated Food/Beverage POS tabs. */
+.pos-category-wrap {
+    margin: 0 0 16px
+}
+
+.pos-category-heading {
+    display: block;
+    color: #637083;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: .09em;
+    font-weight: 800;
+    margin: 0 0 7px
+}
+
+.pos-category-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px
+}
+
+.pos-category-button {
+    border: 1px solid #dfe4eb;
+    border-radius: 99px;
+    background: #fff;
+    color: #475669;
+    min-height: 34px;
+    padding: 7px 13px;
+    font-size: 11px;
+    font-weight: 750;
+    cursor: pointer
+}
+
+.pos-category-button:hover {
+    border-color: #c8102e
+}
+
+.pos-category-button.is-active {
+    background: #c8102e;
+    border-color: #c8102e;
+    color: #fff
+}
+
+.pos-browse-drinks {
+    width: 100%;
+    padding: 12px;
+    border: 1px dashed #c8102e;
+    border-radius: 11px;
+    background: #fff8fa;
+    text-align: center;
+    font-weight: 750;
+    color: #b81131;
+    cursor: pointer;
+    margin-top: 8px
+}
+
+.pos-browse-drinks:hover {
+    background: #ffedf1
+}
+
+.pos-category-button:focus-visible,
+.pos-browse-drinks:focus-visible {
+    outline: 3px solid #eabf62;
+    outline-offset: 2px
+}
+
+/* Step 26: quantity-based food extras */
+.pos-addon-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 9px 0;
+    border-bottom: 1px solid #edf0f4
+}
+
+.pos-addon-label {
+    display: grid;
+    gap: 2px;
+    flex: 1;
+    min-width: 0;
+    color: #293648;
+    font-size: 13px
+}
+
+.pos-addon-label small {
+    color: #6e7788;
+    font-weight: 500
+}
+
+.pos-addon-qty {
+    width: 72px;
+    min-height: 40px;
+    border: 1px solid #dce1e8;
+    border-radius: 9px;
+    background: #fff;
+    color: #243449;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 750
+}
+
+.pos-addon-qty:focus-visible {
+    outline: 3px solid #f1b8c4;
+    outline-offset: 2px;
+    border-color: #c8102e
+}
