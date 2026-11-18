@@ -43,9 +43,12 @@ Route::view('/terms-and-conditions', 'legal.terms')->name('legal.terms');
 Route::view('/privacy-policy', 'legal.privacy')->name('legal.privacy');
 
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])
+    ->middleware('web')
     ->name('register');
 
-Route::post('/register', [RegisterController::class, 'register']);
+Route::post('/register', [RegisterController::class, 'register'])
+    ->middleware('web');
+
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])
     ->name('login');
@@ -333,4 +336,32 @@ Route::middleware('auth:web')->group(function () {
 
     Route::delete('/customer/addresses/{address}', [AddressController::class, 'destroy'])
         ->name('customer.addresses.destroy');
+});
+
+
+/*
+|--------------------------------------------------------------------------
+| TEMPORARY: Render Session Diagnostic
+|--------------------------------------------------------------------------
+| Remove after testing.
+*/
+
+Route::get('/cc-session-check', function (\Illuminate\Http\Request $request) {
+
+    $response = response()->json([
+        'session_driver' => config('session.driver'),
+        'session_started' => $request->hasSession()
+            && $request->session()->isStarted(),
+        'cookie_name' => config('session.cookie'),
+        'secure_cookie' => config('session.secure'),
+        'session_domain_is_null' => is_null(config('session.domain')),
+        'config_cached' => app()->configurationIsCached(),
+    ]);
+
+    $response->headers->set('Cache-Control', 'private, no-store');
+
+    return $response->withCookie(
+        cookie('cc_probe', 'ok', 1)
+    );
+
 });
