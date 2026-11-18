@@ -347,20 +347,36 @@ Route::middleware('auth:web')->group(function () {
 
 Route::get('/cc-session-check', function (\Illuminate\Http\Request $request) {
 
+    $file = '';
+    $line = 0;
+
+    $headersAlreadySent = headers_sent($file, $line);
+
     $response = response()->json([
         'session_driver' => config('session.driver'),
+
         'session_started' => $request->hasSession()
             && $request->session()->isStarted(),
-        'cookie_name' => config('session.cookie'),
-        'secure_cookie' => config('session.secure'),
-        'session_domain_is_null' => is_null(config('session.domain')),
-        'config_cached' => app()->configurationIsCached(),
+
+        'headers_already_sent' => $headersAlreadySent,
+
+        'output_started_at' => $headersAlreadySent
+            ? basename($file ?: 'unknown') . ':' . $line
+            : null,
     ]);
 
     $response->headers->set('Cache-Control', 'private, no-store');
 
-    return $response->withCookie(
+    $response->headers->set('X-CC-Header-Probe', 'yes');
+
+    $response->headers->setCookie(
         cookie('cc_probe', 'ok', 1)
     );
 
+    $response->headers->set(
+        'X-CC-Cookies-Queued',
+        (string) count($response->headers->getCookies())
+    );
+
+    return $response;
 });
