@@ -68,4 +68,5 @@ RUN mkdir -p \
 
 EXPOSE 10000
 
-CMD ["apache2-foreground"]
+
+CMD ["sh", "-c", "php artisan migrate --force --path=database/migrations/2026_11_20_000004_create_business_expenses_table.php --path=database/migrations/2026_11_20_000005_normalize_order_progress.php && exec apache2-foreground"]
