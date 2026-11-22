@@ -65,6 +65,7 @@ class CheckoutController extends Controller
         $validated = $request->validate([
             'recipient_name' => ['required', 'string', 'max:255'],
             'recipient_phone' => ['required', 'string', 'max:30'],
+            'save_contact_phone' => ['sometimes', 'boolean'],
             'address_line' => ['required', 'string', 'max:255'],
             'city' => ['required', 'string', 'max:100'],
             'postal_code' => ['required', 'string', 'max:20'],
@@ -167,12 +168,19 @@ class CheckoutController extends Controller
             $subtotalCents += $unitPriceCents * $quantity;
         }
 
+        if (!empty($validated['save_contact_phone']) && mb_strlen(trim($validated['recipient_phone'])) > 20) {
+            throw ValidationException::withMessages(['recipient_phone' => 'Account phone number must be 20 characters or fewer.']);
+        }
+
         $order = DB::transaction(function () use ($validated, $validatedLines, $subtotalCents) {
+            if (!empty($validated['save_contact_phone'])) {
+                Auth::guard('web')->user()->update(['phone_number' => trim($validated['recipient_phone'])]);
+            }
             $order = Order::create([
                 'customer_id' => Auth::guard('web')->id(),
                 'order_date' => now(),
                 'total_amount' => self::asDecimal($subtotalCents + self::DELIVERY_FEE_CENTS),
-                'order_status' => 'Pending',
+                'order_status' => 'Preparing',
                 'order_type' => 'Delivery',
             ]);
 
@@ -219,8 +227,8 @@ class CheckoutController extends Controller
 
             $delivery = new Delivery();
             $delivery->order_id = $order->order_id;
-            // Keep delivery tracking in sync with the newly created Pending order.
-            $delivery->tracking_status = 'Pending';
+            // Keep delivery tracking in sync with the newly created Preparing order.
+            $delivery->tracking_status = 'Preparing';
             $delivery->recipient_name = $validated['recipient_name'];
             $delivery->recipient_phone = $validated['recipient_phone'];
             $delivery->address_line = $validated['address_line'];

@@ -23,7 +23,7 @@
         <div class="pos-head-buttons">
             <a class="pos-btn {{ $status === 'all' ? 'pos-btn-primary' : 'pos-btn-muted' }}" href="{{ route('admin.pos.history', ['status' => 'all']) }}">All</a>
             <a class="pos-btn {{ $status === 'Preparing' ? 'pos-btn-primary' : 'pos-btn-muted' }}" href="{{ route('admin.pos.history', ['status' => 'Preparing']) }}">Preparing</a>
-            <a class="pos-btn {{ $status === 'Delivered' ? 'pos-btn-primary' : 'pos-btn-muted' }}" href="{{ route('admin.pos.history', ['status' => 'Delivered']) }}">Fulfilled</a>
+            <a class="pos-btn {{ $status === 'Delivered' ? 'pos-btn-primary' : 'pos-btn-muted' }}" href="{{ route('admin.pos.history', ['status' => 'Delivered']) }}">Served</a>
         </div>
     </div>
     @if($orders->isEmpty())
@@ -50,7 +50,7 @@
                             <td>{{ $order->items->sum('quantity') }}</td>
                             <td>{{ $order->payment?->payment_method ?? '—' }}</td>
                             <td>₱{{ number_format((float) $order->total_amount, 2) }}</td>
-                            <td><span class="pos-status {{ $order->order_status === 'Delivered' ? 'pos-status-done' : '' }}">{{ $order->order_status === 'Delivered' ? 'Fulfilled' : 'Preparing' }}</span></td>
+                            <td><span class="pos-status {{ $order->order_status === 'Delivered' ? 'pos-status-done' : '' }}">{{ $order->order_status === 'Delivered' ? 'Served' : 'Preparing' }}</span></td>
                             <td><a href="{{ route('admin.pos.show', $order->order_id) }}">View receipt →</a></td>
                         </tr>
                     @endforeach

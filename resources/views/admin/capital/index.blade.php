@@ -9,6 +9,11 @@
     <a href="{{ route('admin.reports.index') }}" class="a-text-link">Sales &amp; Reports →</a>
 </div>
 
+<section class="a-panel cc-capital-clarity" aria-label="What business capital means">
+    <p><strong>Capital is money you put into CHICK’S POPS.</strong> Record new money you add to fund the business, not every purchase you make using that money.</p>
+    <p>Example: you contribute ₱10,000, then spend ₱3,000 buying ingredients. Keep ₱10,000 as the capital contributed, and record the ₱3,000 purchase in <a href="{{ route('admin.reports.index') }}">Sales &amp; Reports → Business spending</a>. Capital contributed is <strong>not</strong> your remaining cash balance.</p>
+</section>
+
 <section class="a-panel cc-capital-filter" aria-label="Choose capital month">
     <form method="GET" action="{{ route('admin.investments.index') }}" class="cc-capital-month-form">
         <label for="capital-month-filter">Reporting month</label>
@@ -20,17 +25,18 @@
 <section class="a-stats cc-capital-summary" aria-label="Monthly capital summary">
     <article class="a-stat">
         <div class="a-stat-top">
-            <span>Capital invested · {{ $monthLabel }}</span>
-            <details class="cc-finance-info"><summary aria-label="Explain business capital">i</summary><div>Money contributed to the business, not the same as operating expenses or profit.</div></details>
+            <span>Money added · {{ $monthLabel }}</span>
+            <details class="cc-finance-info"><summary aria-label="Explain business capital">i</summary><div>Total additional money put into the business during this month. Buying ingredients or supplies with that money is spending, not another capital contribution.</div></details>
         </div>
         <strong>₱{{ number_format($monthCapital, 2) }}</strong>
-        <small>Active contributions recorded for this month</small>
+        <small>Total money contributed; not remaining cash</small>
     </article>
 </section>
 
 <div class="cc-capital-grid">
     <section class="a-panel cc-capital-panel" aria-labelledby="capital-form-title">
-        <h2 id="capital-form-title">Record a contribution</h2>
+        <h2 id="capital-form-title">Add business capital</h2>
+        <p class="cc-capital-muted">Only for new funds you put into the business, such as your own savings added to the business cash.</p>
         @if($errors->any())
             <div class="a-alert a-alert-error" role="alert">{{ $errors->first() }}</div>
         @endif
@@ -109,6 +115,6 @@
             <tbody>@foreach($comparison as $row)<tr><td>{{ $row['month'] }}</td><td>₱{{ number_format($row['capital'], 2) }}</td><td>₱{{ number_format($row['revenue'], 2) }}</td></tr>@endforeach</tbody>
         </table></div>
     </details>
-    <p class="cc-capital-chart-note">Paid sales use verified payments. Capital is funding received, not an expense. This chart does not calculate profit.</p>
+    <p class="cc-capital-chart-note">Paid sales use verified payments; capital shows only new money contributed. Ingredient and supply purchases are recorded separately under Business spending.</p>
 </section>
 @endsection

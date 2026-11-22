@@ -92,11 +92,10 @@
                 <input type="text" id="pos-gcash-ref" name="gcash_reference" maxlength="100" value="{{ old('gcash_reference') }}" placeholder="Enter transaction reference">
                 <p class="pos-help">Verify the transfer in your GCash merchant account before saving.</p>
             </div>
-            <label class="pos-confirm"><input type="checkbox" name="payment_confirmed" value="1" required @checked(old('payment_confirmed'))><span>I confirm the payment was received or verified.</span></label>
             <div class="pos-client-error" id="pos-client-error" role="alert" hidden></div>
             <button type="submit" id="pos-record" class="pos-btn pos-btn-primary pos-record">Save paid sale &amp; create receipt</button>
         </form>
-        <p class="pos-help pos-after-note">After giving the order to the customer, mark it <strong>Fulfilled</strong> on the receipt to update stock.</p>
+        <p class="pos-help pos-after-note">Mark the order <strong>Served</strong> on its receipt after handing it to the customer.</p>
     </section>
 </div>
 
@@ -116,7 +115,7 @@
                     <td>{{ $order->order_date?->format('M d · h:i A') }}</td>
                     <td>{{ $order->items->sum('quantity') }}</td>
                     <td>₱{{ number_format((float) $order->total_amount, 2) }}</td>
-                    <td><span class="pos-status {{ $order->order_status === 'Delivered' ? 'pos-status-done' : '' }}">{{ $order->order_status === 'Delivered' ? 'Fulfilled' : 'Preparing' }}</span></td>
+                    <td><span class="pos-status {{ $order->order_status === 'Delivered' ? 'pos-status-done' : '' }}">{{ $order->order_status === 'Delivered' ? 'Served' : 'Preparing' }}</span></td>
                     <td><a href="{{ route('admin.pos.show', $order->order_id) }}">View receipt →</a></td>
                 </tr>
             @endforeach</tbody>

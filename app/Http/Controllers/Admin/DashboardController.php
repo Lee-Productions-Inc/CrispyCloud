@@ -46,15 +46,19 @@ class DashboardController extends Controller
                     ->whereBetween('p.payment_date', [$monthStart, $monthEnd]);
             })->sum('o.total_amount');
 
-        $recordedCapital = (float) DB::table('business_capital_entries')
-            ->where('capital_month', $monthStart->toDateString())
-            ->whereNull('voided_at')->sum('amount');
+        // This is an estimate, not net profit: ingredient COGS and unrecorded
+        // costs are deliberately excluded.
+        $recordedExpenses = (float) DB::table('business_expenses')
+            ->whereNull('voided_at')
+            ->whereBetween('expense_date', [$monthStart->toDateString(), $monthEnd->toDateString()])
+            ->sum('amount');
+        $estimatedProfit = $monthlyPaidSales - $recordedExpenses;
 
         $totalOrders = Order::count();
         $totalCustomers = User::count();
-        $pendingOrders = Order::where('order_status', 'Pending')->count();
+
         $activeOrders = Order::where('order_type', 'Delivery')->whereIn('order_status', [
-            'Pending', 'Preparing', 'Out for Delivery',
+            'Preparing',
         ])->count();
 
         $averageOrderValue = (float) Order::query()
@@ -120,7 +124,7 @@ class DashboardController extends Controller
         ));
 
         return view('admin.dashboard', compact(
-            'paidSales', 'grossProductSales', 'recordedCapital', 'monthlyPaidSales', 'monthLabel', 'totalOrders', 'totalCustomers', 'pendingOrders',
+            'paidSales', 'grossProductSales', 'recordedExpenses', 'estimatedProfit', 'monthlyPaidSales', 'monthLabel', 'totalOrders', 'totalCustomers',
             'activeOrders', 'averageOrderValue', 'recentOrders', 'lowStock',
             'topProducts', 'dailyValues', 'maxValue', 'chartPoints', 'chartPolyline'
         ));

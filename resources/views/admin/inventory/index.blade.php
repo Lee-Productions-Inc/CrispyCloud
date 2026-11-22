@@ -67,7 +67,10 @@
                             @csrf @method('PATCH')
                             <label class="ai-field"><span>Adjustment</span><select name="direction" required><option value="add">Stock In (+)</option><option value="remove">Stock Out (−)</option></select></label>
                             <label class="ai-field"><span>Quantity ({{ $item->unit_of_measure }})</span><input name="quantity" type="number" min="0.01" max="99999999.99" step="0.01" inputmode="decimal" placeholder="0.00" required></label>
-                            <label class="ai-field ai-reason"><span>Reason for adjustment</span><input name="reason" type="text" minlength="3" maxlength="500" placeholder="Supplier delivery, damaged stock, count correction…" required></label>
+                            <label class="ai-field ai-reason"><span>Reason for adjustment</span>
+                                <select name="reason" required data-stock-reason><option value="">Select reason</option></select>
+                            </label>
+                            <label class="ai-field ai-reason" data-stock-other-wrap hidden><span>Specify reason</span><input name="reason_other" type="text" minlength="3" maxlength="450" placeholder="Enter reason" disabled></label>
                             <button class="ai-button ai-button-primary" type="submit">Save stock change</button>
                         </form>
                     </details>
@@ -81,5 +84,5 @@
         </div>@endif
     @endif
 </section>
-<div class="air-hint"><strong>How beverages work:</strong> Coke is a <strong>product</strong> in the Beverages category. Create an ingredient such as “Coke 330 mL bottle” with unit “bottles,” then set the Coke product recipe to consume <strong>1.00 bottle</strong>. Do not create Coke as a food extra.</div>
+<script src="{{ asset('js/admin-stock-reasons.js') }}" defer></script>
 @endsection

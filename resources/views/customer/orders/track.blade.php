@@ -9,17 +9,15 @@
 
 @php
     $money = fn ($amount): string => '₱' . number_format((float) $amount, 2);
-    $statusTones = ['Pending' => 'pending', 'Preparing' => 'preparing', 'Out for Delivery' => 'delivery', 'Delivered' => 'delivered', 'Cancelled' => 'cancelled'];
+    $statusTones = ['Preparing' => 'preparing', 'Delivered' => 'delivered', 'Cancelled' => 'cancelled'];
     $tone = $statusTones[$order->order_status] ?? 'pending';
     $isCancelled = $order->order_status === 'Cancelled';
     $isDelivered = $order->order_status === 'Delivered';
-    $statusStages = ['Pending', 'Preparing', 'Out for Delivery', 'Delivered'];
+    $statusStages = ['Preparing', 'Delivered'];
     $stageIndex = array_search($order->order_status, $statusStages, true);
     $stageIndex = $stageIndex === false ? 0 : $stageIndex;
     $steps = [
-        ['name' => 'Order received', 'description' => 'Your order has been recorded.'],
-        ['name' => 'Preparing', 'description' => 'Our team is getting your order ready.'],
-        ['name' => 'Out for delivery', 'description' => 'The order has been marked as out for delivery.'],
+        ['name' => 'Preparing', 'description' => 'Your order has been received and is being prepared.'],
         ['name' => 'Delivered', 'description' => 'The order has been marked as delivered.'],
     ];
     $date = $order->order_date ?? $order->created_at;

@@ -28,7 +28,7 @@ use App\Http\Controllers\Admin\OrderManagementController;
 use App\Http\Controllers\Admin\InventoryController;
 use App\Http\Controllers\Admin\RecipeManagementController;
 use App\Http\Controllers\Admin\SalesReportController;
-use App\Http\Controllers\Admin\BusinessCapitalController;
+use App\Http\Controllers\Admin\BusinessExpenseController;
 use App\Http\Controllers\Admin\WalkInPosController;
 use App\Http\Controllers\Admin\InventoryFulfillmentAuditController;
 
@@ -123,12 +123,6 @@ Route::middleware('auth:admin')
         Route::patch('/catalog/addons/{addon}/toggle', [CatalogController::class, 'toggleAddOn'])
             ->name('catalog.addons.toggle');
 
-        Route::delete(
-            '/catalog/addons/{addon}',
-            [CatalogController::class, 'destroyAddOn']
-        )->whereNumber('addon')
-            ->name('catalog.addons.destroy');
-
         // ADMIN ORDER STATUS
         Route::patch(
             '/orders/{order}/status',
@@ -174,31 +168,21 @@ Route::middleware('auth:admin')
             ->whereNumber('ingredient')
             ->name('inventory.adjust');
 
-        // Monthly business capital (Admin-only). Retain old product investment records separately.
-        Route::get('/business-capital', [BusinessCapitalController::class, 'index'])->name('investments.index');
-        Route::post('/business-capital', [BusinessCapitalController::class, 'store'])->name('investments.store');
-        Route::post('/business-capital/{entry}/void', [BusinessCapitalController::class, 'void'])
-            ->whereNumber('entry')->name('investments.void');
-        Route::redirect('/product-investments', '/admin/business-capital');
+        // Keep older bookmarks usable; financial data stays in the database untouched.
+        Route::redirect('/business-capital', '/admin/sales-reports')->name('investments.index');
+        Route::redirect('/product-investments', '/admin/sales-reports');
 
-        // SALES REPORTS
+        // SALES REPORTS / MANUALLY RECORDED EXPENSES
+        Route::post('/sales-reports/expenses', [BusinessExpenseController::class, 'store'])
+            ->name('reports.expenses.store');
+        Route::post('/sales-reports/expenses/{expense}/void', [BusinessExpenseController::class, 'void'])
+            ->whereNumber('expense')->name('reports.expenses.void');
+
         Route::get('/sales-reports', [SalesReportController::class, 'index'])
             ->name('reports.index');
 
         Route::get('/reports/exports', [SalesReportController::class, 'export'])
             ->name('reports.export');
-
-        Route::put(
-            '/inventory/recipes/addons/{addon}',
-            [RecipeManagementController::class, 'updateAddon']
-        )->whereNumber('addon')
-            ->name('inventory.recipes.addons.update');
-
-        Route::put(
-            '/inventory/recipes/components/{component}',
-            [RecipeManagementController::class, 'updateComponent']
-        )->whereNumber('component')
-            ->name('inventory.recipes.components.update');
 
         // ADMIN WALK-IN POS
         Route::get('/pos', [WalkInPosController::class, 'index'])
@@ -303,7 +287,7 @@ Route::middleware('auth:web')->group(function () {
     Route::get('/customer/orders/{order}', [OrderConfirmationController::class, 'show'])
         ->name('customer.orders.show');
 
-    // Only the order's customer may cancel an unpaid Pending delivery order.
+    // Only the order's customer may cancel an unpaid, still-Preparing delivery order.
     Route::patch('/customer/orders/{order}/cancel', [OrderCancellationController::class, 'cancel'])
         ->whereNumber('order')
         ->name('customer.orders.cancel');

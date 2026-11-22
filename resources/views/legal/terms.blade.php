@@ -27,7 +27,7 @@
 </section>
 
 <section><h2>6. Cancellation, problems and refunds</h2>
-<p>Where the website offers the feature, customers may cancel a <strong>Pending and unpaid</strong> order before preparation begins. Once an order is being prepared, has been paid, or is out for delivery, online self-cancellation may be unavailable; contact the store promptly for assistance. Incorrect orders, missing items, damaged products, or other concerns will be assessed under applicable Philippine consumer laws. Nothing in these Terms limits rights or remedies guaranteed by law. Where a refund is due, the store will communicate the available refund method and handling process.</p>
+<p>Where the website offers the feature, customers may cancel an <strong>unpaid order marked Preparing</strong> while online cancellation remains available. Once an order has been delivered or paid, online self-cancellation is unavailable; contact the store promptly for assistance. Incorrect orders, missing items, damaged products, or other concerns will be assessed under applicable Philippine consumer laws. Nothing in these Terms limits rights or remedies guaranteed by law. Where a refund is due, the store will communicate the available refund method and handling process.</p>
 </section>
 
 <section><h2>7. Proper use of the website</h2>

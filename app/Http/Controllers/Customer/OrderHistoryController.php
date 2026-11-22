@@ -22,7 +22,7 @@ class OrderHistoryController extends Controller
             ->with(['items.product', 'payment']);
 
         if ($filter === 'active') {
-            $query->whereIn('order_status', ['Pending', 'Preparing', 'Out for Delivery']);
+            $query->whereIn('order_status', ['Preparing']);
         } elseif ($filter === 'past') {
             $query->whereIn('order_status', ['Delivered', 'Cancelled']);
         }

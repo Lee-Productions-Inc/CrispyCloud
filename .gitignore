@@ -23,3 +23,8 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+/.history/
+/patch_backups/
+/step53A_polish/
+*.zip
+*.sql

@@ -5,9 +5,9 @@
     <div>
         <p class="a-eyebrow">COUNTER RECEIPT</p>
         <h1>Walk-in #CP-{{ $order->order_id }}</h1>
-        <p>Payment recorded; fulfillment tracked independently of online deliveries.</p>
+        <p></p>
     </div>
-    <div class="pos-head-buttons"><a class="pos-btn pos-btn-muted" href="{{ route('admin.pos.history') }}">← Walk-in history</a><button class="pos-btn pos-btn-muted" type="button" onclick="window.print()">Print receipt</button></div>
+    <div class="pos-head-buttons"><a class="pos-btn pos-btn-muted" href="{{ route('admin.pos.history') }}">← Walk-in history</a><button class="pos-btn pos-btn-muted" type="button" data-print-receipt>Print receipt</button></div>
 </div>
 @if($errors->any())<div class="pos-error pos-no-print" role="alert"><strong>Could not complete sale.</strong>@foreach($errors->all() as $error)<p>{{ $error }}</p>@endforeach</div>@endif
 <div class="pos-receipt-grid">
@@ -72,18 +72,19 @@
     </section>
     <aside class="a-panel pos-receipt-side pos-no-print" aria-label="Fulfillment">
         <h2>Fulfillment status</h2>
-        <p><span class="pos-status {{ $order->order_status === 'Delivered' ? 'pos-status-done' : '' }}">{{ $order->order_status === 'Delivered' ? 'Fulfilled' : 'Preparing' }}</span></p>
+        <p><span class="pos-status {{ $order->order_status === 'Delivered' ? 'pos-status-done' : '' }}">{{ $order->order_status === 'Delivered' ? 'Served' : 'Preparing' }}</span></p>
         @if($order->order_status === 'Preparing')
-        <p>When the meal has been prepared and handed to the customer, mark it fulfilled. Inventory will be deducted and logged once.</p>
+        <p>After handing over the order, mark it Served. Stock will update automatically.</p>
         <form method="POST" action="{{ route('admin.pos.complete', $order->order_id) }}">
             @csrf
-            <button class="pos-btn pos-btn-primary pos-record" type="submit">Mark Fulfilled &amp; Deduct Stock</button>
+            <button class="pos-btn pos-btn-primary pos-record" type="submit">Mark as Served</button>
         </form>
-        <p class="pos-help">If an ingredient recipe is missing or stock is insufficient, fulfillment will be blocked. No inventory or order status will be partially updated.</p>
+        <p class="pos-help"></p>
         @else
         <p class="pos-complete-message">✓ This walk-in order is complete. Inventory deduction has already been recorded.</p>
         @endif
         <a class="pos-btn pos-btn-muted pos-record" href="{{ route('admin.pos.index') }}">+ Start another sale</a>
     </aside>
 </div>
+<script src="{{ asset('js/admin-pos-receipt.js') }}" defer></script>
 @endsection

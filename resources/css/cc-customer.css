@@ -19,8 +19,6 @@
 
 /* === Original: resources/css/app.css === */
 
-
-
 :root {
     --primary-red: #e31837;
     --primary-red-dark: #9d1b1b;
@@ -155,7 +153,9 @@ input {
     color: var(--dark-text);
     @apply text-[15px];
     outline: none;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 .form-input::placeholder {
@@ -233,7 +233,9 @@ input {
     @apply font-extrabold;
     @apply cursor-pointer;
     box-shadow: 0 6px 0 var(--primary-red-dark);
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
 }
 
 .auth-button:hover {
@@ -481,7 +483,6 @@ input {
     }
 }
 
-
 /* === Original: resources/css/customer/navigation.css === */
 :root {
     --ccn-red: #c8102e;
@@ -527,7 +528,7 @@ input {
     z-index: 50;
     background: var(--ccn-bg);
     border-bottom: 1px solid var(--ccn-line);
-    box-shadow: 0 2px 12px rgba(34, 34, 34, .035);
+    box-shadow: 0 2px 12px rgba(34, 34, 34, 0.035);
     font-family: "Quicksand", sans-serif;
 }
 
@@ -566,7 +567,9 @@ input {
     @apply rounded-[12px];
     @apply text-[#fff];
     background: var(--ccn-red);
-    font: 700 15px "Fredoka", sans-serif;
+    font:
+        700 15px "Fredoka",
+        sans-serif;
 }
 
 .ccn-brand-words {
@@ -577,8 +580,10 @@ input {
 
 .ccn-brand-words strong {
     @apply whitespace-nowrap;
-    letter-spacing: -.3px;
-    font: 700 19px/1 "Fredoka", sans-serif;
+    letter-spacing: -0.3px;
+    font:
+        700 19px/1 "Fredoka",
+        sans-serif;
 }
 
 .ccn-brand-words small {
@@ -586,7 +591,7 @@ input {
     color: var(--ccn-muted);
     @apply text-[10px];
     @apply font-bold;
-    letter-spacing: .15px;
+    letter-spacing: 0.15px;
 }
 
 .ccn-desktop-nav {
@@ -661,7 +666,9 @@ input {
     @apply rounded-[100px];
     background: var(--ccn-red);
     color: white;
-    font: 700 11px "Quicksand", sans-serif;
+    font:
+        700 11px "Quicksand",
+        sans-serif;
 }
 
 .ccn-account-dropdown {
@@ -691,7 +698,7 @@ input {
     padding: 8px;
     border: 1px solid var(--ccn-line);
     background: white;
-    box-shadow: 0 16px 35px rgba(0, 0, 0, .12);
+    box-shadow: 0 16px 35px rgba(0, 0, 0, 0.12);
     @apply rounded-[14px];
 }
 
@@ -714,7 +721,9 @@ input {
     padding: 11px 10px;
     background: transparent;
     color: var(--ccn-ink);
-    font: 700 13px "Quicksand", sans-serif;
+    font:
+        700 13px "Quicksand",
+        sans-serif;
     @apply cursor-pointer;
 }
 
@@ -737,7 +746,9 @@ input {
     @apply rounded-[11px];
     @apply text-[#fff];
     background: var(--ccn-red);
-    font: 700 13px "Quicksand", sans-serif;
+    font:
+        700 13px "Quicksand",
+        sans-serif;
     @apply whitespace-nowrap;
 }
 
@@ -836,7 +847,7 @@ input {
         padding: 7px 6px calc(8px + env(safe-area-inset-bottom, 0px));
         border-top: 1px solid var(--ccn-line);
         background: #fff;
-        box-shadow: 0 -6px 24px rgba(0, 0, 0, .07);
+        box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.07);
         font-family: "Quicksand", sans-serif;
     }
 
@@ -887,18 +898,16 @@ input {
 }
 
 @media (prefers-reduced-motion: reduce) {
-
     .ccn-header *,
     .ccn-mobile-nav * {
         transition: none !important;
     }
 }
 
-
 /* === Original: public/css/crispycloud-customer-minimal.css === */
 .cc-menu-page .ccm-card:focus-within {
     @apply border-[#da9faa];
-    box-shadow: 0 10px 26px rgba(90, 32, 44, .09);
+    box-shadow: 0 10px 26px rgba(90, 32, 44, 0.09);
 }
 
 .cc-menu-page .ccm-card:focus-within .ccm-card-cta {
@@ -906,13 +915,27 @@ input {
     @apply text-[#fff];
 }
 
-.cc-menu-page :is(.ccm-card-cta, .ccm-category, .ccm-flavor, .ccm-section-option, .ccm-hero-button, .ccm-search-form button):focus-visible,
-.cc-customer-page :is(.ccn-nav-link, .ccn-cart-action, .ccn-sign-in, .ccn-mobile-nav a):focus-visible {
+.cc-menu-page
+    :is(
+        .ccm-card-cta,
+        .ccm-category,
+        .ccm-flavor,
+        .ccm-section-option,
+        .ccm-hero-button,
+        .ccm-search-form button
+    ):focus-visible,
+.cc-customer-page
+    :is(
+        .ccn-nav-link,
+        .ccn-cart-action,
+        .ccn-sign-in,
+        .ccn-mobile-nav a
+    ):focus-visible {
     outline: 3px solid #d49a21;
     outline-offset: 3px;
 }
 
-.cc-menu-page .ccm-search-form input[type=search] {
+.cc-menu-page .ccm-search-form input[type="search"] {
     @apply min-w-0;
 }
 
@@ -924,15 +947,13 @@ input {
     @apply min-h-[40px];
 }
 
-@media (prefers-reduced-motion:reduce) {
-
+@media (prefers-reduced-motion: reduce) {
     .cc-menu-page .ccm-card,
     .cc-menu-page .ccm-card-photo img {
         transition: none !important;
         transform: none !important;
     }
 }
-
 
 /* === Original: resources/css/customer/menu.css === */
 .cc-menu-page {
@@ -1001,7 +1022,7 @@ input {
     padding: 24px 0 19px;
     @apply text-[11px];
     @apply font-bold;
-    letter-spacing: .09em;
+    letter-spacing: 0.09em;
     color: var(--ccm-muted);
 }
 
@@ -1020,7 +1041,7 @@ input {
     @apply rounded-[24px];
     @apply overflow-hidden;
     @apply grid;
-    grid-template-columns: 1.15fr .85fr;
+    grid-template-columns: 1.15fr 0.85fr;
     isolation: isolate;
     @apply relative;
 }
@@ -1039,7 +1060,7 @@ input {
     @apply text-[#fff0d9];
     @apply text-[11px];
     @apply font-bold;
-    letter-spacing: .16em;
+    letter-spacing: 0.16em;
 }
 
 .ccm-eyebrow-dot {
@@ -1051,8 +1072,10 @@ input {
 
 .ccm-hero h1 {
     margin: 17px 0 16px;
-    font: 800 clamp(32px, 3.4vw, 48px)/1.12 "Poppins", sans-serif;
-    letter-spacing: -.05em;
+    font:
+        800 clamp(32px, 3.4vw, 48px) / 1.12 "Poppins",
+        sans-serif;
+    letter-spacing: -0.05em;
 }
 
 .ccm-hero h1 span {
@@ -1078,8 +1101,10 @@ input {
     @apply rounded-[10px];
     @apply text-[12px];
     @apply font-bold;
-    box-shadow: 0 5px 16px rgba(35, 0, 0, .12);
-    transition: transform .18s ease, box-shadow .18s ease;
+    box-shadow: 0 5px 16px rgba(35, 0, 0, 0.12);
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease;
 }
 
 .ccm-hero-button svg {
@@ -1089,7 +1114,7 @@ input {
 
 .ccm-hero-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(35, 0, 0, .17);
+    box-shadow: 0 8px 20px rgba(35, 0, 0, 0.17);
 }
 
 .ccm-hero-art {
@@ -1111,7 +1136,7 @@ input {
     @apply right-[-34px];
     @apply top-[-40px];
     background: #e73b53;
-    opacity: .45;
+    opacity: 0.45;
 }
 
 .ccm-hero-blob-two {
@@ -1120,7 +1145,7 @@ input {
     @apply right-[112px];
     @apply bottom-[-135px];
     background: #ffcd59;
-    opacity: .17;
+    opacity: 0.17;
 }
 
 .ccm-hero-food {
@@ -1142,10 +1167,14 @@ input {
     @apply gap-[6px];
     @apply w-[215px];
     @apply h-[215px];
-    border: 1px solid rgba(255, 255, 255, .35);
+    border: 1px solid rgba(255, 255, 255, 0.35);
     @apply rounded-full;
     @apply text-[#fff2df];
-    background: radial-gradient(circle, rgba(255, 255, 255, .16), rgba(255, 255, 255, .025));
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.16),
+        rgba(255, 255, 255, 0.025)
+    );
     transform: rotate(-7deg);
 }
 
@@ -1157,7 +1186,7 @@ input {
 .ccm-hero-art-fallback span {
     @apply text-[12px];
     @apply font-bold;
-    letter-spacing: -.015em;
+    letter-spacing: -0.015em;
 }
 
 .ccm-explore {
@@ -1182,14 +1211,14 @@ input {
     color: var(--ccm-brand);
     @apply text-[10px];
     @apply font-extrabold;
-    letter-spacing: .16em;
+    letter-spacing: 0.16em;
     @apply mb-[7px];
 }
 
 .ccm-intro-copy h2 {
     font-size: clamp(24px, 2.9vw, 32px);
     @apply font-extrabold;
-    letter-spacing: -.045em;
+    letter-spacing: -0.045em;
     line-height: 1.2;
     margin: 0 0 8px;
     color: var(--ccm-ink);
@@ -1213,13 +1242,15 @@ input {
     @apply rounded-[12px];
     background: #fff;
     border: 1px solid #dedfdf;
-    box-shadow: 0 4px 12px rgba(25, 33, 42, .035);
-    transition: border-color .15s ease, box-shadow .15s ease;
+    box-shadow: 0 4px 12px rgba(25, 33, 42, 0.035);
+    transition:
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
 }
 
 .ccm-search-form:focus-within {
     @apply border-[#bd4358];
-    box-shadow: 0 0 0 3px rgba(200, 16, 46, .08);
+    box-shadow: 0 0 0 3px rgba(200, 16, 46, 0.08);
 }
 
 .ccm-search-icon {
@@ -1255,7 +1286,7 @@ input {
     @apply text-[11px];
     @apply font-bold;
     @apply cursor-pointer;
-    transition: background-color .15s ease;
+    transition: background-color 0.15s ease;
 }
 
 .ccm-search-form button:hover {
@@ -1297,7 +1328,10 @@ input {
     @apply rounded-[9px];
     @apply text-[11.5px];
     @apply font-semibold;
-    transition: background-color .15s ease, color .15s ease, border-color .15s ease;
+    transition:
+        background-color 0.15s ease,
+        color 0.15s ease,
+        border-color 0.15s ease;
 }
 
 .ccm-category:hover {
@@ -1334,7 +1368,9 @@ input {
     @apply text-[11px];
     @apply font-semibold;
     @apply text-[#5e6875];
-    transition: border-color .15s ease, color .15s ease;
+    transition:
+        border-color 0.15s ease,
+        color 0.15s ease;
 }
 
 .ccm-flavor:hover,
@@ -1357,7 +1393,7 @@ input {
 .ccm-results-heading h3 {
     @apply text-[21px];
     @apply font-extrabold;
-    letter-spacing: -.035em;
+    letter-spacing: -0.035em;
     margin: 0 0 5px;
 }
 
@@ -1403,14 +1439,17 @@ input {
     @apply overflow-hidden;
     background: #fff;
     border: 1px solid var(--ccm-border);
-    box-shadow: 0 6px 22px rgba(39, 33, 27, .045);
-    transition: box-shadow .18s ease, transform .18s ease, border-color .18s ease;
+    box-shadow: 0 6px 22px rgba(39, 33, 27, 0.045);
+    transition:
+        box-shadow 0.18s ease,
+        transform 0.18s ease,
+        border-color 0.18s ease;
 }
 
 .ccm-card:hover {
     transform: translateY(-3px);
     @apply border-[#e8cfd1];
-    box-shadow: 0 12px 30px rgba(39, 33, 27, .075);
+    box-shadow: 0 12px 30px rgba(39, 33, 27, 0.075);
 }
 
 .ccm-card-photo {
@@ -1431,7 +1470,7 @@ input {
     @apply w-full;
     @apply h-full;
     @apply object-contain;
-    transition: transform .25s ease;
+    transition: transform 0.25s ease;
 }
 
 .ccm-card:hover .ccm-card-photo img {
@@ -1471,7 +1510,7 @@ input {
     @apply text-[14.5px];
     @apply font-extrabold;
     line-height: 1.35;
-    letter-spacing: -.02em;
+    letter-spacing: -0.02em;
     @apply m-0;
 }
 
@@ -1520,7 +1559,7 @@ input {
     @apply text-[20px];
     color: var(--ccm-brand);
     @apply font-extrabold;
-    letter-spacing: -.035em;
+    letter-spacing: -0.035em;
     @apply whitespace-nowrap;
 }
 
@@ -1537,7 +1576,7 @@ input {
     @apply text-[11px];
     @apply font-bold;
     @apply whitespace-nowrap;
-    transition: background-color .15s ease;
+    transition: background-color 0.15s ease;
 }
 
 .ccm-card-cta:hover {
@@ -1621,7 +1660,7 @@ input {
     border-bottom: 1px solid var(--ccm-border);
 }
 
-.ccm-assurance>div {
+.ccm-assurance > div {
     @apply grid;
     grid-template-columns: 32px 1fr;
     @apply gap-x-[11px];
@@ -1630,11 +1669,11 @@ input {
     border-right: 1px solid var(--ccm-border);
 }
 
-.ccm-assurance>div:first-child {
+.ccm-assurance > div:first-child {
     @apply pl-[0];
 }
 
-.ccm-assurance>div:last-child {
+.ccm-assurance > div:last-child {
     border-right: 0;
 }
 
@@ -1642,7 +1681,7 @@ input {
     grid-row: span 2;
     @apply text-[20px];
     @apply font-extrabold;
-    letter-spacing: -.04em;
+    letter-spacing: -0.04em;
     @apply text-[#d9a8ae];
 }
 
@@ -1659,7 +1698,7 @@ input {
 
 @media (max-width: 1020px) {
     .ccm-hero {
-        grid-template-columns: 1.25fr .75fr;
+        grid-template-columns: 1.25fr 0.75fr;
     }
 
     .ccm-product-grid {
@@ -1685,7 +1724,7 @@ input {
     }
 
     .ccm-hero {
-        grid-template-columns: 1.15fr .85fr;
+        grid-template-columns: 1.15fr 0.85fr;
         @apply min-h-[260px];
     }
 
@@ -1726,7 +1765,7 @@ input {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .ccm-assurance>div {
+    .ccm-assurance > div {
         padding: 5px 10px;
     }
 }
@@ -1876,7 +1915,7 @@ input {
         padding: 11px 0;
     }
 
-    .ccm-assurance>div {
+    .ccm-assurance > div {
         border-right: 0;
         padding: 10px 0;
     }
@@ -1904,7 +1943,6 @@ input {
 }
 
 @media (prefers-reduced-motion: reduce) {
-
     .ccm-card,
     .ccm-card-photo img,
     .ccm-hero-button,
@@ -1943,7 +1981,9 @@ input {
     @apply text-[13px];
     font-weight: 750;
     color: #4e5867 !important;
-    transition: background .15s, color .15s;
+    transition:
+        background 0.15s,
+        color 0.15s;
 }
 
 .ccm-section-option:hover {
@@ -1954,7 +1994,7 @@ input {
 .ccm-section-option.is-active {
     background: #fff;
     color: #c8102e !important;
-    box-shadow: 0 2px 8px rgba(40, 30, 40, .08);
+    box-shadow: 0 2px 8px rgba(40, 30, 40, 0.08);
     border: 1px solid #ece2e2;
 }
 
@@ -1970,7 +2010,7 @@ input {
     outline-offset: 3px;
 }
 
-@media (max-width:560px) {
+@media (max-width: 560px) {
     .ccm-section-switch {
         @apply w-full;
     }
@@ -1988,7 +2028,6 @@ input {
     line-height: 1;
 }
 
-
 /* === Original: resources/css/customer/commerce.css === */
 .cc-commerce-page {
     --ccc-red: #c8102e;
@@ -1997,7 +2036,7 @@ input {
     --ccc-muted: #697483;
     --ccc-soft: #faf9f7;
     --ccc-border: #eae5df;
-    --ccc-shadow: 0 8px 26px rgba(49, 35, 27, .055);
+    --ccc-shadow: 0 8px 26px rgba(49, 35, 27, 0.055);
     background: var(--ccc-soft);
     color: var(--ccc-ink);
     font-family: "Quicksand", sans-serif;
@@ -2040,7 +2079,7 @@ input {
     @apply underline;
 }
 
-.cc-commerce-page .ccc-breadcrumb [aria-current=page] {
+.cc-commerce-page .ccc-breadcrumb [aria-current="page"] {
     color: var(--ccc-ink);
 }
 
@@ -2056,14 +2095,16 @@ input {
     @apply block;
     color: var(--ccc-red);
     @apply text-[10.5px];
-    letter-spacing: .15em;
+    letter-spacing: 0.15em;
     @apply font-extrabold;
     margin: 0 0 8px;
 }
 
 .cc-commerce-page .ccc-page-heading h1 {
-    font: 700 clamp(30px, 4vw, 43px)/1.13 "Fredoka", sans-serif;
-    letter-spacing: -.035em;
+    font:
+        700 clamp(30px, 4vw, 43px) / 1.13 "Fredoka",
+        sans-serif;
+    letter-spacing: -0.035em;
     margin: 0 0 8px;
 }
 
@@ -2113,7 +2154,7 @@ input {
     @apply font-bold;
 }
 
-.cc-commerce-page .ccc-progress li>span:first-child {
+.cc-commerce-page .ccc-progress li > span:first-child {
     flex: 0 0 25px;
     @apply grid;
     @apply place-items-center;
@@ -2122,14 +2163,16 @@ input {
     border: 1px solid #dcd7d1;
     background: #fff;
     @apply text-[#8b9097];
-    font: 700 11px "Quicksand", sans-serif;
+    font:
+        700 11px "Quicksand",
+        sans-serif;
 }
 
 .cc-commerce-page .ccc-progress .ccc-progress-current {
     color: var(--ccc-red);
 }
 
-.cc-commerce-page .ccc-progress .ccc-progress-current>span:first-child {
+.cc-commerce-page .ccc-progress .ccc-progress-current > span:first-child {
     background: var(--ccc-red);
     color: white;
     border-color: var(--ccc-red);
@@ -2139,7 +2182,7 @@ input {
     @apply text-[#465d50];
 }
 
-.cc-commerce-page .ccc-progress .ccc-progress-complete>span:first-child {
+.cc-commerce-page .ccc-progress .ccc-progress-complete > span:first-child {
     background: #e0f1e5;
     @apply text-[#176239];
     @apply border-[#c9e4d3];
@@ -2147,7 +2190,7 @@ input {
 
 .cc-commerce-page .ccc-two-column {
     @apply grid;
-    grid-template-columns: minmax(0, 1.67fr) minmax(305px, .86fr);
+    grid-template-columns: minmax(0, 1.67fr) minmax(305px, 0.86fr);
     align-items: start;
     @apply gap-[22px];
 }
@@ -2171,9 +2214,11 @@ input {
 .cc-commerce-page .ccc-card-header h2,
 .cc-commerce-page .ccc-summary-card h2,
 .cc-commerce-page .ccc-form-panel h2 {
-    font: 700 22px/1.25 "Fredoka", sans-serif;
+    font:
+        700 22px/1.25 "Fredoka",
+        sans-serif;
     @apply m-0;
-    letter-spacing: -.025em;
+    letter-spacing: -0.025em;
 }
 
 .cc-commerce-page .ccc-count-pill {
@@ -2227,7 +2272,9 @@ input {
 }
 
 .cc-commerce-page .ccc-item-details h3 {
-    font: 700 19px/1.35 "Fredoka", sans-serif;
+    font:
+        700 19px/1.35 "Fredoka",
+        sans-serif;
     margin: 0 0 4px;
     overflow-wrap: anywhere;
 }
@@ -2245,7 +2292,7 @@ input {
     @apply gap-[5px];
 }
 
-.cc-commerce-page .ccc-customizations>div {
+.cc-commerce-page .ccc-customizations > div {
     @apply grid;
     grid-template-columns: 65px minmax(0, 1fr);
     @apply gap-[7px];
@@ -2283,7 +2330,9 @@ input {
 }
 
 .cc-commerce-page .ccc-line-total {
-    font: 700 19px/1.4 "Fredoka", sans-serif;
+    font:
+        700 19px/1.4 "Fredoka",
+        sans-serif;
     @apply whitespace-nowrap;
 }
 
@@ -2313,7 +2362,9 @@ input {
     @apply rounded-[9px];
     background: #fff;
     color: var(--ccc-ink);
-    font: 800 14px "Quicksand", sans-serif;
+    font:
+        800 14px "Quicksand",
+        sans-serif;
 }
 
 .cc-commerce-page .ccc-small-button {
@@ -2363,7 +2414,7 @@ input {
     @apply gap-[15px];
 }
 
-.cc-commerce-page .ccc-summary-rows>div {
+.cc-commerce-page .ccc-summary-rows > div {
     @apply flex;
     @apply justify-between;
     @apply gap-[15px];
@@ -2394,7 +2445,9 @@ input {
 
 .cc-commerce-page .ccc-summary-total strong {
     color: var(--ccc-red);
-    font: 700 26px "Fredoka", sans-serif;
+    font:
+        700 26px "Fredoka",
+        sans-serif;
     @apply whitespace-nowrap;
 }
 
@@ -2416,7 +2469,9 @@ input {
     @apply no-underline;
     padding: 11px 15px;
     @apply text-center;
-    transition: background-color .14s ease, transform .14s ease;
+    transition:
+        background-color 0.14s ease,
+        transform 0.14s ease;
 }
 
 .cc-commerce-page .ccc-primary-button:hover {
@@ -2477,7 +2532,9 @@ input {
 
 .cc-commerce-page .ccc-empty-state h2 {
     margin: 21px 0 9px;
-    font: 700 29px "Fredoka", sans-serif;
+    font:
+        700 29px "Fredoka",
+        sans-serif;
 }
 
 .cc-commerce-page .ccc-empty-state p {
@@ -2544,7 +2601,9 @@ input {
     @apply rounded-[9px];
     background: #fff0f2;
     color: var(--ccc-red);
-    font: 800 11px "Quicksand", sans-serif;
+    font:
+        800 11px "Quicksand",
+        sans-serif;
 }
 
 .cc-commerce-page .ccc-section-title-row h2 {
@@ -2590,7 +2649,9 @@ input {
     background: #fff;
     @apply rounded-[10px];
     border: 1px solid #d9d5d0;
-    font: 600 13px "Quicksand", sans-serif;
+    font:
+        600 13px "Quicksand",
+        sans-serif;
     color: var(--ccc-ink);
     padding: 11px 13px;
 }
@@ -2668,7 +2729,9 @@ input {
     flex: 0 0 35px;
     @apply w-[35px];
     @apply h-[35px];
-    font: 700 18px "Fredoka", sans-serif;
+    font:
+        700 18px "Fredoka",
+        sans-serif;
 }
 
 .cc-commerce-page .ccc-payment-description {
@@ -2740,14 +2803,18 @@ input {
 }
 
 .cc-commerce-page .ccc-review-info h3 {
-    font: 700 15px/1.35 "Fredoka", sans-serif;
+    font:
+        700 15px/1.35 "Fredoka",
+        sans-serif;
     margin: 0 0 6px;
     overflow-wrap: anywhere;
 }
 
 .cc-commerce-page .ccc-review-info h3 span {
     color: var(--ccc-muted);
-    font: 700 11px "Quicksand", sans-serif;
+    font:
+        700 11px "Quicksand",
+        sans-serif;
 }
 
 .cc-commerce-page .ccc-review-info p {
@@ -2759,7 +2826,9 @@ input {
 }
 
 .cc-commerce-page .ccc-review-price {
-    font: 700 13px "Fredoka", sans-serif;
+    font:
+        700 13px "Fredoka",
+        sans-serif;
     @apply whitespace-nowrap;
 }
 
@@ -2786,7 +2855,7 @@ input {
 
 @media (max-width: 970px) {
     .cc-commerce-page .ccc-two-column {
-        grid-template-columns: minmax(0, 1.3fr) minmax(280px, .9fr);
+        grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.9fr);
         @apply gap-[15px];
     }
 
@@ -2855,7 +2924,7 @@ input {
         @apply text-[10px];
     }
 
-    .cc-commerce-page .ccc-progress li>span:first-child {
+    .cc-commerce-page .ccc-progress li > span:first-child {
         @apply w-[23px];
         @apply h-[23px];
         flex-basis: 23px;
@@ -2927,7 +2996,6 @@ input {
         transition: none;
     }
 }
-
 
 /* === Original: resources/css/customer/customize.css === */
 .cc-product-page {
@@ -3016,14 +3084,14 @@ input {
 
 .ccx-eyebrow {
     color: var(--ccx-red);
-    letter-spacing: .17em;
+    letter-spacing: 0.17em;
     @apply text-[10px];
     @apply font-extrabold;
 }
 
 .ccx-intro {
     @apply grid;
-    grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
     @apply min-h-[300px];
     @apply gap-[0];
     background: #fff;
@@ -3081,8 +3149,10 @@ input {
 }
 
 .ccx-intro-copy h1 {
-    font: 700 clamp(27px, 3vw, 42px)/1.16 "Fredoka", sans-serif;
-    letter-spacing: -.035em;
+    font:
+        700 clamp(27px, 3vw, 42px) / 1.16 "Fredoka",
+        sans-serif;
+    letter-spacing: -0.035em;
     margin: 12px 0 13px;
     overflow-wrap: anywhere;
 }
@@ -3109,7 +3179,9 @@ input {
 }
 
 .ccx-intro-price strong {
-    font: 700 28px/1.1 "Fredoka", sans-serif;
+    font:
+        700 28px/1.1 "Fredoka",
+        sans-serif;
     color: var(--ccx-red);
 }
 
@@ -3129,9 +3201,11 @@ input {
 }
 
 .ccx-section-heading h2 {
-    font: 700 clamp(24px, 2.3vw, 31px)/1.2 "Fredoka", sans-serif;
+    font:
+        700 clamp(24px, 2.3vw, 31px) / 1.2 "Fredoka",
+        sans-serif;
     margin: 7px 0 6px;
-    letter-spacing: -.03em;
+    letter-spacing: -0.03em;
 }
 
 .ccx-section-heading p {
@@ -3155,7 +3229,7 @@ input {
 
 .ccx-content-grid {
     @apply grid;
-    grid-template-columns: minmax(0, 1.65fr) minmax(310px, .85fr);
+    grid-template-columns: minmax(0, 1.65fr) minmax(310px, 0.85fr);
     @apply gap-[23px];
     align-items: start;
 }
@@ -3179,7 +3253,9 @@ input {
 .ccx-panel-heading {
     @apply p-0;
     @apply m-0;
-    font: 700 17px/1.35 "Fredoka", sans-serif;
+    font:
+        700 17px/1.35 "Fredoka",
+        sans-serif;
     color: var(--ccx-ink);
 }
 
@@ -3207,7 +3283,9 @@ input {
     background: #fff0f2;
     color: var(--ccx-red);
     @apply rounded-[9px];
-    font: 800 11px "Quicksand", sans-serif;
+    font:
+        800 11px "Quicksand",
+        sans-serif;
     @apply shrink-0;
 }
 
@@ -3217,7 +3295,9 @@ input {
     background: #f4f4f3;
     padding: 6px 10px;
     @apply rounded-[99px];
-    font: 700 10px "Quicksand", sans-serif;
+    font:
+        700 10px "Quicksand",
+        sans-serif;
 }
 
 .ccx-panel-help {
@@ -3242,7 +3322,9 @@ input {
     background: #fff;
     @apply rounded-[11px];
     @apply cursor-pointer;
-    transition: border-color .16s ease, background-color .16s ease;
+    transition:
+        border-color 0.16s ease,
+        background-color 0.16s ease;
 }
 
 .ccx-select-option:hover {
@@ -3287,7 +3369,9 @@ input {
 }
 
 .ccx-choice-price {
-    font: 800 12px "Quicksand", sans-serif;
+    font:
+        800 12px "Quicksand",
+        sans-serif;
     color: var(--ccx-red);
     @apply whitespace-nowrap;
 }
@@ -3341,13 +3425,15 @@ input {
     border: 1px solid var(--ccx-border);
     @apply rounded-[16px];
     background: #fff;
-    box-shadow: 0 8px 24px rgba(42, 32, 22, .045);
+    box-shadow: 0 8px 24px rgba(42, 32, 22, 0.045);
 }
 
 .ccx-summary-heading h2 {
     margin: 7px 0 6px;
-    font: 700 26px "Fredoka", sans-serif;
-    letter-spacing: -.035em;
+    font:
+        700 26px "Fredoka",
+        sans-serif;
+    letter-spacing: -0.035em;
 }
 
 .ccx-summary-heading p {
@@ -3370,7 +3456,7 @@ input {
     @apply gap-[12px];
 }
 
-.ccx-price-rows>div {
+.ccx-price-rows > div {
     @apply flex;
     @apply justify-between;
     @apply items-baseline;
@@ -3459,7 +3545,7 @@ input {
 }
 
 .ccx-quantity-group button:disabled {
-    opacity: .45;
+    opacity: 0.45;
     @apply cursor-not-allowed;
 }
 
@@ -3470,7 +3556,9 @@ input {
     border: 1px solid #e3dedb;
     background: #fff;
     @apply rounded-[10px];
-    font: 700 17px "Fredoka", sans-serif;
+    font:
+        700 17px "Fredoka",
+        sans-serif;
 }
 
 .ccx-quantity-group input::-webkit-inner-spin-button,
@@ -3479,7 +3567,7 @@ input {
     @apply m-0;
 }
 
-.ccx-quantity-group input[type=number] {
+.ccx-quantity-group input[type="number"] {
     -moz-appearance: textfield;
     appearance: textfield;
 }
@@ -3500,7 +3588,9 @@ input {
 
 .ccx-final-total strong {
     color: var(--ccx-red);
-    font: 700 28px "Fredoka", sans-serif;
+    font:
+        700 28px "Fredoka",
+        sans-serif;
     @apply whitespace-nowrap;
 }
 
@@ -3519,7 +3609,7 @@ input {
     @apply text-[13px];
     @apply font-extrabold;
     @apply cursor-pointer;
-    transition: background-color .16s ease;
+    transition: background-color 0.16s ease;
 }
 
 .ccx-add-to-cart:hover {
@@ -3656,7 +3746,6 @@ input {
 }
 
 @media (prefers-reduced-motion: reduce) {
-
     .ccx-select-option,
     .ccx-add-to-cart {
         transition: none !important;
@@ -3729,7 +3818,7 @@ input {
     @apply gap-[8px];
 }
 
-.ccx-extra-count input[type=number] {
+.ccx-extra-count input[type="number"] {
     @apply w-[75px];
     @apply min-h-[42px];
     padding: 8px;
@@ -3753,7 +3842,7 @@ input {
     @apply border-[#c8102e];
 }
 
-@media (max-width:600px) {
+@media (max-width: 600px) {
     .ccx-extra-row {
         @apply gap-[8px];
     }
@@ -3768,7 +3857,6 @@ input {
     }
 }
 
-
 /* === Original: resources/css/customer/orders-redesign.css === */
 .cc-orderflow-page {
     --cco-red: #c8102e;
@@ -3777,7 +3865,7 @@ input {
     --cco-muted: #677280;
     --cco-bg: #faf9f7;
     --cco-stroke: #eae5df;
-    --cco-shadow: 0 8px 27px rgba(41, 36, 32, .055);
+    --cco-shadow: 0 8px 27px rgba(41, 36, 32, 0.055);
     background: var(--cco-bg);
     color: var(--cco-ink);
     font-family: "Quicksand", sans-serif;
@@ -3820,7 +3908,7 @@ input {
     text-underline-offset: 3px;
 }
 
-.cc-orderflow-page .cco-breadcrumb [aria-current=page] {
+.cc-orderflow-page .cco-breadcrumb [aria-current="page"] {
     color: var(--cco-ink);
 }
 
@@ -3837,14 +3925,16 @@ input {
     color: var(--cco-red);
     @apply text-[10.5px];
     @apply font-extrabold;
-    letter-spacing: .15em;
+    letter-spacing: 0.15em;
     @apply mb-[9px];
 }
 
 .cc-orderflow-page .cco-page-intro h1,
 .cc-orderflow-page .cco-confirm-hero h1 {
-    font: 700 clamp(30px, 4vw, 43px)/1.15 "Fredoka", sans-serif;
-    letter-spacing: -.035em;
+    font:
+        700 clamp(30px, 4vw, 43px) / 1.15 "Fredoka",
+        sans-serif;
+    letter-spacing: -0.035em;
     margin: 0 0 7px;
 }
 
@@ -3966,14 +4056,16 @@ input {
     @apply text-[10px];
     @apply text-[#7c8490];
     @apply font-extrabold;
-    letter-spacing: .095em;
+    letter-spacing: 0.095em;
     line-height: 1.3;
 }
 
 .cc-orderflow-page .cco-card-identity h2 {
-    font: 700 22px/1.25 "Fredoka", sans-serif;
+    font:
+        700 22px/1.25 "Fredoka",
+        sans-serif;
     margin: 5px 0 6px;
-    letter-spacing: -.02em;
+    letter-spacing: -0.02em;
 }
 
 .cc-orderflow-page .cco-card-identity p {
@@ -4061,7 +4153,9 @@ input {
 
 .cc-orderflow-page .cco-card-amount strong {
     @apply block;
-    font: 700 24px/1.4 "Fredoka", sans-serif;
+    font:
+        700 24px/1.4 "Fredoka",
+        sans-serif;
     @apply mt-[4px];
     @apply whitespace-nowrap;
 }
@@ -4107,7 +4201,10 @@ input {
     @apply whitespace-nowrap;
     @apply text-center;
     border: 1px solid transparent;
-    transition: background-color .16s ease, border-color .16s ease, transform .16s ease;
+    transition:
+        background-color 0.16s ease,
+        border-color 0.16s ease,
+        transform 0.16s ease;
     @apply cursor-pointer;
 }
 
@@ -4153,12 +4250,16 @@ input {
     @apply place-items-center;
     background: #fff2f3;
     color: var(--cco-red);
-    font: 700 28px "Fredoka", sans-serif;
+    font:
+        700 28px "Fredoka",
+        sans-serif;
 }
 
 .cc-orderflow-page .cco-empty h2 {
     margin: 0 0 7px;
-    font: 700 25px "Fredoka", sans-serif;
+    font:
+        700 25px "Fredoka",
+        sans-serif;
 }
 
 .cc-orderflow-page .cco-empty p {
@@ -4198,7 +4299,7 @@ input {
 
 .cc-orderflow-page .cco-detail-grid {
     @apply grid;
-    grid-template-columns: minmax(0, 1.55fr) minmax(295px, .85fr);
+    grid-template-columns: minmax(0, 1.55fr) minmax(295px, 0.85fr);
     @apply gap-[20px];
     align-items: start;
 }
@@ -4226,8 +4327,10 @@ input {
 }
 
 .cc-orderflow-page .cco-surface-header h2 {
-    font: 700 22px/1.25 "Fredoka", sans-serif;
-    letter-spacing: -.02em;
+    font:
+        700 22px/1.25 "Fredoka",
+        sans-serif;
+    letter-spacing: -0.02em;
     @apply m-0;
 }
 
@@ -4357,7 +4460,7 @@ input {
     @apply pt-[5px];
 }
 
-.cc-orderflow-page .cco-line-item>div {
+.cc-orderflow-page .cco-line-item > div {
     @apply min-w-0;
 }
 
@@ -4368,7 +4471,7 @@ input {
     overflow-wrap: anywhere;
 }
 
-.cc-orderflow-page .cco-line-item>strong {
+.cc-orderflow-page .cco-line-item > strong {
     @apply whitespace-nowrap;
 }
 
@@ -4399,7 +4502,9 @@ input {
 }
 
 .cc-orderflow-page .cco-total-line strong {
-    font: 700 22px "Fredoka", sans-serif;
+    font:
+        700 22px "Fredoka",
+        sans-serif;
     @apply whitespace-nowrap;
     color: var(--cco-red);
 }
@@ -4412,7 +4517,9 @@ input {
 }
 
 .cc-orderflow-page .cco-total-line--light strong {
-    font: 800 12px "Quicksand", sans-serif;
+    font:
+        800 12px "Quicksand",
+        sans-serif;
     color: var(--cco-ink);
 }
 
@@ -4481,20 +4588,22 @@ input {
     @apply items-center;
 }
 
-.cc-orderflow-page .cco-receipt-strip>div {
+.cc-orderflow-page .cco-receipt-strip > div {
     @apply min-w-0;
     @apply grid;
     @apply gap-[10px];
 }
 
-.cc-orderflow-page .cco-receipt-strip>div>strong {
+.cc-orderflow-page .cco-receipt-strip > div > strong {
     @apply text-[12px];
     overflow-wrap: anywhere;
 }
 
 .cc-orderflow-page .cco-receipt-strip .cco-receipt-total {
     color: var(--cco-red);
-    font: 700 22px "Fredoka", sans-serif;
+    font:
+        700 22px "Fredoka",
+        sans-serif;
 }
 
 .cc-orderflow-page .cco-line-items--full {
@@ -4524,7 +4633,7 @@ input {
 
 @media (max-width: 940px) {
     .cc-orderflow-page .cco-detail-grid {
-        grid-template-columns: minmax(0, 1fr) minmax(240px, .8fr);
+        grid-template-columns: minmax(0, 1fr) minmax(240px, 0.8fr);
     }
 
     .cc-orderflow-page .cco-receipt-strip {
@@ -4700,7 +4809,6 @@ input {
     @apply max-w-[320px];
 }
 
-
 /* === Original: resources/css/customer/profile.css === */
 body.cc-profile-page {
     background: #fbf9f7;
@@ -4730,14 +4838,14 @@ body.cc-profile-page {
     @apply text-[#bd1933];
     @apply text-[11px];
     @apply font-extrabold;
-    letter-spacing: .14em;
+    letter-spacing: 0.14em;
     margin: 0 0 9px;
 }
 
 .ccp-page-heading h1 {
     font-size: clamp(29px, 3.8vw, 39px);
     @apply font-extrabold;
-    letter-spacing: -.045em;
+    letter-spacing: -0.045em;
     line-height: 1.14;
     margin: 0 0 11px;
 }
@@ -4777,7 +4885,7 @@ body.cc-profile-page {
     background: #fff;
     border: 1px solid #eae3dd;
     @apply rounded-[17px];
-    box-shadow: 0 5px 24px rgba(42, 34, 29, .035);
+    box-shadow: 0 5px 24px rgba(42, 34, 29, 0.035);
 }
 
 .ccp-sidebar {
@@ -4838,7 +4946,9 @@ body.cc-profile-page {
     @apply font-bold;
     @apply text-[#485461];
     @apply no-underline;
-    transition: background .15s ease, color .15s ease;
+    transition:
+        background 0.15s ease,
+        color 0.15s ease;
 }
 
 .ccp-side-nav a span {
@@ -4890,7 +5000,7 @@ body.cc-profile-page {
 .ccp-panel-head h2 {
     @apply text-[22px];
     @apply font-extrabold;
-    letter-spacing: -.035em;
+    letter-spacing: -0.035em;
     margin: 0 0 6px;
     line-height: 1.25;
 }
@@ -4914,7 +5024,7 @@ body.cc-profile-page {
     margin: 0 0 23px;
 }
 
-.ccp-details-grid>div {
+.ccp-details-grid > div {
     border: 1px solid #eeeae7;
     @apply rounded-[11px];
     background: #fffdfb;
@@ -4922,7 +5032,7 @@ body.cc-profile-page {
     @apply min-w-0;
 }
 
-.ccp-details-grid>div:last-child {
+.ccp-details-grid > div:last-child {
     grid-column: 1/-1;
 }
 
@@ -4947,7 +5057,7 @@ body.cc-profile-page {
     background: #fff;
 }
 
-.ccp-disclosure>summary {
+.ccp-disclosure > summary {
     @apply flex;
     @apply items-center;
     @apply justify-between;
@@ -4961,15 +5071,15 @@ body.cc-profile-page {
     list-style: none;
 }
 
-.ccp-disclosure>summary::-webkit-details-marker {
+.ccp-disclosure > summary::-webkit-details-marker {
     @apply hidden;
 }
 
-.ccp-disclosure>summary:hover {
+.ccp-disclosure > summary:hover {
     background: #fff9f7;
 }
 
-.ccp-disclosure[open]>summary {
+.ccp-disclosure[open] > summary {
     background: #fff9f7;
     border-bottom: 1px solid #f0e5e0;
 }
@@ -4981,7 +5091,7 @@ body.cc-profile-page {
     border-right: 2px solid currentColor;
     border-bottom: 2px solid currentColor;
     transform: rotate(45deg);
-    transition: transform .15s ease;
+    transition: transform 0.15s ease;
     @apply shrink-0;
 }
 
@@ -5018,13 +5128,15 @@ body.cc-profile-page {
     font-family: inherit;
     @apply text-[13.5px];
     @apply text-[#26303b];
-    transition: border-color .15s ease, box-shadow .15s ease;
+    transition:
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
 }
 
 .ccp-field input:focus {
     outline: none;
     @apply border-[#bd1933];
-    box-shadow: 0 0 0 3px rgba(200, 16, 46, .12);
+    box-shadow: 0 0 0 3px rgba(200, 16, 46, 0.12);
 }
 
 .ccp-optional {
@@ -5055,7 +5167,9 @@ body.cc-profile-page {
     @apply text-[12.5px];
     @apply text-[#fff];
     background: #c8102e;
-    transition: background .15s ease, transform .15s ease;
+    transition:
+        background 0.15s ease,
+        transform 0.15s ease;
 }
 
 .ccp-button:hover {
@@ -5148,7 +5262,7 @@ body.cc-profile-page {
     @apply mt-[9px];
 }
 
-.ccp-address-edit>summary {
+.ccp-address-edit > summary {
     @apply min-h-[42px];
     padding: 10px 14px;
     @apply text-[12px];
@@ -5161,7 +5275,7 @@ body.cc-profile-page {
     scroll-margin-top: 100px;
 }
 
-.ccp-add-address>summary {
+.ccp-add-address > summary {
     @apply text-[12.5px];
 }
 
@@ -5258,7 +5372,7 @@ body.cc-profile-page {
     outline-offset: 3px;
 }
 
-@media (max-width:940px) {
+@media (max-width: 940px) {
     .ccp-grid {
         grid-template-columns: 1fr;
     }
@@ -5276,7 +5390,7 @@ body.cc-profile-page {
     }
 }
 
-@media (max-width:640px) {
+@media (max-width: 640px) {
     .ccp-page {
         padding: 26px 13px 105px;
     }
@@ -5298,7 +5412,7 @@ body.cc-profile-page {
         grid-template-columns: 1fr;
     }
 
-    .ccp-details-grid>div:last-child {
+    .ccp-details-grid > div:last-child {
         grid-column: auto;
     }
 
@@ -5320,12 +5434,46 @@ body.cc-profile-page {
     }
 }
 
-@media (prefers-reduced-motion:reduce) {
+/* Mobile account sign-out */
+
+.ccp-mobile-signout {
+    display: none;
+}
+
+@media (max-width: 700px) {
+    .ccp-mobile-signout {
+        display: block;
+        margin-top: 20px;
+    }
+
+    .ccp-mobile-signout-btn {
+        display: block;
+        width: 100%;
+        padding: 15px 20px;
+        border: 1px solid #c8102e;
+        border-radius: 12px;
+        background: #fff;
+        color: #c8102e;
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    .ccp-mobile-signout-btn:hover {
+        background: #fff0f1;
+    }
+
+    .ccp-mobile-signout-btn:focus-visible {
+        outline: 3px solid #cf6073;
+        outline-offset: 3px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
     .ccp-page * {
         transition: none !important;
     }
 }
-
 
 /* === Original: public/css/crispycloud-confirm-modal.css === */
 .cc-confirm-modal {
@@ -5340,12 +5488,12 @@ body.cc-profile-page {
     @apply rounded-[18px];
     background: #fff;
     @apply text-[#28232a];
-    box-shadow: 0 24px 70px rgba(36, 18, 24, .22);
+    box-shadow: 0 24px 70px rgba(36, 18, 24, 0.22);
     font-family: inherit;
 }
 
 .cc-confirm-modal::backdrop {
-    background: rgba(25, 19, 24, .56);
+    background: rgba(25, 19, 24, 0.56);
 }
 
 .cc-confirm-modal .cc-confirm-panel {
@@ -5377,7 +5525,7 @@ body.cc-profile-page {
 .cc-confirm-modal p {
     @apply m-0;
     @apply text-[#655c61];
-    font-size: .94rem;
+    font-size: 0.94rem;
     line-height: 1.65;
 }
 
@@ -5397,11 +5545,13 @@ body.cc-profile-page {
     border: 1px solid transparent;
     @apply rounded-[10px];
     font: inherit;
-    font-size: .9rem;
+    font-size: 0.9rem;
     line-height: 1.2;
     @apply font-bold;
     @apply cursor-pointer;
-    transition: background-color .15s ease, box-shadow .15s ease;
+    transition:
+        background-color 0.15s ease,
+        box-shadow 0.15s ease;
 }
 
 .cc-confirm-modal .cc-confirm-cancel {
@@ -5452,4 +5602,60 @@ body.cc-profile-page {
     .cc-confirm-modal {
         display: none !important;
     }
+}
+/* Step 53A: explicit customer contact preference */
+.ccc-save-contact {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    font-size: 12px;
+    color: #48556b;
+}
+.ccc-save-contact input {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    accent-color: #c8102e;
+}
+
+/* === Checkout input sizing (integrated from public/css/crispycloud-checkout-input-fix.css) === */
+/* Scoped checkout fix: the generic .ccc-field input rule also matched checkboxes.
+   Override its full width, 46px minimum height, padding and display.
+   This file loads after the compiled customer stylesheet and needs no Vite rebuild. */
+.cc-checkout-page .ccc-field label.ccc-save-contact {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+    max-width: 100%;
+    margin: 9px 0 0;
+    font-size: 12px;
+    line-height: 1.4;
+    font-weight: 600;
+    color: #48556b;
+    cursor: pointer;
+}
+.cc-checkout-page .ccc-field label.ccc-save-contact > input[type="checkbox"] {
+    display: inline-block;
+    flex: 0 0 16px;
+    box-sizing: border-box;
+    width: 16px;
+    min-width: 16px;
+    max-width: 16px;
+    height: 16px;
+    min-height: 16px;
+    max-height: 16px;
+    margin: 0;
+    padding: 0;
+    border-radius: 3px;
+    box-shadow: none;
+    accent-color: #c8102e;
+    vertical-align: middle;
+}
+.cc-checkout-page .ccc-field label.ccc-save-contact > span {
+    display: inline;
+    margin: 0;
+    color: inherit;
 }

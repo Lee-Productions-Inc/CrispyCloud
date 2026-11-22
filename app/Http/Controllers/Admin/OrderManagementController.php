@@ -15,7 +15,7 @@ class OrderManagementController extends Controller
 {
     // The admin may jump directly FORWARD to a later stage in one update.
     // Completed and cancelled orders remain final; backward changes are blocked.
-    private const STAGES = ['Pending', 'Preparing', 'Out for Delivery', 'Delivered'];
+    private const STAGES = ['Preparing', 'Delivered'];
 
     public function __construct(private readonly OrderInventoryService $inventory)
     {
@@ -29,7 +29,7 @@ class OrderManagementController extends Controller
             'order_status' => ['required', Rule::in($allowed)],
             'return_to' => ['sometimes', Rule::in(['index', 'show'])],
             'list_filters' => ['sometimes', 'array'],
-            'list_filters.status' => ['sometimes', Rule::in(['all', 'Pending', 'Preparing', 'Out for Delivery', 'Delivered', 'Cancelled'])],
+            'list_filters.status' => ['sometimes', Rule::in(['all', 'Preparing', 'Delivered', 'Cancelled'])],
             'list_filters.payment' => ['sometimes', Rule::in(['all', 'Pending', 'Paid'])],
             'list_filters.q' => ['nullable', 'string', 'max:80'],
             'list_filters.page' => ['sometimes', 'integer', 'min:1'],
@@ -54,12 +54,6 @@ class OrderManagementController extends Controller
             }
 
             if ($next === 'Cancelled') {
-                // A dispatched delivery needs a separate exception/return workflow.
-                if ($current === 'Out for Delivery') {
-                    throw ValidationException::withMessages([
-                        'order_status' => 'A dispatched order cannot be cancelled through this quick-update control.',
-                    ]);
-                }
                 // This system has no refund procedure. Require resolving paid orders separately.
                 if ($record->payment()->where('payment_status', 'Paid')->exists()) {
                     throw ValidationException::withMessages([
@@ -117,12 +111,6 @@ class OrderManagementController extends Controller
 
     public function markPaid(Request $request, int $order): RedirectResponse
     {
-        $request->validate([
-            'confirmed_external_payment' => ['required', 'accepted'],
-        ], [
-            'confirmed_external_payment.accepted' => 'Confirm you verified the payment or received the cash before marking it Paid.',
-        ]);
-
         DB::transaction(function () use ($order): void {
             $record = Order::query()->where('order_type', 'Delivery')->lockForUpdate()->findOrFail($order);
             $payment = $record->payment()->lockForUpdate()->first();

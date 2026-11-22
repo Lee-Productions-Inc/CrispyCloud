@@ -38,6 +38,8 @@ class SalesReportController extends Controller
             ->count();
 
         $paidSales = (float) $paid()->sum('o.total_amount');
+        $onlinePaidSales = (float) $paid()->where('o.order_type', 'Delivery')->sum('o.total_amount');
+        $walkinPaidSales = (float) $paid()->where('o.order_type', 'Walk-in')->sum('o.total_amount');
         $grossProductSales = (float) DB::table('order_items as oi')
             ->join('orders as o', 'oi.order_id', '=', 'o.order_id')
             ->where('o.order_status', '!=', 'Cancelled')
@@ -47,21 +49,25 @@ class SalesReportController extends Controller
                     ->where('p.payment_status', 'Paid')
                     ->whereBetween('p.payment_date', [$from, $to]);
             })->sum('oi.subtotal');
-        // Capital is reported by its designated calendar month. The selected
-        // reporting dates may cover portions of more than one month.
-        $recordedCapital = (float) DB::table('business_capital_entries')
+        $recordedExpenses = (float) DB::table('business_expenses')
             ->whereNull('voided_at')
-            ->whereBetween('capital_month', [
-                $from->copy()->startOfMonth()->toDateString(),
-                $to->copy()->startOfMonth()->toDateString(),
-            ])->sum('amount');
+            ->whereBetween('expense_date', [$from->toDateString(), $to->toDateString()])
+            ->sum('amount');
+        $estimatedProfit = $paidSales - $recordedExpenses;
+        // History is intentionally independent of the report period: a past-dated
+        // purchase must still be visible after it has been recorded today.
+        $expenseHistory = DB::table('business_expenses')
+            ->whereNull('voided_at')
+            ->orderByDesc('created_at')->orderByDesc('id')
+            ->paginate(10, ['*'], 'expense_page')
+            ->withQueryString();
         $paidOrders = $paid()->distinct()->count('o.order_id');
 
         $statusCounts = $orders()
             ->select('order_status', DB::raw('COUNT(*) as total'))
             ->groupBy('order_status')
             ->pluck('total', 'order_status');
-        $statuses = collect(['Pending', 'Preparing', 'Out for Delivery', 'Delivered', 'Cancelled'])
+        $statuses = collect(['Preparing', 'Delivered', 'Cancelled'])
             ->map(fn (string $name) => [
                 'name' => $name,
                 'count' => (int) ($statusCounts[$name] ?? 0),
@@ -121,6 +127,7 @@ class SalesReportController extends Controller
             ];
         }
         $maxDaily = max(1.0, ...array_column($daily, 'amount'));
+        $chartHasSales = array_sum(array_column($daily, 'amount')) > 0;
 
         $fromDate = $from->format('Y-m-d');
         $toDate = $to->format('Y-m-d');
@@ -131,9 +138,9 @@ class SalesReportController extends Controller
         return view('admin.reports.index', compact(
             'period', 'fromDate', 'toDate', 'exportParams',
             'totalOrders', 'cancelledOrders', 'orderValue', 'averageOrder',
-            'pendingPayments', 'paidSales', 'paidOrders', 'grossProductSales', 'recordedCapital', 'statuses',
+            'pendingPayments', 'paidSales', 'onlinePaidSales', 'walkinPaidSales', 'paidOrders', 'grossProductSales', 'recordedExpenses', 'estimatedProfit', 'expenseHistory', 'statuses',
             'methods', 'topProducts', 'highestUnits', 'recentPaid',
-            'daily', 'maxDaily', 'chartDays'
+            'daily', 'maxDaily', 'chartDays', 'chartHasSales'
         ));
     }
 
@@ -182,11 +189,11 @@ class SalesReportController extends Controller
     private function resolveRange(Request $request): array
     {
         $data = $request->validate([
-            'period' => ['nullable', Rule::in(['7', '30', '90', 'custom'])],
+            'period' => ['nullable', Rule::in(['month', '7', '30', '90', 'custom'])],
             'from' => ['nullable', 'required_if:period,custom', 'date_format:Y-m-d'],
             'to' => ['nullable', 'required_if:period,custom', 'date_format:Y-m-d', 'after_or_equal:from'],
         ]);
-        $period = $data['period'] ?? '30';
+        $period = $data['period'] ?? 'month';
         if ($period === 'custom') {
             $from = Carbon::createFromFormat('!Y-m-d', $data['from'])->startOfDay();
             $to = Carbon::createFromFormat('!Y-m-d', $data['to'])->endOfDay();
@@ -195,7 +202,9 @@ class SalesReportController extends Controller
             }
         } else {
             $to = Carbon::today()->endOfDay();
-            $from = Carbon::today()->subDays((int) $period - 1)->startOfDay();
+            $from = $period === 'month'
+                ? Carbon::today()->startOfMonth()
+                : Carbon::today()->subDays((int) $period - 1)->startOfDay();
         }
         return [$from, $to, $period];
     }

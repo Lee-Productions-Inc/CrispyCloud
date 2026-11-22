@@ -8,8 +8,6 @@ use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\QueryException;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
@@ -81,36 +79,6 @@ class CatalogController extends Controller
         $item = AddOn::findOrFail($addon);
         $item->update(['is_available' => !$item->is_available]);
         return back()->with('success', $item->is_available ? 'Add-on is available.' : 'Add-on is hidden from new customizations.');
-    }
-
-    /** Delete only extras never used in a placed order. Linked product offerings are detached. */
-    public function destroyAddOn(int $addon): RedirectResponse
-    {
-        try {
-            DB::transaction(function () use ($addon): void {
-                $item = AddOn::query()->lockForUpdate()->findOrFail($addon);
-
-                if ($item->customizations()->exists()) {
-                    throw ValidationException::withMessages([
-                        'delete' => 'This extra appears in previous orders and cannot be deleted. Use Hide instead.',
-                    ]);
-                }
-
-                // Recipe definitions are only removed for an otherwise unused extra.
-                if (Schema::hasTable('addon_ingredient_recipes')) {
-                    DB::table('addon_ingredient_recipes')->where('addon_id', $item->addon_id)->delete();
-                }
-
-                $item->products()->detach();
-                $item->delete();
-            });
-        } catch (QueryException $e) {
-            return redirect(route('admin.catalog.index') . '#extras')
-                ->with('error', 'This extra is referenced by other records. Hide it instead of deleting it.');
-        }
-
-        return redirect(route('admin.catalog.index') . '#extras')
-            ->with('success', 'Unused extra deleted and unlinked from products.');
     }
 
     /** Prevent drinks accidentally being registered as food extras. */

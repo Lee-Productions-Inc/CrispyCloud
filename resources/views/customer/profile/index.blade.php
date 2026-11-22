@@ -3,11 +3,11 @@
 @section('title', "My Account | Chick's Pops")
 @section('body_class', 'cc-profile-page')
 @section('page_assets')
-    
+
 @endsection
 
 @php
-    $initial = mb_strtoupper(mb_substr(trim($customer->full_name ?: 'C'), 0, 1));
+$initial = mb_strtoupper(mb_substr(trim($customer->full_name ?: 'C'), 0, 1));
 @endphp
 
 @section('content')
@@ -23,13 +23,13 @@
         </header>
 
         @if(session('success'))
-            <div class="ccp-message ccp-message-success" role="status">{{ session('success') }}</div>
+        <div class="ccp-message ccp-message-success" role="status">{{ session('success') }}</div>
         @endif
         @if($errors->any())
-            <div class="ccp-message ccp-message-error" role="alert">
-                <strong>Some information needs attention.</strong>
-                <ul>@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>
-            </div>
+        <div class="ccp-message ccp-message-error" role="alert">
+            <strong>Some information needs attention.</strong>
+            <ul>@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>
+        </div>
         @endif
 
         <div class="ccp-grid">
@@ -61,9 +61,18 @@
                     </div>
 
                     <dl class="ccp-details-grid">
-                        <div><dt>Full name</dt><dd>{{ $customer->full_name }}</dd></div>
-                        <div><dt>Email address</dt><dd>{{ $customer->email }}</dd></div>
-                        <div><dt>Phone number</dt><dd>{{ $customer->phone_number ?: 'Not added yet' }}</dd></div>
+                        <div>
+                            <dt>Full name</dt>
+                            <dd>{{ $customer->full_name }}</dd>
+                        </div>
+                        <div>
+                            <dt>Email address</dt>
+                            <dd>{{ $customer->email }}</dd>
+                        </div>
+                        <div>
+                            <dt>Phone number</dt>
+                            <dd>{{ $customer->phone_number ?: 'Not added yet' }}</dd>
+                        </div>
                     </dl>
 
                     <details class="ccp-disclosure" @if($errors->has('full_name') || $errors->has('email') || $errors->has('phone_number')) open @endif>
@@ -91,43 +100,45 @@
 
                     <div class="ccp-address-list">
                         @forelse($customer->addresses as $address)
-                            <article class="ccp-address-card">
-                                <div class="ccp-address-top">
-                                    <div>
-                                        <div class="ccp-address-name">
-                                            <h3>{{ $address->is_default ? 'Default delivery address' : 'Saved address #' . $address->address_id }}</h3>
-                                            @if($address->is_default)<span class="ccp-pill">Default</span>@endif
-                                        </div>
-                                        <address>{{ $address->address_line }}<br>{{ $address->city }}, {{ $address->postal_code }}</address>
+                        <article class="ccp-address-card">
+                            <div class="ccp-address-top">
+                                <div>
+                                    <div class="ccp-address-name">
+                                        <h3>{{ $address->is_default ? 'Default delivery address' : 'Saved address #' . $address->address_id }}</h3>
+                                        @if($address->is_default)<span class="ccp-pill">Default</span>@endif
                                     </div>
+                                    <address>{{ $address->address_line }}<br>{{ $address->city }}, {{ $address->postal_code }}</address>
                                 </div>
-                                <div class="ccp-address-actions">
-                                    @unless($address->is_default)
-                                        <form method="POST" action="{{ route('customer.addresses.default', $address->address_id) }}">
-                                            @csrf @method('PATCH')
-                                            <button type="submit" class="ccp-action-button">Set as default</button>
-                                        </form>
-                                    @endunless
-                                    <form method="POST" action="{{ route('customer.addresses.destroy', $address->address_id) }}" onsubmit="return confirm('Remove this saved address?');">
-                                        @csrf @method('DELETE')
-                                        <button type="submit" class="ccp-action-button ccp-danger">Remove address</button>
-                                    </form>
-                                </div>
-                                <details class="ccp-disclosure ccp-address-edit">
-                                    <summary><span>Edit address</span><span class="ccp-disclosure-caret" aria-hidden="true"></span></summary>
-                                    <form method="POST" action="{{ route('customer.addresses.update', $address->address_id) }}" class="ccp-form">
-                                        @csrf @method('PATCH')
-                                        <div class="ccp-field"><label for="address-line-{{ $address->address_id }}">House number, street &amp; barangay</label><input id="address-line-{{ $address->address_id }}" type="text" name="address_line" value="{{ $address->address_line }}" maxlength="255" autocomplete="street-address" required></div>
-                                        <div class="ccp-form-row">
-                                            <div class="ccp-field"><label for="city-{{ $address->address_id }}">City / Municipality</label><input id="city-{{ $address->address_id }}" type="text" name="city" value="{{ $address->city }}" maxlength="100" required></div>
-                                            <div class="ccp-field"><label for="postal-{{ $address->address_id }}">Postal code</label><input id="postal-{{ $address->address_id }}" type="text" name="postal_code" value="{{ $address->postal_code }}" maxlength="20" inputmode="numeric" required></div>
-                                        </div>
-                                        <div class="ccp-form-actions"><button type="submit" class="ccp-button">Save address</button></div>
-                                    </form>
-                                </details>
-                            </article>
+                            </div>
+                            <div class="ccp-address-actions">
+                                @unless($address->is_default)
+                                <form method="POST" action="{{ route('customer.addresses.default', $address->address_id) }}">
+                                    @csrf @method('PATCH')
+                                    <button type="submit" class="ccp-action-button">Set as default</button>
+                                </form>
+                                @endunless
+                                <form method="POST" action="{{ route('customer.addresses.destroy', $address->address_id) }}">
+                                    @csrf @method('DELETE')
+                                    <button type="submit" class="ccp-action-button ccp-danger">Remove address</button>
+                                </form>
+                            </div>
+                            <details class="ccp-disclosure ccp-address-edit">
+                                <summary><span>Edit address</span><span class="ccp-disclosure-caret" aria-hidden="true"></span></summary>
+                                <form method="POST" action="{{ route('customer.addresses.update', $address->address_id) }}" class="ccp-form">
+                                    @csrf @method('PATCH')
+                                    <div class="ccp-field"><label for="address-line-{{ $address->address_id }}">House number, street &amp; barangay</label><input id="address-line-{{ $address->address_id }}" type="text" name="address_line" value="{{ $address->address_line }}" maxlength="255" autocomplete="street-address" required></div>
+                                    <div class="ccp-form-row">
+                                        <div class="ccp-field"><label for="city-{{ $address->address_id }}">City / Municipality</label><input id="city-{{ $address->address_id }}" type="text" name="city" value="{{ $address->city }}" maxlength="100" required></div>
+                                        <div class="ccp-field"><label for="postal-{{ $address->address_id }}">Postal code</label><input id="postal-{{ $address->address_id }}" type="text" name="postal_code" value="{{ $address->postal_code }}" maxlength="20" inputmode="numeric" required></div>
+                                    </div>
+                                    <div class="ccp-form-actions"><button type="submit" class="ccp-button">Save address</button></div>
+                                </form>
+                            </details>
+                        </article>
                         @empty
-                            <div class="ccp-empty"><strong>No saved addresses yet</strong><p>Add an address to make checkout quicker next time.</p></div>
+                        <div class="ccp-empty"><strong>No saved addresses yet</strong>
+                            <p>Add an address to make checkout quicker next time.</p>
+                        </div>
                         @endforelse
                     </div>
 
@@ -157,6 +168,16 @@
                     <div class="ccp-payment-options"><span>Cash on Delivery (COD)</span><span>GCash (manual reference)</span></div>
                     <p class="ccp-helper">No payment card or GCash login credentials are saved here. GCash is not an automatic payment gateway in this demo.</p>
                 </section>
+
+                <form method="POST"
+                    action="{{ route('logout') }}"
+                    class="ccp-mobile-signout">
+                    @csrf
+
+                    <button type="submit" class="ccp-mobile-signout-btn">
+                        Sign Out
+                    </button>
+                </form>
             </div>
         </div>
     </div>

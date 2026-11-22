@@ -65,6 +65,7 @@
                         <div class="ccc-field">
                             <label for="recipient-phone">Phone number <span aria-hidden="true">*</span></label>
                             <input id="recipient-phone" type="tel" name="recipient_phone" maxlength="30" autocomplete="tel" value="{{ old('recipient_phone', $user->phone_number) }}" required>
+                            <label class="ccc-save-contact"><input type="checkbox" name="save_contact_phone" value="1" @checked(old('save_contact_phone', !$user->phone_number))><span>Save this number to my account</span></label>
                             @error('recipient_phone')<p class="ccc-field-error">{{ $message }}</p>@enderror
                         </div>
                         <div class="ccc-field ccc-field-full">
@@ -167,7 +168,7 @@
                 </div>
                 <div class="ccc-summary-total"><span>Total due</span><strong>{{ $price($totalCents) }}</strong></div>
                 <button type="submit" class="ccc-primary-button">Place order <span aria-hidden="true">→</span></button>
-                <p class="ccc-small-print">Your order will start as <strong>Pending</strong>. Payment stays pending until verified. The delivery fee is a demo value.</p>
+                <p class="ccc-small-print">Your order will start as <strong>Preparing</strong>. Payment stays pending until verified. The delivery fee is a demo value.</p>
                 <div class="ccc-summary-support"><a href="{{ route('customer.cart.index') }}">← Return to cart</a></div>
             </aside>
         </form>

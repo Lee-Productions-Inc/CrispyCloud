@@ -30,7 +30,6 @@
     const gcashBlock = $('pos-gcash-block');
     const gcashRef = $('pos-gcash-ref');
     const errorBox = $('pos-client-error');
-    const paymentCheckbox = form.querySelector('input[name="payment_confirmed"]');
     const kindButtons = [...document.querySelectorAll('[data-pos-kind]')];
     const money = (cents) => '₱' + (cents / 100).toLocaleString('en-PH', {minimumFractionDigits:2, maximumFractionDigits:2});
     const method = () => form.querySelector('input[name="payment_method"]:checked')?.value || 'Cash';
@@ -52,7 +51,7 @@
         if (pickerError) { pickerError.hidden = !message; pickerError.textContent = message || ''; }
     }
     function resetConfirmation() {
-        if (paymentCheckbox) paymentCheckbox.checked = false;
+        // Payment is validated using cash amount or GCash reference at submission.
     }
     function chosenProduct() { return byId.get(Number(pick.value)); }
     function checkedValues(fieldset) {
@@ -415,9 +414,6 @@
             }
         } else if (gcashRef.value.trim().length < 4) {
             event.preventDefault(); return showError('Enter the verified GCash transaction reference.');
-        }
-        if (!paymentCheckbox?.checked) {
-            event.preventDefault(); return showError('Confirm that payment was actually received.');
         }
         itemsInput.value = JSON.stringify(lines);
         $('pos-record').disabled = true;

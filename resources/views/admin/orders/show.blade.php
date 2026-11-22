@@ -32,13 +32,15 @@
 
 <div class="a-detail-grid a-om-grid">
     <div class="a-detail-stack">
-        <section class="a-panel">
-            <div class="a-panel-header"><div><h2>Update order status</h2><p>One dropdown to set the next outcome. Updates sync with customer tracking.</p></div></div>
+        @if(!in_array($order->order_status, ['Delivered', 'Cancelled'], true))
+        <section class="a-panel a-om-status-panel">
+            <div class="a-panel-header"><h2>Update order status</h2></div>
             @include('admin.orders.partials.status-form', ['order' => $order, 'context' => 'show'])
         </section>
+        @endif
 
         <section class="a-panel">
-            <div class="a-panel-header"><div><h2>Payment verification</h2><p>Review the method and manually record collected payment.</p></div></div>
+            <div class="a-panel-header"><h2>Payment</h2></div>
             <dl class="a-description">
                 <div><dt>Method</dt><dd>{{ $order->payment?->payment_method ?? 'Not recorded' }}</dd></div>
                 <div><dt>Status</dt><dd>{{ $order->payment?->payment_status ?? 'Not recorded' }}</dd></div>
@@ -50,20 +52,16 @@
                 @endif
             </dl>
             @if($isPaid)
-                <div class="a-om-info a-om-info--success">Payment has been marked Paid. This demo does not implement payment refunds or reversals.</div>
+                <div class="a-om-info a-om-info--success">Payment has been marked Paid. Refunds and reversals require a separate process.</div>
             @elseif($canMarkPaid)
                 <form method="POST" action="{{ route('admin.orders.payment.paid', $order->order_id) }}" class="a-om-form a-om-payment-form">
                     @csrf
                     @method('PATCH')
-                    <label class="a-om-check" for="verified-payment">
-                        <input type="checkbox" id="verified-payment" name="confirmed_external_payment" value="1" required>
-                        <span>@if($isCod)I received the COD cash after delivery.@else I independently verified the GCash payment outside CrispyCloud.@endif</span>
-                    </label>
-                    <button type="submit" class="a-om-button a-om-button--primary" onclick="return confirm('Confirm actual payment has been received? This will mark the order Paid.');">Mark payment Paid</button>
-                    <p class="a-om-hint">Only record actual payments. Checking this box does not contact GCash or transfer money.</p>
+                    <button type="submit" class="a-om-button a-om-button--primary">Mark as paid</button>
+                    <p class="a-om-hint">Record only money actually received; this button does not collect payment.</p>
                 </form>
             @elseif($order->payment?->payment_status === 'Pending' && $isCod && $order->order_status !== 'Cancelled')
-                <p class="a-om-info">COD stays Pending until the order is marked Delivered and cash has been collected.</p>
+                <p class="a-om-info">Deliver the order and collect the COD cash first. Then confirm payment here to mark it Paid.</p>
             @else
                 <p class="a-om-info">No payment action is available for this order.</p>
             @endif
@@ -101,7 +99,7 @@
             <dl class="a-description">
                 <div><dt>Name</dt><dd>{{ $order->customer?->full_name ?? 'Unavailable' }}</dd></div>
                 <div><dt>Email</dt><dd>{{ $order->customer?->email ?? 'Unavailable' }}</dd></div>
-                <div><dt>Phone</dt><dd>{{ $order->customer?->phone_number ?: 'Not provided' }}</dd></div>
+                <div><dt>Account phone</dt><dd>{{ $order->customer?->phone_number ?: 'Not saved' }}</dd></div>
             </dl>
         </section>
         <section class="a-panel">
@@ -112,11 +110,10 @@
                     <div><dt>Delivered at</dt><dd>{{ $order->delivery->actual_delivery_time->format('M d, Y · h:i A') }}</dd></div>
                 @endif
                 <div><dt>Recipient</dt><dd>{{ $order->delivery?->recipient_name ?? 'Not recorded' }}</dd></div>
-                <div><dt>Phone</dt><dd>{{ $order->delivery?->recipient_phone ?? 'Not recorded' }}</dd></div>
+                <div><dt>Delivery phone</dt><dd>{{ $order->delivery?->recipient_phone ?? 'Not recorded' }}</dd></div>
                 <div><dt>Address</dt><dd>{{ collect([$order->delivery?->address_line, $order->delivery?->city, $order->delivery?->postal_code])->filter()->implode(', ') ?: 'Not recorded' }}</dd></div>
             </dl>
         </section>
-        <div class="a-soft-note">Customers can view changes after refreshing My Orders or the tracking page. There is no real-time courier location and no integrated online payment verification in this local version.</div>
     </aside>
 </div>
 @endsection

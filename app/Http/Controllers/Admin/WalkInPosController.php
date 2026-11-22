@@ -80,9 +80,6 @@ class WalkInPosController extends Controller
             'payment_method' => ['required', Rule::in(['Cash', 'GCash'])],
             'cash_received' => ['nullable', 'numeric', 'min:0', 'max:999999.99', 'decimal:0,2'],
             'gcash_reference' => ['nullable', 'string', 'max:100'],
-            'payment_confirmed' => ['required', 'accepted'],
-        ], [
-            'payment_confirmed.accepted' => 'Confirm the money has actually been received or the GCash transfer verified.',
         ]);
 
         // Allow idempotent form retries, including if a browser resends a completed POST.
@@ -251,7 +248,7 @@ class WalkInPosController extends Controller
         }, 3);
 
         return redirect()->route('admin.pos.show', $savedOrder)
-            ->with('success', 'Walk-in sale recorded and paid. Mark Fulfilled when the food is handed over.');
+            ->with('success', 'Payment recorded. Mark Served when the food is handed over.');
     }
 
     public function history(Request $request): View
@@ -287,7 +284,7 @@ class WalkInPosController extends Controller
             $record = Order::query()->where('order_type', 'Walk-in')
                 ->lockForUpdate()->findOrFail($order);
             if ($record->order_status !== 'Preparing' || $record->payment?->payment_status !== 'Paid') {
-                throw ValidationException::withMessages(['sale' => 'This walk-in sale cannot be fulfilled again.']);
+                throw ValidationException::withMessages(['sale' => 'This walk-in sale has already been served or cannot be completed.']);
             }
             $this->inventory->consume($record); // same Step 21 service; audit + exactly once
             $record->order_status = 'Delivered'; // existing fulfilled status for reporting
@@ -295,7 +292,7 @@ class WalkInPosController extends Controller
         }, 3);
 
         return redirect()->route('admin.pos.show', $order)
-            ->with('success', 'Sale fulfilled. Inventory was deducted and logged.');
+            ->with('success', 'Order served. Inventory updated.');
     }
 
     /** Quantities are PER base product unit. Legacy ID-only payloads mean 1 each. */

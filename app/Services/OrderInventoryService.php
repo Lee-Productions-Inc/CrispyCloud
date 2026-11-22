@@ -26,20 +26,13 @@ class OrderInventoryService
 
         $items = $order->items()->with([
             'product.ingredientRecipes',
-            'customizations.addOn',
+            'customizations',
             'removals.component',
         ])->get();
 
         if ($items->isEmpty()) {
             throw ValidationException::withMessages(['order_status' => 'This order has no items; stock cannot be deducted.']);
         }
-
-        $addonIds = $items->flatMap(fn ($item) => $item->customizations->pluck('addon_id'))->unique()->values()->all();
-        $componentIds = $items->flatMap(fn ($item) => $item->removals->pluck('component_id'))->unique()->values()->all();
-        $addonRecipes = DB::table('addon_ingredient_recipes')
-            ->whereIn('addon_id', $addonIds)->get()->groupBy('addon_id');
-        $componentRecipes = DB::table('component_ingredient_recipes')
-            ->whereIn('component_id', $componentIds)->get()->groupBy('component_id');
 
         // Required amounts are accumulated in thousandths to avoid float subtraction.
         $millis = [];
@@ -60,54 +53,27 @@ class OrderInventoryService
                 $this->change($lineMillis, $recipe->ingredient_id, $recipe->quantity_required, $quantity);
             }
 
+            // Extras and removals are still recorded on the order, but they do not
+            // change stock. The simplified admin workflow tracks only the base product.
             foreach ($item->customizations as $customization) {
-                $addon = $customization->addOn;
-                if (!$addon || !$addon->inventory_recipe_configured) {
-                    $this->notConfigured('add-on ' . ($addon?->name ?? ('#' . $customization->addon_id)));
-                }
-                $addonQuantity = (int) $customization->addon_quantity;
-                if ($addonQuantity < 1) {
-                    throw ValidationException::withMessages(['order_status' => 'Invalid add-on quantity on an order item.']);
-                }
-                foreach ($addonRecipes->get($addon->addon_id, collect()) as $recipe) {
-                    $this->change($lineMillis, $recipe->ingredient_id, $recipe->quantity_required, $quantity * $addonQuantity);
+                if ((int) $customization->addon_quantity < 1) {
+                    throw ValidationException::withMessages(['order_status' => 'Invalid extra quantity on an order item.']);
                 }
             }
-
             foreach ($item->removals as $removal) {
                 $component = $removal->component;
                 if (!$component || (int) $component->product_id !== (int) $product->product_id) {
                     throw ValidationException::withMessages(['order_status' => 'An order item contains an invalid removed component.']);
                 }
-                if (!$component->inventory_recipe_configured) {
-                    $this->notConfigured('removable component ' . $component->component_name . ' (' . $product->name . ')');
-                }
-                foreach ($componentRecipes->get($component->component_id, collect()) as $recipe) {
-                    $this->change($lineMillis, $recipe->ingredient_id, $recipe->quantity_required, -$quantity);
-                }
             }
 
-            // A removal must never deduct a negative amount for one menu item.
-            // Validate before combining multiple products in the same order.
+            // Sum the quantities from the base product recipe only.
             foreach ($lineMillis as $ingredientId => $amount) {
-                if ($amount < 0) {
-                    throw ValidationException::withMessages([
-                        'order_status' => 'A removal on ' . $product->name . ' uses more stock than its base recipe. Review removable-component recipes.',
-                    ]);
-                }
                 $millis[$ingredientId] = ($millis[$ingredientId] ?? 0) + $amount;
             }
         }
 
         ksort($millis);
-        foreach ($millis as $ingredientId => $required) {
-            if ($required < 0) {
-                throw ValidationException::withMessages([
-                    'order_status' => 'A removed component subtracts more ingredients than the base recipe provides. Review the recipe mappings.',
-                ]);
-            }
-        }
-
         // Lock and validate ALL ingredients before writing ANY change.
         $ingredients = Ingredient::query()->whereIn('ingredient_id', array_keys($millis))
             ->orderBy('ingredient_id')->lockForUpdate()->get()->keyBy('ingredient_id');
@@ -153,7 +119,7 @@ class OrderInventoryService
             ]);
         }
 
-        // A receipt is saved even when all explicitly configured recipes have zero stock effect.
+        // A receipt is saved even when all configured product recipes have zero stock effect.
         DB::table('order_stock_deductions')->insert([
             'order_id' => $order->order_id,
             'admin_user_id' => $adminId,
@@ -181,7 +147,7 @@ class OrderInventoryService
     private function notConfigured(string $what): never
     {
         throw ValidationException::withMessages([
-            'order_status' => 'Inventory recipe not configured for ' . $what . '. Open Admin → Inventory → Recipes to configure it or explicitly mark No stock effect.',
+            'order_status' => 'Product recipe not configured for ' . $what . '. Open Admin → Inventory → Recipes to configure it or explicitly mark No stock effect.',
         ]);
     }
 }

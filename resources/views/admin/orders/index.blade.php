@@ -4,15 +4,14 @@
 <div class="a-page-head a-om-head">
     <div>
         <p class="a-eyebrow">ORDER OPERATIONS</p>
-        <h1>Manage customer orders</h1>
-        <p>Use the status dropdown to update orders directly, or open details to review payments and items.</p>
+        <h1>Online orders</h1>
     </div>
-    <a class="a-btn-secondary" href="{{ route('admin.dashboard') }}">← Dashboard</a>
+
 </div>
 
 <section class="a-panel" aria-label="Order management">
     <nav class="a-filters" aria-label="Filter orders by status">
-        @foreach(['all' => 'All Orders', 'Pending' => 'Pending', 'Preparing' => 'Preparing', 'Out for Delivery' => 'Out for Delivery', 'Delivered' => 'Delivered', 'Cancelled' => 'Cancelled'] as $code => $label)
+        @foreach(['all' => 'All Orders', 'Preparing' => 'Preparing', 'Delivered' => 'Delivered', 'Cancelled' => 'Cancelled'] as $code => $label)
             <a href="{{ route('admin.orders.index', array_filter(['status' => $code === 'all' ? null : $code, 'payment' => $paymentFilter === 'all' ? null : $paymentFilter, 'q' => $search !== '' ? $search : null])) }}"
                class="{{ $filter === $code ? 'active' : '' }}" {{ $filter === $code ? 'aria-current=page' : '' }}>{{ $label }}</a>
         @endforeach
@@ -31,8 +30,8 @@
                 <option value="Paid" @selected($paymentFilter === 'Paid')>Paid</option>
             </select>
         </div>
-        <button class="a-om-button a-om-button--primary" type="submit">Search</button>
-        <a class="a-om-clear" href="{{ route('admin.orders.index') }}">Reset</a>
+        <button class="a-om-button a-om-button--primary" type="submit">Apply</button>
+        <a class="a-om-clear" href="{{ route('admin.orders.index') }}">Clear</a>
     </form>
 
     @if($errors->any())
@@ -47,7 +46,7 @@
     @else
         <div class="a-table-wrap">
             <table class="a-table a-om-table">
-                <thead><tr><th scope="col">Order</th><th scope="col">Customer</th><th scope="col">Items</th><th scope="col">Total</th><th scope="col">Progress</th><th scope="col">Payment</th><th scope="col">Action</th></tr></thead>
+                <thead><tr><th scope="col">Order</th><th scope="col">Customer</th><th scope="col">Items</th><th scope="col">Total</th><th scope="col">Progress</th><th scope="col">Payment</th><th scope="col">Details</th></tr></thead>
                 <tbody>
                 @foreach($orders as $order)
                     @php $tone = strtolower(str_replace(' ', '-', $order->order_status)); @endphp
@@ -59,8 +58,7 @@
                         <td><span class="a-status status-{{ $tone }}">{{ $order->order_status }}</span></td>
                         <td><span class="a-om-payment {{ $order->payment?->payment_status === 'Paid' ? 'is-paid' : 'is-pending' }}">{{ $order->payment?->payment_status ?? 'Not recorded' }}</span><small>{{ $order->payment?->payment_method }}</small></td>
                         <td class="a-os-action-cell">
-                            @include('admin.orders.partials.status-form', ['order' => $order, 'context' => 'index'])
-                            <a class="a-os-view" href="{{ route('admin.orders.show', $order->order_id) }}" aria-label="View details for order {{ $order->order_id }}">View details →</a>
+                            <a class="a-os-view" href="{{ route('admin.orders.show', $order->order_id) }}" aria-label="View details for order {{ $order->order_id }}">View</a>
                         </td>
                     </tr>
                 @endforeach
@@ -76,5 +74,4 @@
         @endif
     @endif
 </section>
-<p class="a-soft-note a-order-note">Status changes appear on the customer's My Orders and Tracking pages after refresh. Payment status is a manual record—it does not initiate a GCash payment.</p>
 @endsection

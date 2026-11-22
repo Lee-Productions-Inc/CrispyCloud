@@ -16,6 +16,8 @@ use Illuminate\View\View;
 class InventoryController extends Controller
 {
     private const UNITS = ['kg', 'g', 'L', 'mL', 'pcs', 'packs', 'bottles'];
+    private const STOCK_IN_REASONS = ['Supplier purchase', 'Returned to stock', 'Inventory correction', 'Transfer in', 'Other'];
+    private const STOCK_OUT_REASONS = ['Spoiled or expired', 'Damaged', 'Waste or spillage', 'Inventory correction', 'Internal use', 'Other'];
 
     public function index(Request $request): View
     {
@@ -116,8 +118,18 @@ class InventoryController extends Controller
         $data = $request->validate([
             'direction' => ['required', Rule::in(['add', 'remove'])],
             'quantity' => ['required', 'numeric', 'min:0.01', 'max:99999999.99', 'decimal:0,2'],
-            'reason' => ['required', 'string', 'min:3', 'max:500'],
+            'reason' => ['required', 'string', 'max:40'],
+            'reason_other' => ['nullable', 'string', 'min:3', 'max:450'],
         ]);
+        $options = $data['direction'] === 'add' ? self::STOCK_IN_REASONS : self::STOCK_OUT_REASONS;
+        if (!in_array($data['reason'], $options, true)) {
+            throw ValidationException::withMessages(['reason' => 'Choose a valid reason for this adjustment.']);
+        }
+        if ($data['reason'] === 'Other' && !filled(trim($data['reason_other'] ?? ''))) {
+            throw ValidationException::withMessages(['reason_other' => 'Explain the reason for this stock adjustment.']);
+        }
+        $data['reason'] = $data['reason'] === 'Other'
+            ? 'Other: ' . trim($data['reason_other']) : $data['reason'];
         $delta = $this->toHundredths($data['quantity']);
         $signedDelta = $data['direction'] === 'add' ? $delta : -$delta;
 

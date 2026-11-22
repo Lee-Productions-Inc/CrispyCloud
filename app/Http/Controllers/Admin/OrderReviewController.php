@@ -11,7 +11,7 @@ class OrderReviewController extends Controller
 {
     public function index(Request $request): View
     {
-        $allowed = ['all', 'Pending', 'Preparing', 'Out for Delivery', 'Delivered', 'Cancelled'];
+        $allowed = ['all', 'Preparing', 'Delivered', 'Cancelled'];
         $filter = $request->query('status', 'all');
         if (!is_string($filter) || !in_array($filter, $allowed, true)) {
             $filter = 'all';

@@ -8,13 +8,10 @@
         <p>Keep your customer menu accurate. Food and beverages are separate products; extras are optional food add-ons.</p>
     </div>
     <div class="ap-actions">
-        <a class="a-btn-secondary" href="{{ route('admin.catalog.index') }}">Categories & extras</a>
         <a class="ap-primary" href="{{ route('admin.products.create') }}">+ Add product</a>
     </div>
 </div>
 <div class="cp-help-strip" role="note">
-    <strong>Quick guide</strong>
-    <span><b>Food:</b> meals and chicken pops. <b>Beverages:</b> drinks sold separately. <b>Extras:</b> optional rice, gravy, cheese, etc.</span>
     <a href="{{ route('admin.catalog.index') }}#extras">Manage food extras</a>
 </div>
 <div class="cp-metrics" aria-label="Product summary">
@@ -28,7 +25,7 @@
     <a class="cp-type-tab {{ $type === $key ? 'is-active' : '' }}" @if($type===$key) aria-current="page" @endif href="{{ route('admin.products.index', array_filter(['type'=>$key === 'all' ? null : $key, 'q'=>$search ?: null, 'category'=>$categoryId, 'availability'=>$availability === 'all' ? null : $availability])) }}">{{ $label }}</a>
     @endforeach
 </div>
-<section class="a-panel cp-list-panel" aria-label="Manage products">
+<section class="cp-list-panel a-panel" aria-label="Manage products">
     <form method="GET" action="{{ route('admin.products.index') }}" class="ap-filter cp-product-filters">
         <input type="hidden" name="type" value="{{ $type }}">
         <div class="ap-field ap-search"><label for="product-search">Search products</label><input type="search" id="product-search" name="q" value="{{ $search }}" placeholder="Search name or description" maxlength="80"></div>
@@ -96,5 +93,4 @@
     </nav>@endif
     @endif
 </section>
-<p class="cp-caption">Products are hidden, not deleted, to protect old receipts and order history. Stock levels are handled in Inventory.</p>
 @endsection

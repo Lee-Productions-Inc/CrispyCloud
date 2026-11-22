@@ -9,7 +9,7 @@
 
 @php
     $money = fn ($amount): string => '₱' . number_format((float) $amount, 2);
-    $statusTones = ['Pending' => 'pending', 'Preparing' => 'preparing', 'Out for Delivery' => 'delivery', 'Delivered' => 'delivered', 'Cancelled' => 'cancelled'];
+    $statusTones = ['Preparing' => 'preparing', 'Delivered' => 'delivered', 'Cancelled' => 'cancelled'];
     $tone = $statusTones[$order->order_status] ?? 'pending';
     $justPlaced = session()->has('success');
     $itemsSubtotal = $order->items->sum(fn ($item) => (float) $item->subtotal);

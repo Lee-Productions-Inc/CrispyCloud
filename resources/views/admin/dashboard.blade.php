@@ -9,51 +9,40 @@
         <span class="a-date-label">{{ now()->format('M d, Y') }}</span>
     </div>
 
-    <section class="a-stats" aria-label="{{ $monthLabel }} financial overview">
+    <section class="a-stats a-stats-finance" aria-label="{{ $monthLabel }} financial overview">
         <article class="a-stat">
-            <div class="a-stat-top"><span>Gross product sales · {{ $monthLabel }}</span><details class="cc-finance-info"><summary aria-label="Explain gross product sales">i</summary><div>Paid product items this month, including extras, excluding delivery fees.</div></details></div>
-            <strong>₱{{ number_format($grossProductSales, 2) }}</strong>
-            <small>Verified paid orders</small>
-        </article>
-        <article class="a-stat">
-            <div class="a-stat-top"><span>Paid revenue · {{ $monthLabel }}</span><details class="cc-finance-info"><summary aria-label="Explain paid revenue">i</summary><div>Total of verified paid orders this month, including delivery charges.</div></details></div>
+            <div class="a-stat-top"><span>Paid revenue</span></div>
             <strong>₱{{ number_format($monthlyPaidSales, 2) }}</strong>
-            <small>Payments recorded as Paid</small>
+            <small>{{ $monthLabel }} · verified payments</small>
         </article>
         <article class="a-stat">
-            <div class="a-stat-top"><span>Business capital · {{ $monthLabel }}</span><details class="cc-finance-info"><summary aria-label="Explain capital invested">i</summary><div>Funding added to the business. It is not profit and not automatically an expense.</div></details></div>
-            <strong>₱{{ number_format($recordedCapital, 2) }}</strong>
-            <small><a href="{{ route('admin.investments.index') }}">Record capital →</a></small>
+            <div class="a-stat-top"><span>Estimated profit</span><details class="cc-finance-info"><summary aria-label="Explain estimated profit">i</summary><div>Paid revenue less manually entered business spending for this month. This is a cash-based estimate: unused stock and untracked costs mean it is not accounting net profit.</div></details></div>
+            <strong>{{ $estimatedProfit < 0 ? '−' : '' }}₱{{ number_format(abs($estimatedProfit), 2) }}</strong>
+            <small>After ₱{{ number_format($recordedExpenses, 2) }} recorded spending*</small>
+        </article>
+        <article class="a-stat">
+            <div class="a-stat-top"><span>Product sales</span></div>
+            <strong>₱{{ number_format($grossProductSales, 2) }}</strong>
+            <small>Excludes delivery fees</small>
+        </article>
+        <article class="a-stat">
+            <div class="a-stat-top"><span>Recorded spending</span></div>
+            <strong>₱{{ number_format($recordedExpenses, 2) }}</strong>
+            <small>{{ $monthLabel }} · manually entered</small>
         </article>
     </section>
-
-    <section class="a-stats" aria-label="Business statistics">
-        <article class="a-stat">
-            <div class="a-stat-top"><span>All-time paid sales</span><span class="a-stat-icon a-red" aria-hidden="true">₱</span></div>
-            <strong>₱{{ number_format($paidSales, 2) }}</strong>
-            <small>Payments marked Paid (not pending)</small>
-        </article>
-        <article class="a-stat">
-            <div class="a-stat-top"><span>All orders</span><span class="a-stat-icon a-amber" aria-hidden="true">▤</span></div>
-            <strong>{{ number_format($totalOrders) }}</strong>
-            <small>{{ number_format($pendingOrders) }} awaiting review</small>
-        </article>
-        <article class="a-stat">
-            <div class="a-stat-top"><span>Customers</span><span class="a-stat-icon a-green" aria-hidden="true">♙</span></div>
-            <strong>{{ number_format($totalCustomers) }}</strong>
-            <small>Registered customer accounts</small>
-        </article>
-        <article class="a-stat">
-            <div class="a-stat-top"><span>Average order value</span><span class="a-stat-icon a-purple" aria-hidden="true">≋</span></div>
-            <strong>₱{{ number_format($averageOrderValue, 2) }}</strong>
-            <small>All non-cancelled orders</small>
-        </article>
-    </section>
+    <div class="a-dashboard-meta" aria-label="Business activity">
+        <span><strong>{{ number_format($totalOrders) }}</strong> total orders</span>
+        <span><strong>{{ number_format($activeOrders) }}</strong> preparing</span>
+        <span><strong>{{ number_format($totalCustomers) }}</strong> customers</span>
+        <span><strong>₱{{ number_format($paidSales, 2) }}</strong> all-time paid</span>
+    </div>
+    <p class="a-finance-caption">* Estimate deducts only spending you recorded. Untracked costs and unused supplies mean this is not accounting net profit.</p>
 
     <section class="a-dashboard-panels" aria-label="Performance overview">
         <article class="a-panel a-chart-panel">
             <div class="a-panel-header">
-                <div><h2>Order value</h2><p>Last 7 days · excluding cancelled orders</p></div>
+                <div><h2>Sales</h2><p>Last 7 days · excluding cancelled orders</p></div>
                 <span class="a-small-tag">7-day view</span>
             </div>
             <div class="a-chart-wrap">
@@ -92,7 +81,7 @@
 
     <section class="a-lower-grid" aria-label="Current operations">
         <article class="a-panel a-recent-panel">
-            <div class="a-panel-header"><div><h2>Recent online orders</h2><p>{{ $activeOrders }} delivery orders active</p></div><div style="display:flex;gap:12px;flex-wrap:wrap"><a class="a-text-link" href="{{ route('admin.orders.index') }}">Online Orders →</a><a class="a-text-link" href="{{ route('admin.pos.index') }}">New Walk-in Sale →</a></div></div>
+            <div class="a-panel-header"><div><h2>Recent online orders</h2><p>{{ $activeOrders }} delivery orders active</p></div></div>
             @if($recentOrders->isEmpty())
                 <div class="a-empty"><span aria-hidden="true">▤</span><strong>No orders yet</strong><p>New customer orders will appear here automatically.</p></div>
             @else
@@ -121,7 +110,6 @@
             @empty
                 <div class="a-empty"><span aria-hidden="true">✓</span><strong>No low-stock records</strong><p>Once ingredients are added, stock alerts will appear automatically.</p></div>
             @endforelse
-            <div class="a-soft-note">Inventory stock changes are recorded when orders are fulfilled.</div>
         </article>
     </section>
 @endsection

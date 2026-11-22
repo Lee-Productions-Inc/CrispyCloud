@@ -10,9 +10,7 @@
 @php
     $money = fn ($amount): string => '₱' . number_format((float) $amount, 2);
     $statusTones = [
-        'Pending' => 'pending',
         'Preparing' => 'preparing',
-        'Out for Delivery' => 'delivery',
         'Delivered' => 'delivered',
         'Cancelled' => 'cancelled',
     ];

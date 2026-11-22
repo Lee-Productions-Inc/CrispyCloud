@@ -21,9 +21,9 @@ class OrderCancellationController extends Controller
                 ->lockForUpdate()
                 ->findOrFail($order);
 
-            if ($record->order_status !== 'Pending') {
+            if ($record->order_status !== 'Preparing') {
                 throw ValidationException::withMessages([
-                    'cancel' => 'This order is no longer Pending. Refresh the page to see its latest status.',
+                    'cancel' => 'This order is no longer eligible for cancellation. Refresh the page to see its latest status.',
                 ]);
             }
 
@@ -54,11 +54,11 @@ class OrderCancellationController extends Controller
             }
 
             // Status-only cancellation: never remove history, refund payments,
-            // restore stock, or touch order items. Pending orders have not used stock.
+            // restore stock, or touch order items. Stock is only consumed on Delivered.
             // The condition additionally protects against a stale status update.
             $updated = Order::query()
                 ->where('order_id', $record->order_id)
-                ->where('order_status', 'Pending')
+                ->where('order_status', 'Preparing')
                 ->update(['order_status' => 'Cancelled']);
 
             if ($updated !== 1) {
