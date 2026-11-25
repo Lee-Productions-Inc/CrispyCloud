@@ -12,9 +12,8 @@
           class="cco-cancel-form">
         @csrf
         @method('PATCH')
-        <button type="submit" class="cco-button cco-button--danger-outline"
+        <button type="submit" class="cco-button--danger-outline cco-button"
                 aria-label="Cancel order #CP-{{ $order->order_id }}">Cancel order</button>
     </form>
 @elseif($isPreparingUnpaid && $gcashReferenceProvided)
-    <span class="cco-cancel-help">GCash reference submitted — contact the store to request cancellation.</span>
 @endif

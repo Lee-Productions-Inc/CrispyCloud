@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 // AUTHENTICATION CONTROLLERS
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\CustomerPasswordResetController;
 use App\Http\Controllers\Admin\AdminLoginController;
 
 // CUSTOMER CONTROLLERS
@@ -15,6 +16,7 @@ use App\Http\Controllers\Customer\CheckoutController;
 use App\Http\Controllers\Customer\CheckoutEntryController;
 use App\Http\Controllers\Customer\OrderConfirmationController;
 use App\Http\Controllers\Customer\OrderHistoryController;
+use App\Http\Controllers\Customer\OrderReorderController;
 use App\Http\Controllers\Customer\OrderCancellationController;
 use App\Http\Controllers\Customer\ProfileController;
 use App\Http\Controllers\Customer\AddressController;
@@ -53,6 +55,17 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])
     ->name('login');
 
 Route::post('/login', [LoginController::class, 'login']);
+
+// Customer password recovery. Separate from admin credentials.
+Route::middleware('guest:web')->group(function () {
+    Route::get('/forgot-password', [CustomerPasswordResetController::class, 'requestForm'])->name('password.request');
+    Route::post('/forgot-password', [CustomerPasswordResetController::class, 'sendLink'])
+        ->middleware('throttle:5,1')->name('password.email');
+    Route::get('/reset-password/{token}', [CustomerPasswordResetController::class, 'resetForm'])
+        ->name('password.reset');
+    Route::post('/reset-password', [CustomerPasswordResetController::class, 'update'])
+        ->middleware('throttle:8,1')->name('password.update');
+});
 
 Route::post('/logout', [LoginController::class, 'logout'])
     ->name('logout');
@@ -237,6 +250,9 @@ Route::get(
 Route::get('/customer/cart', [CartController::class, 'index'])
     ->name('customer.cart.index');
 
+Route::post('/customer/cart/checkout-selection', [CartController::class, 'selectCheckout'])
+    ->name('customer.cart.checkout-selection');
+
 Route::post('/customer/products/{product}/cart', [CartController::class, 'store'])
     ->name('customer.cart.store');
 
@@ -286,6 +302,10 @@ Route::middleware('auth:web')->group(function () {
 
     Route::get('/customer/orders/{order}', [OrderConfirmationController::class, 'show'])
         ->name('customer.orders.show');
+
+    Route::post('/customer/orders/{order}/reorder', [OrderReorderController::class, 'store'])
+        ->whereNumber('order')
+        ->name('customer.orders.reorder');
 
     // Only the order's customer may cancel an unpaid, still-Preparing delivery order.
     Route::patch('/customer/orders/{order}/cancel', [OrderCancellationController::class, 'cancel'])

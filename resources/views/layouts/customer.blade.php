@@ -19,5 +19,15 @@
     <a class="ccn-skip" href="#main-content">Skip to main content</a>
     @include('components.customer.navbar')
     @yield('content')
+
+    <dialog id="cc-product-preview" class="cc-photo-dialog" aria-labelledby="cc-preview-title">
+        <div class="cc-photo-dialog-inner">
+            <div class="cc-photo-dialog-header">
+                <h2 id="cc-preview-title">Product photo</h2>
+                <button type="button" class="cc-photo-close" data-preview-close aria-label="Close photo preview">×</button>
+            </div>
+            <img class="cc-photo-large" alt="" data-preview-image>
+        </div>
+    </dialog>
 </body>
 </html>

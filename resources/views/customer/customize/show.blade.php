@@ -53,7 +53,9 @@ $initialTotal = ($initialUnit + $drinkPrice) * $initialQty;
             <section class="ccx-intro" aria-labelledby="ccx-product-name">
                 <div class="ccx-photo-wrap">
                     @if($imageAvailable)
-                        <img class="ccx-product-img" src="{{ asset($imagePath) }}" alt="{{ $product->name }}" fetchpriority="high">
+                        <button type="button" class="ccx-photo-preview" data-product-preview data-preview-src="{{ asset($imagePath) }}" data-preview-name="{{ $product->name }}" aria-label="View larger photo of {{ $product->name }}">
+                            <img class="ccx-product-img" src="{{ asset($imagePath) }}" alt="{{ $product->name }}" fetchpriority="high">
+                        </button>
                     @else
                         <div class="ccx-photo-fallback" role="img" aria-label="Product photo unavailable">
                             <span class="ccx-fallback-symbol" aria-hidden="true">{{ $isBeverage ? '🥤' : '🍗' }}</span>
@@ -109,7 +111,7 @@ $initialTotal = ($initialUnit + $drinkPrice) * $initialQty;
 
                     <fieldset class="ccx-choice-panel">
                         <legend class="ccx-panel-legend"><span class="ccx-step">{{ $hasSauceSelection ? '02' : '01' }}</span> Add extras <span class="ccx-optional">Optional</span></legend>
-                        <p class="ccx-panel-help">Enter how many extras you want <strong>per meal</strong>. Use 0 for none (maximum 10 of each).</p>
+                        <p class="ccx-panel-help">Use − and + to choose extras <strong>per meal</strong> (0–10 each).</p>
                         <div class="ccx-choice-list">
                             @forelse($product->addOns as $addon)
                                 <div class="ccx-select-option ccx-extra-row">
@@ -117,10 +119,14 @@ $initialTotal = ($initialUnit + $drinkPrice) * $initialQty;
                                     <span class="ccx-choice-price">+₱{{ number_format((float) $addon->price, 2) }} each</span>
                                     <div class="ccx-extra-count">
                                         <label class="ccx-visually-hidden" for="ccx-extra-{{ $addon->addon_id }}">{{ $addon->name }} quantity per meal</label>
-                                        <input type="number" id="ccx-extra-{{ $addon->addon_id }}" name="add_ons[{{ $addon->addon_id }}]"
-                                            min="0" max="10" step="1" inputmode="numeric" required
-                                            data-addon-price="{{ $addon->price }}" data-addon-name="{{ $addon->name }}"
-                                            value="{{ max(0, min(10, (int) ($selectedAddons[$addon->addon_id] ?? 0))) }}">
+                                        <div class="ccx-extra-stepper" role="group" aria-label="{{ $addon->name }} quantity">
+                                            <button type="button" data-addon-step="-1" data-addon-target="ccx-extra-{{ $addon->addon_id }}" aria-label="Remove one {{ $addon->name }}" aria-controls="ccx-extra-{{ $addon->addon_id }}">−</button>
+                                            <input type="number" id="ccx-extra-{{ $addon->addon_id }}" name="add_ons[{{ $addon->addon_id }}]"
+                                                min="0" max="10" step="1" readonly inputmode="none" required
+                                                data-addon-price="{{ $addon->price }}" data-addon-name="{{ $addon->name }}"
+                                                value="{{ max(0, min(10, (int) ($selectedAddons[$addon->addon_id] ?? 0))) }}">
+                                            <button type="button" data-addon-step="1" data-addon-target="ccx-extra-{{ $addon->addon_id }}" aria-label="Add one {{ $addon->name }}" aria-controls="ccx-extra-{{ $addon->addon_id }}">+</button>
+                                        </div>
                                         <small>per meal</small>
                                     </div>
                                 </div>
@@ -219,7 +225,7 @@ $initialTotal = ($initialUnit + $drinkPrice) * $initialQty;
                             <label for="item-quantity">Quantity</label>
                             <div class="ccx-quantity-group">
                                 <button type="button" data-quantity-step="-1" aria-label="Decrease quantity">−</button>
-                                <input id="item-quantity" type="number" name="quantity" min="1" max="20" step="1" value="{{ $initialQty }}" required inputmode="numeric" aria-describedby="ccx-qty-hint">
+                                <input id="item-quantity" type="number" name="quantity" min="1" max="20" step="1" readonly value="{{ $initialQty }}" required inputmode="numeric" aria-describedby="ccx-qty-hint">
                                 <button type="button" data-quantity-step="1" aria-label="Increase quantity">+</button>
                             </div>
                             <small id="ccx-qty-hint">1–20 items per selection. For different flavors, add each meal separately.</small>

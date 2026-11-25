@@ -79,7 +79,10 @@ class WalkInPosController extends Controller
             'items_json' => ['required', 'string', 'max:25000'],
             'payment_method' => ['required', Rule::in(['Cash', 'GCash'])],
             'cash_received' => ['nullable', 'numeric', 'min:0', 'max:999999.99', 'decimal:0,2'],
-            'gcash_reference' => ['nullable', 'string', 'max:100'],
+            'gcash_reference' => ['exclude_unless:payment_method,GCash', 'required', 'regex:/^[0-9]{9,12}$/'],
+        ], [
+            'gcash_reference.required' => 'Enter the verified GCash reference number.',
+            'gcash_reference.regex' => 'The GCash reference must contain 9 to 12 digits.',
         ]);
 
         // Allow idempotent form retries, including if a browser resends a completed POST.
@@ -173,9 +176,7 @@ class WalkInPosController extends Controller
             }
             $change = $received - $subtotal;
         } else {
-            if (mb_strlen(trim((string) ($data['gcash_reference'] ?? ''))) < 4) {
-                throw ValidationException::withMessages(['gcash_reference' => 'Enter the verified GCash reference (at least 4 characters).']);
-            }
+            // The verified GCash reference format is checked by request validation.
             $received = null;
             $change = null;
         }

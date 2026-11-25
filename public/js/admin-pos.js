@@ -412,8 +412,8 @@
             if (cashInput.value === '' || !Number.isFinite(Number(cashInput.value)) || Math.round(Number(cashInput.value) * 100) < basketTotal()) {
                 event.preventDefault(); return showError('Enter cash received equal to or greater than the total.');
             }
-        } else if (gcashRef.value.trim().length < 4) {
-            event.preventDefault(); return showError('Enter the verified GCash transaction reference.');
+        } else if (!/^[0-9]{9,12}$/.test(gcashRef.value.trim())) {
+            event.preventDefault(); return showError('Enter the verified 9–12 digit GCash reference number.');
         }
         itemsInput.value = JSON.stringify(lines);
         $('pos-record').disabled = true;

@@ -5,7 +5,7 @@
     $availableStatuses = ($position === false || $order->order_status === 'Delivered')
         ? [] : array_slice($statusStages, $position + 1);
 
-    if ($position !== false && $order->order_status !== 'Delivered' && $order->payment?->payment_status !== 'Paid') {
+    if ($position !== false && $order->order_status !== 'Delivered' && ($order->payment?->payment_status !== 'Paid' || $order->payment?->payment_method === 'GCash')) {
         $availableStatuses[] = 'Cancelled';
     }
 

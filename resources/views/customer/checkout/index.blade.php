@@ -106,18 +106,18 @@
                             <label class="ccc-payment-choice">
                                 <input type="radio" name="payment_method" value="GCash" @checked(old('payment_method') === 'GCash')>
                                 <span class="ccc-payment-symbol" aria-hidden="true">G</span>
-                                <span class="ccc-payment-description"><strong>GCash — manual verification</strong><small>No automatic online payment is processed.</small></span>
+                                <span class="ccc-payment-description"><strong>GCash (demo)</strong><small>Recorded as Paid on confirmation. No real transfer.</small></span>
                             </label>
                         </div>
                         @error('payment_method')<p class="ccc-field-error">{{ $message }}</p>@enderror
                     </fieldset>
                     <div id="cc-gcash-reference" class="ccc-gcash-reference" hidden>
                         <div class="ccc-field">
-                            <label for="gcash-reference">GCash reference number <span class="ccc-optional">(optional)</span></label>
-                            <input id="gcash-reference" type="text" name="reference_number" maxlength="100" value="{{ old('reference_number') }}" placeholder="Enter your reference, if available">
+                            <label for="gcash-reference">GCash reference number</label>
+                            <input id="gcash-reference" type="text" name="reference_number" inputmode="numeric" pattern="[0-9]{9,12}" minlength="9" maxlength="12" autocomplete="off" value="{{ old('reference_number') }}" placeholder="9–12 digits" aria-describedby="gcash-ref-help">
                             @error('reference_number')<p class="ccc-field-error">{{ $message }}</p>@enderror
                         </div>
-                        <p class="ccc-inline-tip">Payment will remain pending until the administrator verifies it. Do not enter your GCash PIN or password.</p>
+                        <p id="gcash-ref-help" class="ccc-inline-tip">Enter a 9–12 digit test reference. No real money is processed. Never enter your GCash PIN or password.</p>
                     </div>
                 </section>
 
@@ -168,7 +168,7 @@
                 </div>
                 <div class="ccc-summary-total"><span>Total due</span><strong>{{ $price($totalCents) }}</strong></div>
                 <button type="submit" class="ccc-primary-button">Place order <span aria-hidden="true">→</span></button>
-                <p class="ccc-small-print">Your order will start as <strong>Preparing</strong>. Payment stays pending until verified. The delivery fee is a demo value.</p>
+                <p class="ccc-small-print">Your order will start as <strong>Preparing</strong>. GCash demo payments are recorded as Paid; COD stays Pending until cash is received.</p>
                 <div class="ccc-summary-support"><a href="{{ route('customer.cart.index') }}">← Return to cart</a></div>
             </aside>
         </form>

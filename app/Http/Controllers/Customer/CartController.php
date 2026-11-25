@@ -15,6 +15,7 @@ use Illuminate\View\View;
 class CartController extends Controller
 {
     private const SESSION_KEY = 'crispycloud_cart';
+    private const SELECTION_KEY = 'crispycloud_checkout_lines';
 
     public function index(Request $request): View
     {
@@ -26,7 +27,17 @@ class CartController extends Controller
             0
         );
 
-        return view('customer.cart.index', compact('items', 'subtotalCents'));
+        $selectedLineIds = $request->session()->get(self::SELECTION_KEY);
+        if (!is_array($selectedLineIds)) {
+            $selectedLineIds = array_keys($items);
+        }
+        $selectedLineIds = array_values(array_intersect($selectedLineIds, array_keys($items)));
+        $selectedLineIds = old('selected_lines', $selectedLineIds);
+        if (!is_array($selectedLineIds)) {
+            $selectedLineIds = [];
+        }
+
+        return view('customer.cart.index', compact('items', 'subtotalCents', 'selectedLineIds'));
     }
 
     public function store(Request $request, int $product): RedirectResponse
@@ -164,9 +175,36 @@ class CartController extends Controller
         }
 
         $request->session()->put(self::SESSION_KEY, $cart);
+        // A new cart line should be included in the next checkout by default.
+        $request->session()->forget(self::SELECTION_KEY);
 
         return redirect()->route('customer.cart.index')->with('success',
             $selectedDrink ? 'Meal and beverage added as separate items.' : 'Product added to your basket.');
+    }
+
+
+    /** Save the chosen cart lines before sending a guest or customer to checkout. */
+    public function selectCheckout(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'selected_lines' => ['required', 'array', 'min:1', 'max:50'],
+            'selected_lines.*' => ['required', 'string', 'distinct'],
+        ], [
+            'selected_lines.required' => 'Select at least one item to checkout.',
+            'selected_lines.min' => 'Select at least one item to checkout.',
+        ]);
+
+        $cart = $request->session()->get(self::SESSION_KEY, []);
+        $selected = array_values($validated['selected_lines']);
+        if (empty($cart) || count(array_diff($selected, array_keys($cart))) > 0) {
+            throw ValidationException::withMessages([
+                'selected_lines' => 'Your cart changed. Please review your items again.',
+            ]);
+        }
+
+        $request->session()->put(self::SELECTION_KEY, $selected);
+
+        return redirect()->route('customer.checkout.start');
     }
 
     public function update(Request $request, string $line): RedirectResponse
@@ -191,6 +229,11 @@ class CartController extends Controller
 
         unset($cart[$line]);
         $request->session()->put(self::SESSION_KEY, $cart);
+        $selected = $request->session()->get(self::SELECTION_KEY);
+        if (is_array($selected)) {
+            $request->session()->put(self::SELECTION_KEY,
+                array_values(array_filter($selected, fn ($id) => isset($cart[$id]))));
+        }
 
         return redirect()->route('customer.cart.index')->with('success', 'Item removed.');
     }

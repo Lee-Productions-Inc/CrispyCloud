@@ -54,10 +54,13 @@ class OrderManagementController extends Controller
             }
 
             if ($next === 'Cancelled') {
-                // This system has no refund procedure. Require resolving paid orders separately.
-                if ($record->payment()->where('payment_status', 'Paid')->exists()) {
+                // Academic GCash payments are simulated at checkout. An admin may cancel
+                // those orders before fulfillment; sales reports exclude Cancelled orders.
+                // COD payments represent recorded cash and retain the original protection.
+                $payment = $record->payment()->lockForUpdate()->first();
+                if ($payment?->payment_status === 'Paid' && $payment->payment_method !== 'GCash') {
                     throw ValidationException::withMessages([
-                        'order_status' => 'A paid order cannot be cancelled until a refund workflow is implemented.',
+                        'order_status' => 'A paid COD order cannot be cancelled without a refund workflow.',
                     ]);
                 }
             } else {

@@ -50,6 +50,9 @@
         @error('cancel')
             <div class="cco-notice cco-notice--danger" role="alert">{{ $message }}</div>
         @enderror
+        @if(session('reorder_error'))
+            <div class="cco-notice cco-notice--danger" role="alert">{{ session('reorder_error') }}</div>
+        @endif
 
         <section class="cco-receipt-strip" aria-label="Order summary">
             <div><span class="cco-field-label">ORDER NUMBER</span><strong>#CP-{{ $order->order_id }}</strong></div>
@@ -108,6 +111,12 @@
         </div>
 
         <div class="cco-bottom-actions">
+            @if($order->order_status === 'Delivered' && $order->order_type === 'Delivery')
+                <form method="POST" action="{{ route('customer.orders.reorder', $order->order_id) }}">
+                    @csrf
+                    <button class="cco-button cco-button--primary" type="submit">Reorder these items</button>
+                </form>
+            @endif
             <a class="cco-button cco-button--primary" href="{{ route('customer.orders.track', $order->order_id) }}">View order status <span aria-hidden="true">→</span></a>
             <a class="cco-button cco-button--outline" href="{{ route('customer.orders.index') }}">All my orders</a>
             @include('customer.orders.partials.cancel-form', ['order' => $order])

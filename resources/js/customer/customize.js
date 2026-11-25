@@ -85,6 +85,26 @@ if (customizer) {
     });
     quantityInput.addEventListener('input', updateTotal);
     quantityInput.addEventListener('change', updateTotal);
+    const updateAddonControls = () => {
+        customizer.querySelectorAll('[data-addon-step]').forEach((button) => {
+            const input = document.getElementById(button.dataset.addonTarget);
+            if (!input) return;
+            const count = Math.max(0, Math.min(10, Number.parseInt(input.value, 10) || 0));
+            button.disabled = Number(button.dataset.addonStep) < 0 ? count <= 0 : count >= 10;
+        });
+    };
+
+    customizer.querySelectorAll('[data-addon-step]').forEach((button) => {
+        button.addEventListener('click', () => {
+            const input = document.getElementById(button.dataset.addonTarget);
+            if (!input) return;
+            const count = Math.max(0, Math.min(10, Number.parseInt(input.value, 10) || 0));
+            input.value = String(Math.max(0, Math.min(10, count + Number(button.dataset.addonStep))));
+            updateTotal();
+            updateAddonControls();
+        });
+    });
+
     customizer.querySelectorAll('input[data-addon-price]').forEach((input) => {
         input.addEventListener('input', updateTotal);
         input.addEventListener('change', updateTotal);
@@ -99,4 +119,5 @@ if (customizer) {
     }));
 
     updateTotal();
+    updateAddonControls();
 }

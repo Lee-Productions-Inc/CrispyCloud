@@ -24,11 +24,12 @@ use Illuminate\View\View;
 class CheckoutController extends Controller
 {
     private const CART_KEY = 'crispycloud_cart';
+    private const SELECTION_KEY = 'crispycloud_checkout_lines';
     private const DELIVERY_FEE_CENTS = 3000; // Demo fee: ₱30. Confirm with CHICK'S POPS before real use.
 
     public function index(Request $request): View|RedirectResponse
     {
-        $items = $request->session()->get(self::CART_KEY, []);
+        $items = $this->selectedItems($request);
 
         if (!$items) {
             return redirect()->route('customer.cart.index')->with('error', 'Your basket is empty.');
@@ -70,10 +71,14 @@ class CheckoutController extends Controller
             'city' => ['required', 'string', 'max:100'],
             'postal_code' => ['required', 'string', 'max:20'],
             'payment_method' => ['required', Rule::in(['COD', 'GCash'])],
-            'reference_number' => ['nullable', 'string', 'max:100'],
+            'reference_number' => ['exclude_unless:payment_method,GCash', 'required', 'regex:/^[0-9]{9,12}$/'],
+        ], [
+            'reference_number.required' => 'Enter the GCash reference number.',
+            'reference_number.regex' => 'The GCash reference must contain 9 to 12 digits.',
         ]);
 
-        $cart = $request->session()->get(self::CART_KEY, []);
+        $fullCart = $request->session()->get(self::CART_KEY, []);
+        $cart = $this->selectedItems($request);
         if (empty($cart)) {
             return redirect()->route('customer.cart.index')->with('error', 'Your basket is empty.');
         }
@@ -219,8 +224,10 @@ class CheckoutController extends Controller
             Payment::create([
                 'order_id' => $order->order_id,
                 'payment_method' => $validated['payment_method'],
-                'payment_status' => 'Pending', // No real payment gateway or auto-confirmation.
-                'payment_date' => null,
+                // For this academic prototype, a valid GCash reference records a simulated
+                // payment immediately. COD still awaits actual cash collection.
+                'payment_status' => $validated['payment_method'] === 'GCash' ? 'Paid' : 'Pending',
+                'payment_date' => $validated['payment_method'] === 'GCash' ? now() : null,
                 'reference_number' => $validated['payment_method'] === 'GCash'
                     ? ($validated['reference_number'] ?? null) : null,
             ]);
@@ -240,11 +247,35 @@ class CheckoutController extends Controller
             return $order;
         });
 
-        // Only empty the cart AFTER the transaction has committed successfully.
-        $request->session()->forget(self::CART_KEY);
+        // Only remove purchased lines AFTER the database transaction commits.
+        // Other cart items remain available for the customer's next order.
+        $remaining = array_diff_key($fullCart, $cart);
+        if ($remaining) {
+            $request->session()->put(self::CART_KEY, $remaining);
+        } else {
+            $request->session()->forget(self::CART_KEY);
+        }
+        $request->session()->forget(self::SELECTION_KEY);
 
         return redirect()->route('customer.orders.show', $order->order_id)
-            ->with('success', 'Your order was placed successfully. Payment is pending.');
+            ->with('success', $validated['payment_method'] === 'GCash'
+                ? 'Order placed. GCash recorded as Paid (demo); order is Preparing.'
+                : 'Order placed. COD payment is Pending until cash collection.');
+    }
+
+    /** No explicit selection means all cart items (backward compatible sessions). */
+    private function selectedItems(Request $request): array
+    {
+        $cart = $request->session()->get(self::CART_KEY, []);
+        $selected = $request->session()->get(self::SELECTION_KEY);
+        if ($selected === null) {
+            return $cart;
+        }
+        if (!is_array($selected)) {
+            return [];
+        }
+
+        return array_intersect_key($cart, array_fill_keys($selected, true));
     }
 
     private function ensureSchemaIsReady(): void

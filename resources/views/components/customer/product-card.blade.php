@@ -8,10 +8,14 @@ $isBeverage = \App\Support\MenuSections::isBeverageCategory($product->category?-
 @endphp
 
 <article class="ccm-card relative">
-    <a href="{{ $productUrl }}" class="ccm-card-photo" aria-label="View {{ $product->name }}">
-        @if($hasPhoto)
+    @if($hasPhoto)
+    <button type="button" class="ccm-card-photo cc-photo-preview-button" data-product-preview
+        data-preview-src="{{ asset($photoPath) }}" data-preview-name="{{ $product->name }}"
+        aria-label="View larger photo of {{ $product->name }}">
         <img src="{{ asset($photoPath) }}" alt="{{ $product->name }}" loading="lazy">
-        @else
+    </button>
+    @else
+    <a href="{{ $productUrl }}" class="ccm-card-photo" aria-label="Customize {{ $product->name }}">
         <span class="ccm-photo-placeholder" aria-hidden="true">
             @if($isBeverage)
             <span class="ccm-photo-drink-icon" aria-hidden="true">🥤</span>
@@ -23,8 +27,8 @@ $isBeverage = \App\Support\MenuSections::isBeverageCategory($product->category?-
             </svg>
             @endif
         </span>
-        @endif
     </a>
+    @endif
     <div class="ccm-card-body">
         <div class="ccm-card-heading">
             <h4><a href="{{ $productUrl }}">{{ $product->name }}</a></h4>

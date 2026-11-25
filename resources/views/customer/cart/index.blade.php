@@ -5,11 +5,15 @@
 
 @section('page_assets')
     @vite('resources/js/app.js')
+    <script src="{{ asset('js/crispycloud-cart-selection.js') }}" defer></script>
 @endsection
 
 @php
     $price = fn (int $cents): string => '₱' . number_format($cents / 100, 2);
     $totalQuantity = collect($items)->sum(fn ($item) => (int) ($item['quantity'] ?? 0));
+    $selected = array_intersect_key($items, array_fill_keys($selectedLineIds, true));
+    $selectedQuantity = collect($selected)->sum(fn ($item) => (int) ($item['quantity'] ?? 0));
+    $selectedSubtotal = collect($selected)->sum(fn ($item) => (int) $item['unit_price_cents'] * (int) $item['quantity']);
 @endphp
 
 @section('content')
@@ -54,7 +58,13 @@
             <section class="ccc-card ccc-cart-list rounded-2xl" aria-labelledby="ccc-items-title">
                 <div class="ccc-card-header">
                     <h2 id="ccc-items-title">Items in your cart</h2>
-                    <span class="ccc-count-pill">{{ $totalQuantity }} {{ $totalQuantity === 1 ? 'item' : 'items' }}</span>
+                    <div class="flex flex-wrap items-center gap-3">
+                        <label class="inline-flex min-h-11 cursor-pointer items-center gap-2 text-xs font-bold text-[#596473]">
+                            <input type="checkbox" data-select-all class="!h-4 !w-4 !min-w-4 cursor-pointer accent-[#c8102e]" @checked(count($selected) === count($items))>
+                            <span>Select all</span>
+                        </label>
+                        <span class="ccc-count-pill">{{ $totalQuantity }} {{ $totalQuantity === 1 ? 'item' : 'items' }}</span>
+                    </div>
                 </div>
 
                 @foreach($items as $lineId => $item)
@@ -73,6 +83,13 @@
                         </div>
 
                         <div class="ccc-item-details">
+                            <label class="mb-2 inline-flex min-h-11 cursor-pointer items-center gap-2 text-xs font-bold text-[#596473]">
+                                <input type="checkbox" form="cart-checkout-selection" name="selected_lines[]" value="{{ $lineId }}"
+                                    data-cart-select data-qty="{{ (int) $item['quantity'] }}" data-cents="{{ $lineTotalCents }}"
+                                    class="!h-4 !w-4 !min-w-4 cursor-pointer accent-[#c8102e]"
+                                    @checked(in_array($lineId, $selectedLineIds, true))>
+                                <span>Include in checkout</span>
+                            </label>
                             <h3 id="cart-product-{{ $loop->iteration }}">{{ $item['name'] }}</h3>
                             <p class="ccc-unit-price">{{ $price((int) $item['unit_price_cents']) }} per item</p>
 
@@ -128,11 +145,17 @@
                 <span class="ccc-eyebrow">BEFORE CHECKOUT</span>
                 <h2 id="ccc-summary-title">Order summary</h2>
                 <div class="ccc-summary-rows">
-                    <div><span>Subtotal ({{ $totalQuantity }} {{ $totalQuantity === 1 ? 'item' : 'items' }})</span><strong>{{ $price($subtotalCents) }}</strong></div>
+                    <div><span>Subtotal (<span data-selected-quantity>{{ $selectedQuantity }}</span> selected)</span><strong data-selected-subtotal>{{ $price($selectedSubtotal) }}</strong></div>
                     <div><span>Delivery fee</span><span>Shown at checkout</span></div>
                 </div>
-                <div class="ccc-summary-total"><span>Subtotal</span><strong>{{ $price($subtotalCents) }}</strong></div>
-                <a href="{{ route('customer.checkout.start') }}" class="ccc-primary-button">Proceed to checkout <span aria-hidden="true">→</span></a>
+                <div class="ccc-summary-total"><span>Selected total</span><strong data-selected-subtotal>{{ $price($selectedSubtotal) }}</strong></div>
+                <form id="cart-checkout-selection" action="{{ route('customer.cart.checkout-selection') }}" method="POST">
+                    @csrf
+                    <button type="submit" data-checkout-button class="ccc-primary-button disabled:cursor-not-allowed disabled:opacity-50" @disabled(!$selectedQuantity)>
+                        Checkout selected <span aria-hidden="true">→</span>
+                    </button>
+                </form>
+                <p data-cart-select-message role="status" class="ccc-small-print" @if($selectedQuantity) hidden @endif>Select at least one item to continue.</p>
             </aside>
         </div>
         @else

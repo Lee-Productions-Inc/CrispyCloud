@@ -45,20 +45,26 @@
                 <div><dt>Method</dt><dd>{{ $order->payment?->payment_method ?? 'Not recorded' }}</dd></div>
                 <div><dt>Status</dt><dd>{{ $order->payment?->payment_status ?? 'Not recorded' }}</dd></div>
                 @if($order->payment?->reference_number)
-                    <div><dt>Reference</dt><dd>{{ $order->payment->reference_number }} <small class="a-om-ref-note">(customer provided; not automatically verified)</small></dd></div>
+                    <div><dt>Reference</dt><dd>{{ $order->payment->reference_number }} <small class="a-om-ref-note">(customer-provided; simulated payment)</small></dd></div>
                 @endif
                 @if($order->payment?->payment_date)
                     <div><dt>Recorded at</dt><dd>{{ $order->payment->payment_date->format('M d, Y · h:i A') }}</dd></div>
                 @endif
             </dl>
             @if($isPaid)
-                <div class="a-om-info a-om-info--success">Payment has been marked Paid. Refunds and reversals require a separate process.</div>
+                @if($order->payment?->payment_method === 'GCash')
+                    @if($order->order_status === 'Cancelled')
+                        <p class="a-om-hint">Simulated payment retained for history; excluded from sales.</p>
+                    @endif
+                @else
+                    <div class="a-om-info a-om-info--success">COD payment recorded after cash collection.</div>
+                @endif
             @elseif($canMarkPaid)
                 <form method="POST" action="{{ route('admin.orders.payment.paid', $order->order_id) }}" class="a-om-form a-om-payment-form">
                     @csrf
                     @method('PATCH')
                     <button type="submit" class="a-om-button a-om-button--primary">Mark as paid</button>
-                    <p class="a-om-hint">Record only money actually received; this button does not collect payment.</p>
+                    <p class="a-om-hint">{{ $isCod ? 'Record only cash actually received.' : 'Record the previously submitted demo payment.' }}</p>
                 </form>
             @elseif($order->payment?->payment_status === 'Pending' && $isCod && $order->order_status !== 'Cancelled')
                 <p class="a-om-info">Deliver the order and collect the COD cash first. Then confirm payment here to mark it Paid.</p>

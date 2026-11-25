@@ -39,6 +39,9 @@
                 <p>Enter your email and password to continue.</p>
             </div>
 
+            @if(session('status'))
+                <div role="status" class="cca-reset-notice">{{ session('status') }}</div>
+            @endif
             @if($errors->any())
                 <div role="alert" class="cca-alert"><strong>Unable to sign in.</strong> {{ $errors->first() }}</div>
             @endif
@@ -60,6 +63,9 @@
                         </button>
                     </div>
                 </div>
+                @if(config('services.brevo.api_key') && config('services.brevo.sender_email'))
+                    <div class="cca-reset-link"><a href="{{ route('password.request') }}">Forgot password?</a></div>
+                @endif
                 <button type="submit" class="cca-primary-btn">Sign in <span aria-hidden="true">→</span></button>
             </form>
 

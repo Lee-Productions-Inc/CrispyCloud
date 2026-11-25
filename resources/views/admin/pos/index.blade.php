@@ -89,7 +89,7 @@
             </div>
             <div class="pos-field" id="pos-gcash-block" hidden>
                 <label for="pos-gcash-ref">Verified GCash reference</label>
-                <input type="text" id="pos-gcash-ref" name="gcash_reference" maxlength="100" value="{{ old('gcash_reference') }}" placeholder="Enter transaction reference">
+                <input type="text" id="pos-gcash-ref" name="gcash_reference" inputmode="numeric" pattern="[0-9]{9,12}" minlength="9" maxlength="12" autocomplete="off" value="{{ old('gcash_reference') }}" placeholder="9–12 digit transaction reference">
                 <p class="pos-help">Verify the transfer in your GCash merchant account before saving.</p>
             </div>
             <div class="pos-client-error" id="pos-client-error" role="alert" hidden></div>
